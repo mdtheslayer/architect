@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns="http://emias.mos.ru/system/v1/faults/" xmlns:uctx="http://emias.mos.ru/system/v1/userContext/" xmlns:nsf="http://emias.mos.ru/system/v1/faults/" xmlns:ns1="http://emias.mos.ru/quarantine/quarantineQueryService/v1/types/" xmlns:tns="http://emias.mos.ru/quarantine/quarantineQueryService/v1/" xmlns:ns2="http://emias.mos.ru/quarantine/core/v1/" targetNamespace="http://emias.mos.ru/quarantine/quarantineQueryService/v1/">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import namespace="http://emias.mos.ru/system/v1/userContext/" schemaLocation="../emias.core/emias.system.v1.userContext.xsd"/>
+			<xs:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="../emias.core/emias.system.v1.faults.xsd"/>
+			<xs:import namespace="http://emias.mos.ru/quarantine/quarantineQueryService/v1/types/" schemaLocation="../service.types/quarantine.quarantineQueryService.v1.types.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getQuarantineByIdOutput">
+		<wsdl:part name="body" element="ns1:getQuarantineByIdResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getQuarantineByIdInput">
+		<wsdl:part name="body" element="ns1:getQuarantineByIdRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getQuarantineListInput">
+		<wsdl:part name="body" element="ns1:getQuarantineListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getQuarantineListOutput">
+		<wsdl:part name="body" element="ns1:getQuarantineListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getQuarantineParticipationByIdInput">
+		<wsdl:part name="body" element="ns1:getQuarantineParticipationByIdRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getQuarantineParticipationByIdOutput">
+		<wsdl:part name="body" element="ns1:getQuarantineParticipationByIdResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getQuarantineParticipationListInput">
+		<wsdl:part name="body" element="ns1:getQuarantineParticipationListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getQuarantineParticipationListOutput">
+		<wsdl:part name="body" element="ns1:getQuarantineParticipationListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getPersonByIdOutput">
+		<wsdl:part name="body" element="ns1:getPersonByIdResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getPersonByIdInput">
+		<wsdl:part name="body" element="ns1:getPersonByIdRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getPersonListOutput">
+		<wsdl:part name="body" element="ns1:getPersonListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getPersonListInput">
+		<wsdl:part name="body" element="ns1:getPersonListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getEntityCounOutput">
+		<wsdl:part name="body" element="ns1:getEntityCountResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getEntityCountInput">
+		<wsdl:part name="body" element="ns1:getEntityCountRequest"/>
+	</wsdl:message>
+	<wsdl:message name="fault">
+		<wsdl:documentation>Ошибка</wsdl:documentation>
+		<wsdl:part name="body" element="nsf:fault"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="userContext">
+		<wsdl:documentation>Контекст пользователя</wsdl:documentation>
+		<wsdl:part name="userContext" element="uctx:userContext"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getContainsPersonInput">
+		<wsdl:part name="body" element="ns1:getContainsPersonRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getContainsPersonOutput">
+		<wsdl:part name="body" element="ns1:getContainsPersonResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="queryServicePortType">
+		<wsdl:operation name="getQuarantineById">
+			<wsdl:documentation>Получение карантина по идентификатору</wsdl:documentation>
+			<wsdl:input message="tns:getQuarantineByIdInput"/>
+			<wsdl:output message="tns:getQuarantineByIdOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getQuarantineList">
+			<wsdl:documentation>Получение списка карантинов</wsdl:documentation>
+			<wsdl:input message="tns:getQuarantineListInput"/>
+			<wsdl:output message="tns:getQuarantineListOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getQuarantineParticipationById">
+			<wsdl:documentation>Получения участия в рамках карантина</wsdl:documentation>
+			<wsdl:input message="tns:getQuarantineParticipationByIdInput"/>
+			<wsdl:output message="tns:getQuarantineParticipationByIdOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getQuarantineParticipationList">
+			<wsdl:documentation>Получение участий в рамках карантина</wsdl:documentation>
+			<wsdl:input message="tns:getQuarantineParticipationListInput"/>
+			<wsdl:output message="tns:getQuarantineParticipationListOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getPersonById">
+			<wsdl:documentation>Получение персоны по идентификатору</wsdl:documentation>
+			<wsdl:input message="tns:getPersonByIdInput"/>
+			<wsdl:output message="tns:getPersonByIdOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getPersonList">
+			<wsdl:documentation>Получение списка персон</wsdl:documentation>
+			<wsdl:input message="tns:getPersonListInput"/>
+			<wsdl:output message="tns:getPersonListOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getEntityCount">
+			<wsdl:documentation>Получения количества объектов в сервисе</wsdl:documentation>
+			<wsdl:input message="tns:getEntityCountInput"/>
+			<wsdl:output message="tns:getEntityCounOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getContainsPerson">
+			<wsdl:documentation>  Получение признака наличия у пациента актуальных карантинов</wsdl:documentation>
+			<wsdl:input message="tns:getContainsPersonInput"/>
+			<wsdl:output message="tns:getContainsPersonOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="queryServiceBinding" type="tns:queryServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getQuarantineById">
+			<soap:operation soapAction="getQuarantineById"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getQuarantineList">
+			<soap:operation soapAction="getQuarantineList"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getQuarantineParticipationById">
+			<soap:operation soapAction="getQuarantineParticipationById"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getQuarantineParticipationList">
+			<soap:operation soapAction="getQuarantineParticipationList"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPersonById">
+			<soap:operation soapAction="getPerson"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPersonList">
+			<soap:operation soapAction="getPersonList"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getEntityCount">
+			<soap:operation soapAction="getEntityCount"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getContainsPerson">
+			<soap:operation soapAction="getContainsPerson"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="queryService">
+		<wsdl:port name="queryServicePortType" binding="tns:queryServiceBinding">
+			<soap:address location="REPLACE_ACTUAL_URL"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:tns="http://emias.mos.ru/simi/simiService/v5/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:simicore="http://emias.mos.ru/simi/core/v5/" xmlns:cct="http://emias.mos.ru/simi/cct/v5/"
+		   xmlns:doc="http://emias.mos.ru/simi/document/v5/" targetNamespace="http://emias.mos.ru/simi/simiService/v5/types/" version="1.0">
+	<xs:import namespace="http://emias.mos.ru/simi/document/v5/" schemaLocation="simi.document.v5.xsd"/>
+	<xs:import namespace="http://emias.mos.ru/simi/core/v5/" schemaLocation="simi.core.v5.xsd"/>
+	<xs:import namespace="http://emias.mos.ru/simi/cct/v5/" schemaLocation="simi.cct.v5.xsd"/>
+	<!--query documents-->
+	<xs:complexType name="DocumentsResultPage">
+		<xs:annotation>
+			<xs:documentation>Результаты отбора Документов СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="simicore:PagingResults">
+				<xs:sequence>
+					<xs:element name="item" type="doc:Metadata" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Представляет метаданные Документа СИМИ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DocumentsQueryData">
+		<xs:annotation>
+			<xs:documentation>Параметры отбора Документов СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="conditions" form="qualified" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Условия отбора результатов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Условия отбора результатов</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="condition" type="tns:DocumentsFilterCondition" form="qualified" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Условие отбора Документов СИМИ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="orderClauses" form="qualified" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Способы сортировки результатов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Способы сортировки результатов</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="orderClause" type="tns:DocumentsOrderClause" form="qualified" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Способ сортировки результатов</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentsFilterCondition">
+		<xs:annotation>
+			<xs:documentation>Условие отбора Документов СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="leftOperand" type="tns:DocumentsSearchAttribute" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Левый операнд в условии сравнения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rightOperand" type="xs:string" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Правый операнд в условии сравнения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="operator" type="simicore:ComparisonType" use="required">
+			<xs:annotation>
+				<xs:documentation>Способ сравнения операндов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="DocumentsOrderClause">
+		<xs:annotation>
+			<xs:documentation>Способ сортировки результатов отбора Документов СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attributeName" type="tns:DocumentsSearchAttribute" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Атрибут отбора Документов СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ascending" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Направление сортировки (ascending/descending)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="DocumentsSearchAttribute">
+		<xs:annotation>
+			<xs:documentation>Атрибуты отбора Документов СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PATIENT_ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Пациента в ЕМИАС</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STATUS">
+				<xs:annotation>
+					<xs:documentation>Статус документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIMI_VERSION">
+				<xs:annotation>
+					<xs:documentation>Версия объектной модели Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LINKS_PARENT">
+				<xs:annotation>
+					<xs:documentation>Восходящая зависимость</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LINKS_DESCENDANT">
+				<xs:annotation>
+					<xs:documentation>Нисходящая зависимость</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOCUMENT_ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOCUMENT_SUBMISSION_SET">
+				<xs:annotation>
+					<xs:documentation>Идентификатор набора документов, которому принадлежит Документ СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOCUMENT_CREATED">
+				<xs:annotation>
+					<xs:documentation>Дата/время создания Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VALID">
+				<xs:annotation>
+					<xs:documentation>Бизнес признак валидности контента Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIGNEE_LOGIN">
+				<xs:annotation>
+					<xs:documentation>Логин пользователя, подписавшего электронной подписью документ СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CCT_CODE">
+				<xs:annotation>
+					<xs:documentation>Код элемента терминологии CCT</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CARE_EVENT_ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Клинического события в операционном сервисе ЕМИАС.СУПП.События</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CARE_EVENT_STARTED">
+				<xs:annotation>
+					<xs:documentation>Дата/время начала Клинического события</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CARE_EVENT_FINISHED">
+				<xs:annotation>
+					<xs:documentation>Дата/время окончания Клинического события</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUTHOR_LOGIN">
+				<xs:annotation>
+					<xs:documentation>Логин пользователя-автора Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TAG_SCHEMA">
+				<xs:annotation>
+					<xs:documentation>Идентификатор терминологии "Тэга"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TAG_CODE">
+				<xs:annotation>
+					<xs:documentation>Код элемента терминологии "Тэга"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TAG_VALUE">
+				<xs:annotation>
+					<xs:documentation>Значение элемента терминологии "Тэга"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TAG_ROLE">
+				<xs:annotation>
+					<xs:documentation>Роль элемента терминологии "Тэга"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASSOCIATION_TARGET_DOCUMENT_ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор целевого Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASSOCIATION_TARGET_ROLE">
+				<xs:annotation>
+					<xs:documentation>Роль целевого Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASSOCIATION_SOURCE_ROLE">
+				<xs:annotation>
+					<xs:documentation>Роль текущего Документа СИМИ по отношению к целевому Документу СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASSOCIATION_TYPE_SCHEMA">
+				<xs:annotation>
+					<xs:documentation>Идентификатор типа междокументарной связи</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASSOCIATION_TYPE_CODE">
+				<xs:annotation>
+					<xs:documentation>Код типа междокументарной связи</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASSOCIATION_TYPE_VALUE">
+				<xs:annotation>
+					<xs:documentation>Значение типа междокументарной связи</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASSOCIATION_TARGET_CCT_CODE">
+				<xs:annotation>
+					<xs:documentation>Код класса документов СИМИ, которому принадлежит целевой Документ СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--query audit user actions-->
+	<xs:complexType name="AuditResultPage">
+		<xs:annotation>
+			<xs:documentation>Результаты отбора сведений из Журнала аудита операций, совершаемых пользователями</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="simicore:PagingResults">
+				<xs:sequence>
+					<xs:element name="item" type="tns:AuditRecord" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Результат отбора сведений из Журнала аудита операций, совершаемых пользователями</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AuditQueryData">
+		<xs:annotation>
+			<xs:documentation>Параметры отбора сведений из Журнала аудита операций, совершаемых пользователями</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="conditions" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Условия отбора результатов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Условия отбора результатов</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="condition" type="tns:AuditFilterCondition" form="qualified" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Условие отбора результатов</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="orderClauses" form="qualified" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Способы сортировки результатов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Способы сортировки результатов</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="orderClause" type="tns:AuditOrderClause" form="qualified" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Способ сортировки результатов</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AuditFilterCondition">
+		<xs:annotation>
+			<xs:documentation>Условие отбора сведений из Журнала аудита операций, совершаемых пользователями</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="leftOperand" type="tns:AuditSearchAttribute" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Левый операнд в условии сравнения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rightOperand" type="xs:string" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Правый операнд в условии сравнения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="operator" type="simicore:ComparisonType" use="required">
+			<xs:annotation>
+				<xs:documentation>Способ сравнения операндов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="AuditOrderClause">
+		<xs:annotation>
+			<xs:documentation>Способ сортировки результатов отбора сведений из Журнала аудита операций, совершаемых пользователями</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attributeName" type="tns:AuditSearchAttribute" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Поле журнала аудита действий пользователей</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ascending" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Направление сортировки (ascending/descending)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="AuditRecord">
+		<xs:annotation>
+			<xs:documentation>Запись Журнала аудита операций, совершаемых пользователями</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="doc:documentId" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="eventTime" type="xs:dateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Дата и время совершения операции пользователем</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="action" type="tns:UserActionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип операции, совершенной пользователем</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="errorCode" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>Код ошибки выполнения операции, совершенной пользователем</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="userLogin" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Логин пользователя, совершившего данную операцию</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="AuditSearchAttribute">
+		<xs:annotation>
+			<xs:documentation>Поля Журнала аудита операций, совершаемых пользователями</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EVENT_TIME">
+				<xs:annotation>
+					<xs:documentation>Дата и время совершения операции пользователем</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACTION">
+				<xs:annotation>
+					<xs:documentation>Тип операции, совершенной пользователем</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOCUMENT_ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERROR_CODE">
+				<xs:annotation>
+					<xs:documentation>Код ошибки выполнения операции, совершенной пользователем</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USER_LOGIN">
+				<xs:annotation>
+					<xs:documentation>Логин пользователя, совершившего данную операцию</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserActionType">
+		<xs:annotation>
+			<xs:documentation>Типы операций, совершаемых пользователями</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREATE_DOCUMENT">
+				<xs:annotation>
+					<xs:documentation>Создание Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHANGE_DOCUMENT">
+				<xs:annotation>
+					<xs:documentation>Изменение черновика Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIGN_DOCUMENT">
+				<xs:annotation>
+					<xs:documentation>Подписание Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEPRECATE_DOCUMENT">
+				<xs:annotation>
+					<xs:documentation>Аннулирование Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARCHIVE_DOCUMENT">
+				<xs:annotation>
+					<xs:documentation>Архивирование Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UNKNOWN_ACTION">
+				<xs:annotation>
+					<xs:documentation>Неизвестное действие</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GET_DOCUMENT">
+				<xs:annotation>
+					<xs:documentation>Получение документа</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAVE_EXTERNAL_DOCUMENT">
+				<xs:annotation>
+					<xs:documentation>Сохранен подписанный документ за один шаг</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UNKNOWN_SAVE">
+				<xs:annotation>
+					<xs:documentation>Неопределенное изменение при сохранении</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHANGE_METADATA">
+				<xs:annotation>
+					<xs:documentation>Изменены метаданные у документа, который находится в статусе SIGNING</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- requests & responses -->
+	<xs:element name="archiveDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода archiveDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода archiveDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="doc:documentId"/>
+				<xs:element ref="simicore:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="archiveDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода archiveDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода archiveDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода createDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода createDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="cct:cctCode"/>
+				<xs:element ref="simicore:patientId"/>
+				<xs:element ref="simicore:careEventId"/>
+				<xs:element ref="simicore:careEventStarted"/>
+				<xs:element ref="simicore:careEventFinished" minOccurs="0"/>
+				<xs:element ref="simicore:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода createDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода createDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="doc:document"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="deprecateDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода deprecateDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода deprecateDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="doc:documentId"/>
+				<xs:element ref="simicore:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="deprecateDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода deprecateDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода deprecateDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAuditRecordsRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getAuditRecords</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода getAuditRecords</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="params" type="tns:AuditQueryData">
+					<xs:annotation>
+						<xs:documentation>Параметры отбора сведений об операциях, совершенных пользователями</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="simicore:pagingOptions" minOccurs="0"/>
+				<xs:element ref="simicore:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAuditRecordsResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getAuditRecords</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода getAuditRecords</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="return" type="tns:AuditResultPage">
+					<xs:annotation>
+						<xs:documentation>Результаты отбора сведений из Журнала аудита операций, совершаемых пользователями</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getCareEventDocumentsRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getCareEventDocuments</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода getCareEventDocuments</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="simicore:careEventId"/>
+				<xs:element ref="cct:cctCode" minOccurs="0"/>
+				<xs:element ref="simicore:pagingOptions" minOccurs="0"/>
+				<xs:element ref="simicore:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getCareEventDocumentsResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getCareEventDocuments</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода getCareEventDocuments</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="return" type="tns:DocumentsResultPage">
+					<xs:annotation>
+						<xs:documentation>Результаты отбора Документов СИМИ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода getDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="doc:documentId"/>
+				<xs:element ref="simicore:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода getDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="doc:document"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="saveDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода saveDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода saveDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="doc:document"/>
+				<xs:element ref="simicore:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+	<xs:element name="saveDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода saveDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода saveDocument</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="doc:document" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="searchDocumentsRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода searchDocuments</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода searchDocuments</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="queryName" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Имя подготовленного (хранимого) запроса</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="params" type="tns:DocumentsQueryData">
+					<xs:annotation>
+						<xs:documentation>Параметры отбора Документов СИМИ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="simicore:pagingOptions" minOccurs="0"/>
+				<xs:element ref="simicore:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="searchDocumentsResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода searchDocuments</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода searchDocuments</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="return" type="tns:DocumentsResultPage">
+					<xs:annotation>
+						<xs:documentation>Результаты отбора Документов СИМИ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getCareEventDocumentsForSignRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getCareEventDocumentsForSign</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода getCareEventDocumentsForSign</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="simicore:careEventId"/>
+				<xs:element ref="simicore:pagingOptions" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getCareEventDocumentsForSignResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getCareEventDocumentsForSign</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода getCareEventDocumentsForSign</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="return" type="tns:DocumentsResultPage">
+					<xs:annotation>
+						<xs:documentation>Результаты отбора Документов СИМИ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getDocumentsByPatientForSignRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getDocumentsByPatientForSign</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода getCareEventDocumentsForSign</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="simicore:patientId"/>
+				<xs:element ref="simicore:pagingOptions" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getDocumentsByPatientForSignResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getDocumentsByPatientForSign</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода getCareEventDocumentsForSign</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="return" type="tns:DocumentsResultPage">
+					<xs:annotation>
+						<xs:documentation>Результаты отбора Документов СИМИ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getDocumentsForSignRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getDocumentsForSign</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Входные параметры метода getCareEventDocumentsForSign</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="doc:documentId" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="simicore:pagingOptions" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getDocumentsForSignResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getDocumentsForSign</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Выходные параметры метода getCareEventDocumentsForSign</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="return" type="tns:DocumentsResultPage">
+					<xs:annotation>
+						<xs:documentation>Результаты отбора Документов СИМИ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

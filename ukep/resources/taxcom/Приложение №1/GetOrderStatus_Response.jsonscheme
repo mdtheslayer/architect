@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "title": "Статусы заявок",
+    "required": [
+        "statuses"
+    ],
+    "properties": {
+        "statuses": {
+            "type": "array",
+            "title": "Статус заявки",
+            "items": {
+                "type": "object",
+                "title": "The items schema",
+                "required": [
+                    "registrationGuid",
+                    "status",
+                    "check"
+                ],
+                "properties": {
+                    "registrationGuid": {
+                        "type": "string",
+                        "title": "Гуид заявки"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Статус заявки",
+                        "enum": [
+                            "NotFound",
+                            "InProgress",
+                            "Deny",
+                            "Success",
+                            "Error"
+                        ]
+                    },
+                    "check": {
+                        "type": "array",
+                        "title": "Список проверок",
+                        "items": {
+                            "type": "object",
+                            "title": "Проверка",
+                            "required": [
+                                "checkType",
+                                "state",
+                                "message"
+                            ],
+                            "properties": {
+                                "checkType": {
+                                    "type": "string",
+                                    "title": "Наименование проверки",
+                                    "enum": [
+                                        "GrayListTaxcom",
+                                        "BlackListFNS",
+                                        "ReliabilityOfInformation",
+                                        "DisqualifiedPersonsRegister",
+                                        "InvalidPassports",
+                                        "SnilsCheck",
+                                        "QuickPassportCheck"
+                                    ]
+                                },
+                                "state": {
+                                    "type": "integer",
+                                    "title": "Результат проверки (1 - в процессе, 2 - пройдена, 3 - отклонено, 4 - не применима)"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "title": "Текст результата проверки"
+                                },
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+{
+	"createDate": "2001-12-17T09:30:47Z",
+	"modificationDate": "2001-12-17T09:30:47Z",
+	"diagnosis": {
+		"code": "String",
+		"status": "String",
+		"date": "1957-08-13",
+		"name": "String"
+	},
+	"duration": {
+		"startDate": "2001-12-17T09:30:47Z",
+		"endDate": "2001-12-17T09:30:47Z"
+	},
+	"state": {
+		"status": "NEW",
+		"user": {
+			"name": "Иванов В.В",
+			"positionNom": "Врач",
+			"jobExecutionId": "123124123535"
+		},
+		"reason": ""
+	},
+	"type":"EDUCATION",
+	"moId":"123",
+	"muId":"123",
+	attachmentId:"123",
+	"address": {
+		"value": "г.Москва",
+		"nsiId": "123"
+	},
+	"participations": [
+		{
+			"participation": {
+				"type": "INFECTED",
+				"class": {
+					"name": "7A",
+					"meshUuid": "124214124",
+					"areaId": "123124"
+				},
+				"buildingId": "124214124",
+				"sources": [
+					{
+						"source": {
+							"documentId": "435435",
+							"templateId": "43543634",
+							"createdDate": "2001-12-17T09:30:47Z",
+							"type": "INITIATING",
+							"employee": {
+								"name": "",
+								"positionNom": "",
+								"jobExecutionId": ""
+							}
+						}
+					}
+				],
+				"person": {
+					"emiasId": "1233124124",
+					"createDate": "2001-12-17T09:30:47Z",
+					"patient": {
+						"lastName": "Иванов",
+						"firstName": "Валера"
+					}
+				}
+			}
+		}
+	]
+}

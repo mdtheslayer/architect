@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "Прикрепление файлов к заказу",
+  "required": [
+    "registrationGuid",
+    "files"
+  ],
+  "properties": {
+    "registrationGuid": {
+      "type": "string",
+      "title": "ИД заявки на сертификата"
+    },
+    "files": {
+      "type": "array",
+      "title": "Сканы документов",
+      "items": {
+        "type": "object",
+        "title": "Сканы документов",
+        "required": [
+          "fileName",
+          "body"
+        ],
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "title": "Имя файла"
+          },
+          "body": {
+            "type": "string",
+            "title": "Тело файла в формате base64"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Аутентификация и авторизация по сертификату",
+  "description": "Аутентификация и авторизация по сертификату",
+  "properties": {
+    "sessionToken": {
+      "type": "string",
+      "title": "Маркер временного доступа",
+      "description": "Маркер временного доступа"
+    }
+  },
+  "required": [
+    "sessionToken"
+  ]
+}

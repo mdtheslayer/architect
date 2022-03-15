@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>ЗАЯВЛЕНИЕ</title>
+    <style type="text/css">
+        .recv {
+            border-collapse: collapse;
+            width: 95%;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .recv tr td {
+            border: 1px solid black;
+            padding: 3px;
+            /*    font-weight: bold;
+            font-size: 11pt;*/
+            font-style: italic;
+        }
+
+        .recv tr td:first-child {
+            background: rgb(216, 216, 216);
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        .recv tr:first-child td {
+            text-align: center;
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        .passinvisible {
+            display: none;
+        }
+
+        .passvisible {
+            display: inline;
+            font-weight: normal;
+            padding: 2px;
+        }
+
+        .u {
+            display: inline;
+            font-style: italic;
+            border-bottom: 1px solid black;
+            margin: 0 2px;
+            line-height: 150%;
+        }
+        .sign {
+            margin: 10px 0;
+            width: 100%;
+        }
+        .sign tr {
+            text-align: left;
+        }        
+        .sign tr td:first-child {
+            background-color: white;
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        .sign tr td {
+            text-align: left;
+            border: none;
+            padding: 0;
+            font-weight: normal;
+            font-size: 8pt;
+            font-style: normal;
+            /*background-color: white;*/
+        }
+    </style>
+    <script src="JsBarcode.all.js"></script>
+</head>
+<body>
+<div style='font-family:"Times New Roman","serif";font-size:9.0pt; color: black;line-height: 120%'>
+<div style="text-align:center; margin: -5px 0; color: rgb(65, 65, 65)">
+    <table width="100%">
+        <colgroup>
+            <col width="40%" />
+            <col width="30%" />
+            <col width="30%" />
+        </colgroup>
+        <tr>
+            <td style="font-size:10.0pt;text-align: left;font-weight: bold">Для юридических лиц</td>
+            <td><img id="barcode" /></td>
+            <td style="font-size:10.0pt;text-align: right;font-weight: bold;">Удостоверяющий центр ООО «Такском»</td>
+        </tr>
+    </table>
+</div>
+
+<div style="text-align:center;margin: 25px 0">
+    <span style='font-size:11pt;'>
+        <b>
+            Заявление<br />
+            на создание квалифицированного сертификата ключа проверки электронной подписи
+        </b>
+    </span>
+</div>
+
+
+<div style="margin: 10px 0px">
+    <table width="100%">
+        <colgroup>
+            <col width="100%" />
+        </colgroup>
+        <tr>
+            <td style="border-bottom: 1px solid black; font-size:11.0pt; text-align: center">##OrgFullName##</td>
+        </tr>
+        <tr>
+            <td style="text-align: center"><span style='font-size:10.0pt;'>Наименование юридического лица, включая организационно-правовую форму</span></td>
+        </tr>
+    </table>
+</div>
+<div style="margin: 10px 0px">
+    <table width="100%">
+        <colgroup>
+            <col width="100%" />
+        </colgroup>
+        <tr>
+            <td style="border-bottom: 1px solid black; font-size:10.0pt; text-align: center">##BossTitle##</td>
+        </tr>
+        <tr>
+            <td style="text-align: center"><span style='font-size:10.0pt;'>должность руководителя юридического лица или уполномоченного сотрудника</span></td>
+        </tr>
+    </table>
+</div>
+<div style="margin: 10px 0px">
+    <table width="100%">
+        <colgroup>
+            <col width="100%" />
+        </colgroup>
+        <tr>
+            <td style="border-bottom: 1px solid black; font-size:10.0pt; text-align: center">##BossName##</td>
+        </tr>
+        <tr>
+            <td style="text-align: center"><span style='font-size:10.0pt;'>фамилия, имя, отчество</span></td>
+        </tr>
+    </table>
+</div>
+
+<div style="margin: 10px 0px">
+    <table width="100%">
+        <colgroup>
+            <col width="auto" />
+            <col width="100%" />
+        </colgroup>
+        <tr>
+            <td>действующий&nbsp;на&nbsp;основании&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="border-bottom: 1px solid black; font-size:10.0pt; align-content:stretch; text-align: center"><div style="padding-right: 210px;">##BossBasis##</div></td>
+        </tr>
+        <tr>
+            <td style="text-align: center" colspan="2"><span style='font-size:10.0pt;'>основание полномочий</span></td>
+        </tr>
+    </table>
+</div>
+
+<span style="align-content:stretch; text-align: justify;">
+    заявляет об акцепте действующего на дату регистрации Заявления «Регламента аккредитованного Удостоверяющего центра ООО «Такском», условия которого определены ООО «Такском», в порядке, предусмотренном ст. 428 Гражданского Кодекса Российской Федерации и просит создать квалифицированный сертификат ключа проверки электронной подписи (далее – квалифицированный сертификат) с указанием физического лица - Пользователя Аккредитованного удостоверяющего центра ООО «Такском» - в соответствии со следующими идентификационными данными:
+</span>
+<div style="text-align: center; margin: 15px;">
+    <table class="recv">
+        <colgroup>
+            <col width="40%" />
+            <col width="60%" />
+        </colgroup>
+        <tr>
+            <td colspan="2">Сведения о физическом лице – Пользователе Аккредитованного удостоверяющего центра</td>
+        </tr>
+        <tr>
+            <td>Фамилия</td>
+            <td>##SN##</td>
+        </tr>
+        <tr>
+            <td>Имя, отчество</td>
+            <td>##GN##</td>
+        </tr>
+        <tr>
+            <td>Пол</td>
+            <td>##GENDER##</td>
+        </tr>
+        <tr>
+            <td>Дата рождения</td>
+            <td>##BIRTHDD##&nbsp;##BIRTHMM##&nbsp;##BIRTHYYYY##&nbsp;г.</td>
+        </tr>
+        <tr>
+            <td>СНИЛС</td>
+            <td>##SNILS##</td>
+        </tr>
+        <tr>
+            <td>Гражданство</td>
+            <td>##CITIZENSHIP##</td>
+        </tr>
+        <tr>
+            <td>Документ, удостоверяющий личность</td>
+            <td>
+
+                <div class="##PASSRUSCLASS##">
+                    Тип документа:<span class="u">Паспорт гражданина РФ</span><br />
+                    серия&nbsp;<span class="u">&nbsp;##PASSSER##&nbsp;</span>&nbsp;номер&nbsp;<span class="u">&nbsp;##PASSNUM##&nbsp;</span> дата выдачи&nbsp;<span class="u">&nbsp;##PASSDD##&nbsp;##PASSMM##&nbsp;##PASSYYYY##&nbsp;</span>&nbsp;г.<br />
+                    выдан&nbsp;<span class="u">&nbsp;##PASSISSUE##&nbsp;</span><br />
+                    код подразделения&nbsp;<span class="u">&nbsp;##PASSISSUECODE##&nbsp;</span>
+                </div>
+                <div class="##PASSFOREIGNCLASS##">
+                    Тип документа:&nbsp;<span class="u">&nbsp;Паспорт гражданина иностранного государства&nbsp;</span><br />
+                    <span id="passser" margin="0">серия&nbsp;<span class="u">&nbsp;##PASSSER##&nbsp;</span>&nbsp;</span>номер&nbsp;<span class="u">&nbsp;##PASSNUM##&nbsp;</span><br />
+                    дата&nbsp;выдачи&nbsp;<span class="u">&nbsp;##PASSDD##&nbsp;##PASSMM##&nbsp;##PASSYYYY##&nbsp;</span>&nbsp;г.
+                    <span id="passexdate" margin="0"><br />дата окончания&nbsp;<span class="u">&nbsp;##PASSEXDD##&nbsp;##PASSEXMM##&nbsp;##PASSEXYYYY##&nbsp;</span>&nbsp;г.</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding: 5px">Должность</td>
+            <td style="border: 1px solid black; padding: 5px">##T##</td>
+        </tr>
+        <tr>
+            <td>Тип участника/Полномочия в информационной<br /> системе<br /><span style='font-size:8.0pt;color: black;'> (если имеются)</span></td>
+            <td>##Qual##</td>
+        </tr>
+        <tr>
+        <td colspan="2" style="background: white">
+            <div style="align-content: stretch; text-align: justify; font-size: 7pt;">
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Настоящим выражаю согласие с обработкой своих персональных данных ООО «Такском», включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение) извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение). Персональные данные, на обработку которых дается согласие в целях исполнения договора, предусматривающего оказание услуг удостоверяющего центра в соответствии с федеральным законом от 06.04.2008 №63-ФЗ «Об электронной подписи» (далее ФЗ «Об электронной подписи») для изготовления квалифицированных сертификатов: фамилия, имя, отчество, ИНН, СНИЛС, место работы (организация), подразделение, должность, адрес места жительства, адрес электронной почты, пол, телефон, паспортные данные (серия и номер, код подразделения, место и дата рождения, дата выдачи паспорта, адрес регистрации). Соглашаюсь с указанием своих персональных данных согласно приказу Минкомсвязи РФ от 05.10.2011 № 250  в реестре выданных ООО «Такском» квалифицированных сертификатов, при этом признаю, что в соответствии с п. 3 ст. 15  ФЗ «Об электронной подписи» ООО «Такском» обязан обеспечить любому лицу безвозмездный доступ к реестру квалифицированных сертификатов ООО «Такском». Соглашаюсь с передачей своих персональных данных в  Единую систему идентификации и аутентификации в целях обеспечения требования ч. 5 ст. 18 ФЗ «Об электронной подписи».
+            </div>
+            <div style="background: white; float: right">
+                <table class="sign" >
+                    <tr><td/></tr>
+                    <tr><td style="border-bottom: 1px solid black;"><span style="font-style: italic">/*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ ##SN##&nbsp;##GN##</span></td></tr>
+                    <tr><td ><span style="border-bottom: 1px solid black; font-weight: bold;">Подпись субъекта персональных данных</span></td></tr>
+                    <tr><td ><small>(лица, указываемого в квалифицированном сертификате)</small></td></tr>
+                </table>
+            </div>
+                                   
+        </td>
+        <tr>
+            <td colspan="2" style="text-align: center;font-weight: bold;font-style: normal;">Сведения об организации</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding: 5px">ОГРН</td>
+            <td style="border: 1px solid black; padding: 5px">##OGRN##</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding: 5px">ИНН</td>
+            <td style="border: 1px solid black; padding: 5px">##INN##</td>
+        </tr>
+        <tr>
+            <td>Контактный телефон</td>
+            <td>##PHONE##</td>
+        </tr>
+        <tr>
+            <td>Адрес электронной почты</td>
+            <td>##EMAIL##</td>
+        </tr>
+    </table>
+</div>
+<div style="align-content: stretch; text-align: justify; ">
+    просит указать при заполнении квалифицированного сертификата адрес места нахождения и наименование  юридического лица согласно данных выписки из государственных информационных ресурсов на дату создания квалифицированного сертификата.
+</div>
+
+<div style="align-content:stretch;text-align:justify;margin:20px">
+    <table width="100%">
+        <colgroup>
+            <col width="42%" />
+            <col width="3%" />
+            <col width="22%" />
+            <col width="3%" />
+            <col width="30%" />
+        </colgroup>
+        <tr>
+            <td style="border-bottom: 1px solid black; margin-right: 15px;font-size:10.0pt; color: black; text-align: center">##BossTitle##</td>
+            <td/>
+            <td style="border-bottom: 1px solid black;">*&nbsp; &nbsp;</td>
+            <td />
+            <td style="border-bottom: 1px solid black;">&nbsp; &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center"><span style='font-size:8.0pt;'>Должность руководителя или уполномоченного сотрудника</span></td>
+            <td />
+            <td style="text-align: center"><span style='font-size:8.0pt;'>подпись</span></td>
+            <td />
+            <td style="text-align: center"><span style='font-size:8.0pt;'>Ф.И.О.</span></td>
+        </tr>
+
+    </table>
+    <br>
+</div>
+<div style="justify-content: stretch; margin-top: -30px; padding-left: 30%"><div style="text-align: center;">М.П.</div></div>
+<div style="margin: -10px 0px">
+    <table width="100%">
+        <colgroup>
+            <col width="100%" />
+            <col width="300pt" />
+        </colgroup>
+        <tr>
+            <td>&nbsp;</td>
+            <td>«____»&nbsp;________________&nbsp;20____г.</td>
+        </tr>
+    </table>
+</div>
+
+<div style="vertical-align: bottom"><small>* наличие подписи обязательно</small></div>
+</div>
+<script>
+    JsBarcode(barcode, "##BARCODE##",{ height : 18, format: "EAN13"});
+</script>
+</body>
+</html>

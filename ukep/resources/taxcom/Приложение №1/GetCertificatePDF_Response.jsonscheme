@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "registrationGuid",
+        "pdf",
+        "name"
+    ],
+    "properties": {
+        "registrationGuid": {
+            "type": "string",
+            "title": "Гуид заказа"
+        },
+        "pdf": {
+            "type": "string",
+            "title": "Печатная форма в формате base64"
+        },
+        "name": {
+            "type": "string",
+            "title": "Имя печатной формы"
+        }
+    }
+}

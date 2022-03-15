@@ -1,0 +1,288 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$ref": "#/definitions/CardAppsDataUC",
+	"definitions": {
+		"CardAppsDataUC": {
+			"description": "Топик",
+			"type": "object",
+			"properties": {
+				"employee": {
+					"$ref": "#/definitions/Employee"
+				},
+				"certType": {
+					"description": "Тип сертификата",
+					"type": "string"
+				},
+				"organization": {
+					"$ref": "#/definitions/Organization"
+				},
+				"registrationGuid": {
+					"description": "ГУИД заявки на сертификат",
+					"type": "string"
+				},
+				"createDateRegistrationGuid": {
+					"description": "Дата создания заявки на сертификат",
+					"type": "string"
+				}
+			},
+			"required": [
+				"employee",
+				"certType",
+				"organization"
+			]
+		},
+		"Document": {
+			"description": "ДУЛ",
+			"type": "object",
+			"properties": {
+				"type": {
+					"title": "type",
+					"description": "Тип документа",
+					"type": "object",
+					"properties": {
+						"name": {
+							"description": "Наименование",
+							"type": "string"
+						},
+						"code": {
+							"description": "Код",
+							"type": "string"
+						},
+						"GNIcode": {
+							"description": "ГНИ код",
+							"type": "string"
+						},
+						"PFcode": {
+							"description": "ПФ код",
+							"type": "string"
+						}
+					},
+					"required": [
+						"name",
+						"code"
+					],
+					"additionalProperties": false
+				},
+				"series": {
+					"description": "Серия",
+					"type": "string"
+				},
+				"number": {
+					"description": "Номер",
+					"type": "string"
+				},
+				"dateOfIssue": {
+					"description": "Дата выдачи",
+					"type": "string"
+				},
+				"dateExpiration": {
+					"description": "Дата окончания",
+					"type": "string"
+				},
+				"issuedBy": {
+					"description": "Кем выдан",
+					"type": "string"
+				}
+			},
+			"required": [
+				"type",
+				"number"
+			],
+			"additionalProperties": false
+		},
+		"Person": {
+			"title": "person",
+			"description": "Персона",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Идентификатор сущности",
+					"type": "string"
+				},
+				"birthDate": {
+					"description": "Дата рождения",
+					"type": "string"
+				},
+				"pensionNbr": {
+					"description": "СНИЛС",
+					"type": "string"
+				},
+				"inn": {
+					"description": "ИНН",
+					"type": "string"
+				},
+				"sex": {
+					"description": "Пол",
+					"type": "string"
+				},
+				"citizenship": {
+					"description": "Гражданство",
+					"type": "string"
+				},
+				"documents": {
+					"title": "documents",
+					"description": "Массив документов",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Document"
+					}
+				},
+				"contact": {
+					"$ref": "#/definitions/Contact"
+				}
+			},
+			"required": [
+				"id",
+				"birthDate",
+				"pensionNbr",
+				"sex",
+				"citizenship",
+				"documents",
+				"contact"
+			]
+		},
+		"Employee": {
+			"title": "employee",
+			"description": "Сотрудник МО",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Идентификатор сущности",
+					"type": "string"
+				},
+				"person": {
+					"$ref": "#/definitions/Person"
+				},
+				"position": {
+					"description": "Должность",
+					"type": "string"
+				}
+			},
+			"required": [
+				"id",
+				"person"
+			],
+			"additionalProperties": false
+		},
+		"Organization": {
+			"description": "Организация",
+			"type": "object",
+			"properties": {
+				"inn": {
+					"description": "ИНН",
+					"type": "string"
+				},
+				"kpp": {
+					"description": "КПП",
+					"type": "string"
+				},
+				"ogrn": {
+					"description": "ОГРН",
+					"type": "string"
+				},
+				"name": {
+					"description": "Наименование ",
+					"type": "string"
+				},
+				"nameFull": {
+					"description": "Полное наименование",
+					"type": "string"
+				},
+				"address": {
+					"$ref": "#/definitions/Address"
+				},
+				"contact": {
+					"$ref": "#/definitions/Contact"
+				}
+			},
+			"required": [
+				"inn",
+				"address",
+				"contact"
+			],
+			"additionalProperties": false
+		},
+		"Address": {
+			"description": "Адрес",
+			"type": "object",
+			"properties": {
+				"index": {
+					"description": "Индекс",
+					"type": "string"
+				},
+				"region": {
+					"description": "Регион",
+					"type": "string"
+				},
+				"area": {
+					"description": "Район",
+					"type": "string"
+				},
+				"city": {
+					"description": "Город",
+					"type": "string"
+				},
+				"place": {
+					"description": "Помещение",
+					"type": "string"
+				},
+				"street": {
+					"description": "Улица",
+					"type": "string"
+				},
+				"houseNum": {
+					"description": "Номера дома",
+					"type": "string"
+				},
+				"buildNum": {
+					"description": "Номер здания",
+					"type": "string"
+				},
+				"room": {
+					"description": "Комната",
+					"type": "string"
+				}
+			},
+			"required": [
+				"index",
+				"region"
+			]
+		},
+		"Contact": {
+			"description": "Контактные данные",
+			"type": "object",
+			"properties": {
+				"phone": {
+					"description": "Номер телефона",
+					"type": "string"
+				},
+				"phoneExt": {
+					"description": "Номер телефона внешний",
+					"type": "string"
+				},
+				"email": {
+					"description": "Электронная почта",
+					"type": "string"
+				},
+				"firstName": {
+					"description": "Имя",
+					"type": "string"
+				},
+				"middleName": {
+					"description": "Отчество",
+					"type": "string"
+				},
+				"lastName": {
+					"description": "Фамилия",
+					"type": "string"
+				}
+			},
+			"required": [
+				"phone",
+				"email",
+				"firstName",
+				"lastName"
+			]
+		}
+	}
+}

@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "title": "Статусы сертификатов",
+    "required": [
+        "statuses"
+    ],
+    "properties": {
+        "statuses": {
+            "type": "array",
+            "title": "Статус заявки",
+            "items": {
+                "type": "object",
+                "title": "The items schema",
+                "required": [
+                    "registrationGuid",
+                    "status",
+                    "message"
+                ],
+                "properties": {
+                    "registrationGuid": {
+                        "type": "string",
+                        "title": "Гуид заявки"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Статус заявки",
+                        "enum": [
+                            "InProgress",
+                            "Success",
+                            "Error"
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "title": "Текст статуса",
+                        
+                               
+                            }
+                        }
+                    }
+                }
+            }
+        
+    
+}
