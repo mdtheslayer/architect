@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "groupGuid",
+        "orders"
+    ],
+    "properties": {
+        "groupGuid": {
+            "type": "string",
+            "title": "Группирующий гуид"
+        },
+        "orders": {
+            "type": "array",
+            "title": "Массив гуидов заказа",
+            "items": {
+                        "required": [
+                            "registrationGuid",
+                            "status"
+                        ],
+                        "properties": {
+                            "registrationGuid": {
+                                "type": "string",
+                                "title": "Гуид заказа"
+                            },
+                            "status": {
+                                "type": "integer",
+                                "title": "Статус заказа. In_processing = 1, Send_documents = 2, Download_document = 3, Issue_cert = 6, Order_completed = 7, Pending_payment = 9"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

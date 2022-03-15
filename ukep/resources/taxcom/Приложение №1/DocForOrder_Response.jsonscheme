@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "Прикрепление файлов к заказу",
+  "required": [
+    "files"
+  ],
+  "properties": {
+    "files": {
+      "type": "array",
+      "title": "Список файлов",
+      "items": {
+        "type": "object",
+        "title": "Список файлов"
+      },
+      "required": [
+        "fileName",
+        "isSent"
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "title": "Имя файла"
+        },
+        "isSent": {
+          "type": "boolean",
+          "title": "Результат прикрепления файла"
+        },
+        "error": {
+          "type": "string",
+          "title": "Описание ошибки"
+        }
+      }
+    }
+  }
+}

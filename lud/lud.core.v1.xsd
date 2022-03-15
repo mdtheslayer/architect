@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by mishatheslayer (axbit) -->
+<xs:schema xmlns="http://emias.mos.ru/lud/core/v1/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://emias.mos.ru/lud/core/v1/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="core/emias.core.v1.xsd"/>
+	<!--List of elements-->
+	<xs:element name="sourceInfo">
+		<xs:annotation>
+			<xs:documentation>Информация об источниках</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="source" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Источник с диагнозом</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="source">
+								<xs:attribute name="isLast" type="xs:boolean" use="optional">
+									<xs:annotation>
+										<xs:documentation>Признак последнего источника с диагнозом</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="isDubbed" type="xs:boolean" use="optional">
+									<xs:annotation>
+										<xs:documentation>Признак дублирующего источника</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="isNotVisibled" type="xs:boolean" use="optional">
+									<xs:annotation>
+										<xs:documentation>Признак необходимости скрытия источника</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="isUntargeted" type="xs:boolean" use="optional">
+									<xs:annotation>
+										<xs:documentation>Нецелевой источник</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="employeeInfo">
+		<xs:annotation>
+			<xs:documentation>Информация о врачах</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="employee" type="employee" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Врач</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dateDiagnosedInfo">
+		<xs:annotation>
+			<xs:documentation>Информация о датах постановки диагноза</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dateDiagnosed" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--elements-->
+	<xs:element name="patientId" type="xs:long">
+		<xs:annotation>
+			<xs:documentation>Идентификатр пациента</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="exactedDiagnosisId" type="xs:long">
+		<xs:annotation>
+			<xs:documentation>Идентификатр уточенного диагноза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="careEventId" type="xs:long">
+		<xs:annotation>
+			<xs:documentation>Идентификатор клинического случая</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="moId" type="xs:long">
+		<xs:annotation>
+			<xs:documentation>Идентификатор головной медицинской организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="moName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Наименование головной медицинской организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="muId" type="xs:long">
+		<xs:annotation>
+			<xs:documentation>Идентификатор филиала медицинской организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="muName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Наименование филиала медицинской организации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="diagnosisSourceType">
+		<xs:annotation>
+			<xs:documentation>Источник документа с диагнозом</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="POLYCLINIC"/>
+				<xs:enumeration value="INPATIENT_FACILITY"/>
+				<xs:enumeration value="EXTERNAL"/>
+				<xs:enumeration value="AMBULANCE"/>
+				<xs:enumeration value="OTHER"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="documentType">
+		<xs:annotation>
+			<xs:documentation>Тип документа в котором был поставлен диагноз</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="EXAMINATION"/>
+				<xs:enumeration value="EXACTED_DIAGNOSES"/>
+				<xs:enumeration value="EPICRISES"/>
+				<xs:enumeration value="REFERENCE_FORM_030_017"/>
+				<xs:enumeration value="REFERENCE_FORM_030_13"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="jobExecutiondId" type="xs:long">
+		<xs:annotation>
+			<xs:documentation>Идентификатор исполнения должности Медработника</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="externalMO" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>Признак выдачи документа сторонней организации, работающей вне системы ДЗМ
+            </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="identified">
+		<xs:annotation>
+			<xs:documentation>Порядок выявления диагноза</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="new"/>
+				<xs:enumeration value="repeated"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="actual" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>Признак актуальности диагноза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="diagnosis">
+		<xs:annotation>
+			<xs:documentation>Диагноз</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="NsiWithCodeBase"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="diagnosisStatus">
+		<xs:annotation>
+			<xs:documentation>Статус диагноза</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="confirmed"/>
+				<xs:enumeration value="unconfirmed"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="positionNom" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Специальность врача</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dateDiagnosed" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>Дата постановки диагноза</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="templateId" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Идентификатор шаблона документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="documentCreated" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Дата создания документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--complexType-->
+	<xs:complexType name="mkb10Children">
+		<xs:annotation>
+			<xs:documentation>Дочерняя запись диагноза по МКБ 10</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="mkb10" type="mkb10">
+				<xs:annotation>
+					<xs:documentation>Сущность "Диагноз по МКБ-10"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--business entities-->
+	<xs:complexType name="employee">
+		<xs:annotation>
+			<xs:documentation>Врач</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="positionNom" minOccurs="0"/>
+			<xs:element ref="jobExecutiondId" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ФИО врача</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="source">
+		<xs:annotation>
+			<xs:documentation>Сущность "Источник диагноза"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sourceId" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>Идентификатор источника с диагнозом</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="simiDocumentId"/>
+			<xs:element ref="documentType"/>
+			<xs:element ref="identified" minOccurs="0"/>
+			<xs:element ref="diagnosisSourceType"/>
+			<xs:element ref="dateDiagnosedInfo" minOccurs="0"/>
+			<xs:element ref="externalMO"/>
+			<xs:element ref="actual"/>
+			<xs:element ref="careEventId" minOccurs="0"/>
+			<xs:element ref="diagnosisStatus" minOccurs="0"/>
+			<xs:element ref="moId" minOccurs="0"/>
+			<xs:element ref="moName" minOccurs="0"/>
+			<xs:element ref="muId" minOccurs="0"/>
+			<xs:element ref="muName" minOccurs="0"/>
+			<xs:element ref="employeeInfo" minOccurs="0"/>
+			<xs:element ref="documentCreated" minOccurs="0"/>
+			<xs:element ref="templateId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="mkb10">
+		<xs:annotation>
+			<xs:documentation>Сущность "Диагноз по МКБ-10"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="NsiWithCodeBase">
+				<xs:sequence>
+					<xs:element name="isExactedDiagnosis" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Признак наличия данного диагноза у пациента</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="firstDateDiagnosed" type="xs:date" minOccurs="0"/>
+					<xs:element name="children" type="mkb10Children" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Дочерний диагноз</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="exactedDiagnosis">
+		<xs:annotation>
+			<xs:documentation>Сущность "Уточнённый диагноз"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="exactedDiagnosisId"/>
+			<xs:element ref="patientId"/>
+			<xs:element ref="diagnosis"/>
+			<xs:element ref="sourceInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

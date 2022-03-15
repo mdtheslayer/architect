@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uctx="http://emias.mos.ru/system/v1/userContext/" xmlns:nsf="http://emias.mos.ru/system/v1/faults/" xmlns:ns1="http://emias.mos.ru/quarantine/quarantineCommandService/v1/types/" xmlns:tns="http://emias.mos.ru/quarantine/quarantineCommandService/v1/" xmlns:ns2="http://emias.mos.ru/quarantine/core/v1/" targetNamespace="http://emias.mos.ru/quarantine/quarantineCommandService/v1/">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import namespace="http://emias.mos.ru/system/v1/userContext/" schemaLocation="../emias.core/emias.system.v1.userContext.xsd"/>
+			<xs:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="../emias.core/emias.system.v1.faults.xsd"/>
+			<xs:import namespace="http://emias.mos.ru/quarantine/quarantineCommandService/v1/types/" schemaLocation="../service.types/quarantine.quarantineCommandService.v1.types.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="updateQuarantineInput">
+		<wsdl:part name="body" element="ns1:updateQuarantineStateRequest"/>
+	</wsdl:message>
+	<wsdl:message name="updateQuarantineOutput">
+		<wsdl:part name="body" element="ns1:updateQuarantineStateResponse"/>
+	</wsdl:message>
+	<wsdl:message name="fault">
+		<wsdl:documentation>Ошибка</wsdl:documentation>
+		<wsdl:part name="body" element="nsf:fault"/>
+	</wsdl:message>
+	<wsdl:message name="userContext">
+		<wsdl:documentation>Контекст пользователя</wsdl:documentation>
+		<wsdl:part name="userContext" element="uctx:userContext"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="depreceateQuarantineInput">
+		<wsdl:part name="body" element="ns1:depreceateQuarantineRequest"/>
+	</wsdl:message>
+	<wsdl:message name="depreceateQuarantineOutput">
+		<wsdl:part name="body" element="ns1:depreceateQuarantineResponse"/>
+	</wsdl:message>
+	<wsdl:message name="archiveQuarantineParticipationsInput">
+		<wsdl:part name="body" element="ns1:archiveQuarantineParticipationsRequest"/>
+	</wsdl:message>
+	<wsdl:message name="archiveQuarantineParticipationsOutput">
+		<wsdl:part name="body" element="ns1:archiveQuarantineParticipationsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="pushParticipationNotificationInput">
+		<wsdl:part name="body" element="ns1:pushParticipationNotificationRequest"/>
+	</wsdl:message>
+	<wsdl:message name="pushParticipationNotificationOutput">
+		<wsdl:part name="body" element="ns1:pushParticipationNotificationResponse"/>
+	</wsdl:message>
+	<wsdl:message name="updateArchiveQuarantineParticipationsInput">
+		<wsdl:part name="body" element="ns1:updateArchiveQuarantineParticipationsRequest"/>
+	</wsdl:message>
+	<wsdl:message name="updateArchiveQuarantineParticipationsOutput">
+		<wsdl:part name="body" element="ns1:updateArchiveQuarantineParticipationsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="createParticipationTreatmentInput">
+		<wsdl:part name="body" element="ns1:createParticipationTreatmentRequest"/>
+	</wsdl:message>
+	<wsdl:message name="createParticipationTreatmentOutput">
+		<wsdl:part name="body" element="ns1:createParticiaptionTreatmentResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="commandServicePortType">
+		<wsdl:operation name="updateQuarantineState">
+			<wsdl:documentation>Обновление статуса карантина</wsdl:documentation>
+			<wsdl:input message="tns:updateQuarantineInput"/>
+			<wsdl:output message="tns:updateQuarantineOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="depreceateQuarantine">
+			<wsdl:documentation>Прекращение карантина</wsdl:documentation>
+			<wsdl:input message="tns:depreceateQuarantineInput"/>
+			<wsdl:output message="tns:depreceateQuarantineOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="archiveQuarantineParticipations">
+			<wsdl:documentation>архивирование участий в рамках карантина</wsdl:documentation>
+			<wsdl:input message="tns:archiveQuarantineParticipationsInput"/>
+			<wsdl:output message="tns:archiveQuarantineParticipationsOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="pushParticipationNotification">
+			<wsdl:documentation>Отправка уведомлений</wsdl:documentation>
+			<wsdl:input message="tns:pushParticipationNotificationInput"/>
+			<wsdl:output message="tns:pushParticipationNotificationOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateArchiveQuarantineParticipations">
+			<wsdl:documentation>Обновление архивирования участий в рамках карантина</wsdl:documentation>
+			<wsdl:input message="tns:updateArchiveQuarantineParticipationsInput"/>
+			<wsdl:output message="tns:updateArchiveQuarantineParticipationsOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="createParticipationTreatment">
+			<wsdl:documentation>Создание мероприятия в рамках участия</wsdl:documentation>
+			<wsdl:input message="tns:createParticipationTreatmentInput"/>
+			<wsdl:output message="tns:createParticipationTreatmentOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="commandServiceBinding" type="tns:commandServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="updateQuarantineState">
+			<soap:operation soapAction="updateQuarantineState"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="depreceateQuarantine">
+			<soap:operation soapAction="depreceateQuarantine"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="archiveQuarantineParticipations">
+			<soap:operation soapAction="updateQuarantineParticipations"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="pushParticipationNotification">
+			<soap:operation soapAction="pushNotification"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateArchiveQuarantineParticipations">
+			<soap:operation soapAction="updateArchiveQuarantineParticipations"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createParticipationTreatment">
+			<soap:operation soapAction="createParticipationTreatment"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="commandService">
+		<wsdl:port name="commandServicePortType" binding="tns:commandServiceBinding">
+			<soap:address location="REPLACE_ACTUAL_URL"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

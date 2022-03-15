@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:tns="http://emias.mos.ru/simi/document/v5/" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:simicore="http://emias.mos.ru/simi/core/v5/" 
+xmlns:cct="http://emias.mos.ru/simi/cct/v5/" 
+xmlns:ds="http://www.w3.org/2000/09/xmldsig#" 
+targetNamespace="http://emias.mos.ru/simi/document/v5/" version="1.0">
+	<xs:import namespace="http://emias.mos.ru/simi/core/v5/" schemaLocation="simi.core.v5.xsd"/>
+	<xs:import namespace="http://emias.mos.ru/simi/cct/v5/" schemaLocation="simi.cct.v5.xsd"/>
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="simi.dsig.xsd"/>
+	<!--reusable elements-->
+	<xs:element name="document" type="tns:Document" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Документ СИМИ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="documentId" type="xs:string" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Идентификатор Документа СИМИ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="data" type="xs:base64Binary">
+		<xs:annotation>
+			<xs:documentation>Контент Документа СИМИ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--document entity and its main sections-->
+	<xs:complexType name="DocumentTag">
+		<xs:annotation>
+			<xs:documentation>Представляет "Тэг" Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="simicore:Tag">
+				<xs:attribute name="definedByCct" type="xs:boolean" use="required">
+					<xs:annotation>
+						<xs:documentation>Признак принадлежности "Тэга" к взятым из CCT терминологии "Тэгам"</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DocumentTagCollection">
+		<xs:annotation>
+			<xs:documentation>Представляет коллекцию "Тэгов" Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="tag" type="tns:DocumentTag" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Представляет "Тэг" Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Document">
+		<xs:annotation>
+			<xs:documentation>Представляет Документ СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="metadata" type="tns:Metadata">
+				<xs:annotation>
+					<xs:documentation>Представляет метаданные Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="content" type="tns:Content" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Описывает контент Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" type="tns:Signature" form="qualified" maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описывает сведения об электронной подписи Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Metadata">
+		<xs:annotation>
+			<xs:documentation>Представляет метаданные Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:documentId">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentInfo" type="tns:DocumentInfo" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Базовые сведения о Документе СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="cct:visualizations">
+				<xs:annotation>
+					<xs:documentation>Представляет коллекцию сведений о XSLT преобразованиях</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="confidentialityTags" type="tns:DocumentTagCollection">
+				<xs:annotation>
+					<xs:documentation>Коллекция Тэгов, определяющих уровень конфеденциальности Документа СИМИ
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="links" type="tns:Links">
+				<xs:annotation>
+					<xs:documentation>Сведения о междокументарных связях Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="associations" type="tns:Associations">
+				<xs:annotation>
+					<xs:documentation>Сведения об ассоциациях между Документами СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="status" type="tns:Status" use="required">
+			<xs:annotation>
+				<xs:documentation>Статус документа СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="authorLogin" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Логин пользователя-автора Документа СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="signeeLogin" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Логин пользователя, подписавшего электронной подписью документ СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="Content">
+		<xs:annotation>
+			<xs:documentation>Описывает контент Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="visualization" type="xs:base64Binary" form="qualified" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>XSLT преобразование, использованное при подписании контента Документа СИМИ
+                        электронной подписью
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="tns:data">
+				<xs:annotation>
+					<xs:documentation>Контент Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="mimeClass" type="cct:MimeClass" use="required">
+			<xs:annotation>
+				<xs:documentation>MIME-класс, которому принадлежит контент Документа СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="mimeType" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>MIME-тип, которому принадлежит контент Документа СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="valid" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>Бизнес признак валидности контента Документа СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="Signature">
+		<xs:annotation>
+			<xs:documentation>Описывает сведения об электронной подписи Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ds:Signature" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Цифровая подпись по стандарту XMLDSig</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signatureCAdES" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Цифровая подпись по стандарту CAdES</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="technicalSignature" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Признак (true/false) использования технической подписи для подписания Документа СИМИ
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="userFIO" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ФИО подписанта</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="dateSign" type="xs:dateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Дата подписания</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="jobExecutionId" type="xs:long">
+			<xs:annotation>
+				<xs:documentation>Идентификатор исполняемой должности</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="signMO" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Признак (true/false) подписи медицинской организации</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="signeeLogin" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Логин пользователя, подписавшего документ электронной подписью (указывается только при
+                    использовании технической подписи, то есть если атрибут technicalSignature=true)
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="deprecated" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>Дата/время аннулирования подписанного документа (указывается только если Документ СИМИ
+                    аннулирован то есть его статус установлен в DEPRECATED)
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--documents' metadata description elements-->
+	<xs:complexType name="CctInfo">
+		<xs:annotation>
+			<xs:documentation>Сведения о Классе документов СИМИ (определенный терминологией CCT), которому принадлежит
+                данный Документ СИМИ
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="simicore:Tag">
+				<xs:sequence>
+					<xs:element ref="cct:cctParameters">
+						<xs:annotation>
+							<xs:documentation>Представляет параметры, специфичные для Класса документов СИМИ,
+                                определенного элементом терминологии CCT
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="cct:contentTypeInfo">
+						<xs:annotation>
+							<xs:documentation>Представляет тип контента, разрешенного для Документа СИМИ, являющегося
+                                представителем Класса документов СИМИ, определенного элементом терминологии CCT
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DocumentInfo">
+		<xs:annotation>
+			<xs:documentation>Описывает базовые сведения о Документе СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="simicore:patientId">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Пациента в ЕМИАС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="simicore:careEventId">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Клинического события в операционном сервисе ЕМИАС.СУПП.События
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="simicore:careEventStarted">
+				<xs:annotation>
+					<xs:documentation>Дата/время начала Клинического события</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="simicore:careEventFinished" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата/время окончания Клинического события</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cctInfo" type="tns:CctInfo" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Сведения о Классе документов СИМИ (определенный терминологией CCT), которому
+                        принадлежит данный Документ СИМИ
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tags" type="tns:DocumentTagCollection">
+				<xs:annotation>
+					<xs:documentation>Тэги Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="documentCreated" type="xs:dateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Дата/время создания Документа СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="documentSubmissionSetId" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Идентификатор набора документов, которому принадлежит Документ СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="simiVersion" type="xs:unsignedShort" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия объектной модели Документа СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--enumerations-->
+	<xs:simpleType name="Status">
+		<xs:annotation>
+			<xs:documentation>Представляет перечисление статусов Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREATED">
+				<xs:annotation>
+					<xs:documentation>Созданный Документ СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DRAFT">
+				<xs:annotation>
+					<xs:documentation>Черновик Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIGNED">
+				<xs:annotation>
+					<xs:documentation>Подписанный Документ СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIGNING">
+				<xs:annotation>
+					<xs:documentation>Подписывающийся Документ СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEPRECATED">
+				<xs:annotation>
+					<xs:documentation>Аннулированный Документ СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARCHIVED">
+				<xs:annotation>
+					<xs:documentation>Архивированный Документ СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="LinkedDocument">
+		<xs:annotation>
+			<xs:documentation>Идентификатор Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:documentId">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Links">
+		<xs:annotation>
+			<xs:documentation>Сведения о междокументарных связях Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="parent" type="tns:LinkedDocument" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Документ-родитель</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="descendants" type="tns:LinkedDocument" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Документы-потомки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssociationType">
+		<xs:annotation>
+			<xs:documentation>Тип ассоциации между Документами СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="schema" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор терминологии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код элемента терминологии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание элемента терминологии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Association">
+		<xs:annotation>
+			<xs:documentation>Ассоциация между Документами СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="myRole" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Роль текущего Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherRole" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Роль другого Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="tns:AssociationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Тип ассоциации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="otherId" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Идентификатор другого Документа СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="Associations">
+		<xs:annotation>
+			<xs:documentation>Сведения об ассоциациях между Документами СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="association" type="tns:Association" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Ассоциация между Документами СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

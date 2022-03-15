@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "title": "Создание запроса на создание сертификата",
+    "required": [
+        "registrationGuid",
+        "pkcs#10"
+    ],
+    "properties": {
+        "registrationGuid": {
+            "type": "string",
+            "title": "ИД заявки на сертификат"
+        },
+        "pkcS10": {
+            "type": "string",
+            "title": "Запрос на выпуск сертификата в формате pkcs#10"
+        }
+    }
+}

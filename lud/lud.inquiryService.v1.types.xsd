@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<xs:schema xmlns:tns="http://emias.mos.ru/lud/inquiryService/v1/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="http://emias.mos.ru/lud/core/v1/" targetNamespace="http://emias.mos.ru/lud/inquiryService/v1/types/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://emias.mos.ru/lud/core/v1/" schemaLocation="lud.core.v1.xsd"/>
+	<xs:complexType name="mkb10ListResultPage">
+		<xs:annotation>
+			<xs:documentation>Результат отбора справочных сведений по диагнозам формата МКБ-10</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PagingResults">
+				<xs:sequence>
+					<xs:element name="mkb10" type="core:mkb10" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="positionNomListResultPage">
+		<xs:annotation>
+			<xs:documentation>Результат отбора справочных сведений по специальностям врача</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PagingResults">
+				<xs:sequence>
+					<xs:element ref="core:positionNom" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--request & responses-->
+	<!--метод getMkb10ByPatientId-->
+	<xs:element name="getMkb10ByPatientIdRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры для метода getMkb10ByPatientId</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="core:patientId"/>
+				<xs:element ref="core:options" minOccurs="0"/>
+				<xs:element ref="core:pagingOptions" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getMkb10ByPatientIdResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры для метода getMkb10ByPatientId</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="tns:mkb10ListResultPage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--метод getPositionNomByPatientId-->
+	<xs:element name="getPositionNomByPatientIdRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры для метода getPositionNomByPatientId</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="core:patientId"/>
+				<xs:element ref="core:options" minOccurs="0"/>
+				<xs:element ref="core:pagingOptions" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getPositionNomByPatientIdResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры для метода getPositionNomByPatientId</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="tns:positionNomListResultPage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--метод gerPrimaryDateByPatientId-->
+	<xs:element name="getPrimaryDateByPatientIdRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры для метода getPrimaryDateByPatientId</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="core:patientId"/>
+				<xs:element ref="core:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getPrimaryDateByPatientIdResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры для метода getPrimaryDateByPatientId</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="core:dateDiagnosed" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

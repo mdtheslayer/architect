@@ -1,0 +1,18 @@
+GET http://localhost:8080/book
+Accept: application/json
+
+###
+POST http://localhost:8080/book
+Content-Type: application/json
+
+{
+  "id":"131241451114324235",
+  "title": "lol",
+  "description": "kek",
+  "amount": 10
+}
+
+
+<> 2021-11-02T121717.500.json
+
+###

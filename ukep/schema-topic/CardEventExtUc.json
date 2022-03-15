@@ -1,0 +1,229 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$ref": "#/definitions/CardsEventExtUc",
+	"definitions": {
+		"OrderCert": {
+			"title": "orderCert",
+			"description": "Запрос на выдачу Сертификата",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Идентификатор",
+					"type": "string"
+				},
+				"registrationGuid": {
+					"description": "ГУИД заявки",
+					"type": "string"
+				},
+				"createDate": {
+					"description": "Дата создания",
+					"type": "string"
+				},
+				"state": {
+					"title": "state",
+					"description": "Состояние",
+					"type": "object",
+					"properties": {
+						"createDate": {
+							"description": "Дата создания",
+							"type": "string"
+						},
+						"status": {
+							"description": "Статус",
+							"type": "string"
+						},
+						"reason": {
+							"description": "Повод",
+							"type": "string"
+						}
+					},
+					"required": [
+						"createDate",
+						"status"
+					],
+					"additionalProperties": false
+				},
+				"snils": {
+					"description": "СНИЛС",
+					"type": "string"
+				}
+			},
+			"required": [
+				"id",
+				"registrationGuid",
+				"createDate",
+				"state",
+				"snils"
+			]
+		},
+		"Certificate": {
+			"title": "сertificate",
+			"description": "Сертификат",
+			"type": "object",
+			"properties": {
+				"subject": {
+					"description": "Субьект",
+					"type": "string"
+				},
+				"period": {
+					"title": "period",
+					"description": "Период действия",
+					"type": "object",
+					"properties": {
+						"validFrom": {
+							"description": "Дата начала",
+							"type": "string"
+						},
+						"validTo": {
+							"description": "Дата окончания",
+							"type": "string"
+						}
+					},
+					"required": [
+						"validFrom",
+						"validTo"
+					],
+					"additionalProperties": false
+				},
+				"createDate": {
+					"description": "Дата создания",
+					"type": "string"
+				},
+				"issuer": {
+					"description": "Издатель",
+					"type": "string"
+				},
+				"serialNumber": {
+					"description": "Серийный номер",
+					"type": "string"
+				},
+				"isRevoked": {
+					"description": "Признак аннулирования",
+					"type": "boolean"
+				},
+				"thumbprint": {
+					"description": "Отпечаток сертификата",
+					"type": "string"
+				},
+				"organization": {
+					"title": "organization",
+					"description": "Организация заявитель",
+					"type": "object",
+					"properties": {
+						"name": {
+							"description": "Наименование",
+							"type": "string"
+						},
+						"ogrn": {
+							"description": "ОГРН",
+							"type": "string"
+						},
+						"inn": {
+							"description": "ИНН",
+							"type": "string"
+						},
+						"nameFull": {
+							"description": "Полное наименование",
+							"type": "string"
+						}
+					},
+					"required": [
+						"name",
+						"ogrn"
+					],
+					"additionalProperties": false
+				}
+			},
+			"required": [
+				"subject",
+				"period",
+				"createDate",
+				"issuer",
+				"serialNumber",
+				"isRevoked",
+				"thumbprint",
+				"organization"
+			]
+		},
+		"Employee": {
+			"title": "employee",
+			"description": "Сотрудник",
+			"type": "object",
+			"properties": {
+				"firstName": {
+					"description": "Имя",
+					"type": "string"
+				},
+				"patronymic": {
+					"description": "Отчество",
+					"type": "string"
+				},
+				"lastName": {
+					"description": "Фамилия",
+					"type": "string"
+				},
+				"contacts": {
+					"title": "contacts",
+					"description": "Контактная информация",
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"type": {
+								"description": "Тип",
+								"type": "string"
+							},
+							"value": {
+								"description": "Значение",
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"value"
+						],
+						"additionalProperties": false
+					}
+				},
+				"inn": {
+					"description": "ИНН",
+					"type": "string"
+				},
+				"snils": {
+					"description": "СНИЛС",
+					"type": "string"
+				},
+				"position": {
+					"description": "Должность",
+					"type": "string"
+				}
+			},
+			"required": [
+				"firstName",
+				"lastName",
+				"contacts",
+				"inn",
+				"snils"
+			]
+		},
+		"CardsEventExtUc": {
+			"description": "Топик",
+			"type": "object",
+			"properties": {
+				"orderCert": {
+					"$ref": "#/definitions/OrderCert"
+				},
+				"сertificate": {
+					"$ref": "#/definitions/Certificate"
+				},
+				"employee": {
+					"$ref": "#/definitions/Employee"
+				}
+			},
+			"required": [
+				"orderCert",
+				"employee"
+			]
+		}
+	}
+}

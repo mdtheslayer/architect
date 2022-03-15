@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<xs:schema xmlns:tns="http://emias.mos.ru/lud/exactedDiagnosesService/v1/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="http://emias.mos.ru/lud/core/v1/" targetNamespace="http://emias.mos.ru/lud/exactedDiagnosesService/v1/types/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://emias.mos.ru/lud/core/v1/" schemaLocation="lud.core.v1.xsd"/>
+	<!--lists of entities-->
+	<xs:complexType name="exactedDiagnosisListResultPage">
+		<xs:annotation>
+			<xs:documentation>Результаты отбора сведений о exactedDiagnosis</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PagingResults">
+				<xs:sequence>
+					<xs:element name="exactedDiagnosis" type="core:exactedDiagnosis" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Сведения о exactedDiagnosis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--requests & responses-->
+	<xs:element name="getExactedDiagnosisRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getExactedDiagnosis</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="core:patientId"/>
+				<xs:element name="diagnosisId" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="core:diagnosisSourceType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="positionNom" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="datePeriod" type="core:DatePeriod" minOccurs="0"/>
+				<xs:element ref="core:pagingOptions" minOccurs="0"/>
+				<xs:element ref="core:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getExactedDiagnosisResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getExactedDiagnosis</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="tns:exactedDiagnosisListResultPage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

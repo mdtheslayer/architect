@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>ЗАЯВЛЕНИЕ</title>
+    <style type="text/css">
+        .recv {
+            border-collapse: collapse;
+            width: 95%;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .recv tr td {
+            border: 1px solid black; 
+            padding: 3px;
+            /*    font-weight: bold;
+            font-size: 11pt;*/
+            font-style: italic;
+        }
+        .recv tr td:first-child {
+            background: rgb(216, 216, 216);
+            font-style: normal;
+            font-weight: normal;
+        }
+        .recv tr:first-child td {
+            text-align: center;
+            font-weight: bold;
+            font-style: normal;
+        }
+        .passinvisible { display: none;} 
+        .passvisible { display: inline; font-weight: normal; padding: 2px}
+        .u {display: inline; font-style: italic;  border-bottom: 1px solid black;  margin: 0 2px; line-height: 150%}
+    </style>
+    <script src="JsBarcode.all.js"></script>
+</head>
+    <body>
+    <div style='font-family:"Times New Roman","serif";font-size:9.0pt; color: black;line-height: 120%' >
+        <div style="text-align:center; margin: -5px 0; color: rgb(65, 65, 65)">
+            <table width="100%">
+                <colgroup>
+                    <col width="40%" />
+                    <col width="30%" />
+                    <col width="30%" />
+                </colgroup>
+                <tr>
+                    <td style="font-size:10.0pt;text-align: left;font-weight: bold">Для физических лиц<br/> и индивидуальных предпринимателей </td>
+                    <td><img id="barcode" /></td>
+                    <td style="font-size:10.0pt;text-align: right;font-weight: bold;">Удостоверяющий центр ООО «Такском»</td>
+                </tr>
+            </table>            
+        </div>
+
+        <div style="text-align:center;margin: 25px 0">
+            <span style='font-size:11pt;'>
+                <b>
+                    Заявление<br />
+                    на создание квалифицированного сертификата ключа проверки электронной подписи
+                </b>
+            </span>
+        </div>
+
+
+        <div >
+            <table width="100%">
+                <colgroup>
+                    <col width="20px" />
+                    <col width="100%"/>
+                </colgroup>
+                <tr>
+                    <td>Я,</td>
+                    <td style="border-bottom: 1px solid black; text-align: center">##SN## ##GN##</td>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center; margin: -5px 0 5px 0"><span style='text-align: center'><small>фамилия, имя, отчество</small></span></div>
+
+        <span style="align-content:stretch; text-align: justify;">заявляю об акцепте действующего на дату регистрации Заявления «Регламента аккредитованного Удостоверяющего центра ООО «Такском», условия которого определены ООО «Такском», в порядке, предусмотренном ст. 428 Гражданского Кодекса Российской Федерации и прошу создать квалифицированный сертификат ключа проверки электронной подписи (далее квалифицированный сертификат) в соответствии со следующими данными:</span>
+        <div style="text-align: center; margin: 15px;">
+            <table class="recv">
+                <colgroup>
+                    <col width="40%" />
+                    <col width="60%" />
+                </colgroup>
+                <tr>
+                    <td  colspan="2" >Сведения о физическом лице – Пользователе Аккредитованного удостоверяющего центра</td>
+                </tr>            
+                <tr>
+                    <td>Фамилия</td> <td>##SN##</td>
+                </tr>
+                <tr>
+                    <td>Имя, отчество</td> <td>##GN##</td>
+                </tr>
+                <tr>
+                    <td>Пол</td><td>##GENDER##</td>
+                </tr>            
+                <tr>
+                    <td>Дата рождения</td><td>##BIRTHDD##&nbsp;##BIRTHMM##&nbsp;##BIRTHYYYY##&nbsp;г.</td>
+                </tr>   
+                <tr>
+                    <td>СНИЛС</td><td>##SNILS##</td>
+                </tr>
+                <tr>
+                    <td>ИНН</td><td>##INN##</td>
+                </tr>
+                <tr>
+                    <td>ОГРНИП<br /><span style='font-size:8.0pt;color: black;'>(заполняется только индивидуальными предпринимателями)</span></td><td>##OGRN##</td>
+                </tr>
+                <tr>
+                    <td>Гражданство</td><td>##CITIZENSHIP##</td>
+                </tr>
+                <tr>
+                    <td>Документ, удостоверяющий личность</td><td>
+                    
+                        <div class="##PASSRUSCLASS##">
+                            Тип документа:<span class="u">Паспорт гражданина РФ</span><br />
+                            серия&nbsp;<span class="u">&nbsp;##PASSSER##&nbsp;</span>&nbsp;номер&nbsp;<span class="u">&nbsp;##PASSNUM##&nbsp;</span> дата выдачи&nbsp;<span class="u">&nbsp;##PASSDD##&nbsp;##PASSMM##&nbsp;##PASSYYYY##&nbsp;</span>&nbsp;г.<br />
+                            выдан&nbsp;<span class="u">&nbsp;##PASSISSUE##&nbsp;</span><br />
+                            код подразделения&nbsp;<span class="u">&nbsp;##PASSISSUECODE##&nbsp;</span>
+                        </div>
+                        <div class="##PASSFOREIGNCLASS##">
+                            Тип документа:&nbsp;<span class="u">&nbsp;Паспорт гражданина иностранного государства&nbsp;</span><br />
+                            <span id="passser" margin="0">серия&nbsp;<span class="u">&nbsp;##PASSSER##&nbsp;</span>&nbsp;</span>номер&nbsp;<span class="u">&nbsp;##PASSNUM##&nbsp;</span><br />
+                            дата&nbsp;выдачи&nbsp;<span class="u">&nbsp;##PASSDD##&nbsp;##PASSMM##&nbsp;##PASSYYYY##&nbsp;</span>&nbsp;г.
+                            <span id="passexdate" margin="0"><br />дата окончания&nbsp;<span class="u">&nbsp;##PASSEXDD##&nbsp;##PASSEXMM##&nbsp;##PASSEXYYYY##&nbsp;</span>&nbsp;г.</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Город</td><td>##L##</td>
+                </tr>
+                <tr>
+                    <td>Субъект РФ</td><td>##S##</td>
+                </tr>
+                <tr>
+                    <td>Страна</td><td>RU</td>
+                </tr>
+                <tr>
+                    <td>Контактный телефон</td><td>##PHONE##</td>
+                </tr>
+                <tr>
+                    <td>Адрес электронной почты</td><td>##EMAIL##</td>
+                </tr>
+                <tr>
+                    <td>Тип участника/Полномочия в ИС<br /><span style='font-size:8.0pt;color: black;'> (если имеются)</span></td><td>##Qual##</td>
+                </tr>
+            </table>
+        </div>
+        <div style="align-content: stretch; text-align: justify; font-size: 7pt;">
+        
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Настоящим выражаю согласие с обработкой своих персональных данных ООО «Такском», включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение) извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение). Персональные данные, на обработку которых дается согласие в целях исполнения договора, предусматривающего оказание услуг удостоверяющего центра в соответствии с федеральным законом от 06.04.2008 №63-ФЗ «Об электронной подписи» (далее ФЗ «Об электронной подписи») для изготовления квалифицированных сертификатов: фамилия, имя, отчество, ИНН, СНИЛС, место работы (организация), подразделение, должность, адрес места жительства, адрес электронной почты, пол, абонентский номер, паспортные данные (серия и номер, код подразделения, место и дата рождения, дата выдачи паспорта, адрес регистрации). Соглашаюсь с указанием своих персональных данных согласно приказу Минкомсвязи РФ от 05.10.2011 № 250  в реестре выданных ООО «Такском» квалифицированных сертификатов, при этом признаю, что в соответствии с п. 3 ст. 15  ФЗ «Об электронной подписи» ООО «Такском» обязан обеспечить любому лицу безвозмездный доступ к реестру квалифицированных сертификатов ООО «Такском». Соглашаюсь с передачей своих персональных данных в  Единую систему идентификации и аутентификации в целях обеспечения требования ч. 5 ст. 18 ФЗ «Об электронной подписи».
+        
+        </div>
+
+        <div style="align-content:stretch;text-align:justify;margin:0px 0">
+            <br />___________________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="u" style="min-width: 200px">##SN##&nbsp;##GN##</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«____» ________________ 20____г.<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <small>подпись</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<small>Ф.И.О.</small>
+        </div>
+        <span style="align-content:stretch;text-align:justify;margin:10px 180px">М.П.*</span>
+        <div style="align-content: stretch; text-align: justify; margin: 20px 0; width: 100%; border-top: 1px solid black">
+            <div style="margin: 10px 0;"><span style="font-weight: bold; border-bottom: 1px solid black">Заполняется сотрудником удостоверяющего центра</span></div>
+            Отметка о регистрации Заявления:<br/><br/>
+            Зарегистрировано&nbsp;«____» ________________ 20____г.<br/><br/>
+            Зарегистрировал:&nbsp;______________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________________________________________<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small>подпись</small>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            <small>Ф.И.О.</small><br/>
+        </div>
+        <span style="align-content:stretch;text-align:justify;margin:30px 180px">М.П.</span>
+        <div style="vertical-align: bottom"><small>* Заявление заполняется машинным способом, распечатывается на одном листе и заверяется печатью (при ее наличии у Заявителя).</small></div>
+    </div>
+    <script>
+        JsBarcode(barcode, "##BARCODE##",{ height : 18, format: "EAN13"});
+    </script>
+    </body>
+</html>

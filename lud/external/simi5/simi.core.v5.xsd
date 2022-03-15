@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://emias.mos.ru/simi/core/v5/"
+           xmlns:tns="http://emias.mos.ru/simi/core/v5/" version="1.0">
+	<xs:include schemaLocation="emias.core.v1.xsd"/>
+
+	<!--business entities which don't belong to SIMI services-->
+	<xs:element name="patientId" type="xs:long">
+		<xs:annotation>
+			<xs:documentation>Идентификатор Пациента в ЕМИАС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="careEventId" type="xs:long">
+		<xs:annotation>
+			<xs:documentation>Идентификатор Клинического события в операционном сервисе ЕМИАС.СУПП.События</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="careEventStarted" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Дата/время начала Клинического события</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="careEventFinished" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Дата/время окончания Клинического события</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!--base types-->
+	<xs:complexType name="Tag">
+		<xs:annotation>
+			<xs:documentation>Представляет "Тэг"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>			
+			<xs:element name="schema" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор терминологии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код элемента терминологии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание элемента терминологии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="role" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Назначение/роль "Тэга"</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>		
+	</xs:complexType>
+	<xs:complexType name="TagCollection">
+		<xs:annotation>
+			<xs:documentation>Представляет коллекцию "Тэгов"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="tag" type="tns:Tag" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Представляет "Тэг"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ComparisonType">
+		<xs:annotation>
+			<xs:documentation>Представляет перечисление типов сравнения значений</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GT">
+				<xs:annotation>
+					<xs:documentation>Сравнение "больше чем"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GE">
+				<xs:annotation>
+					<xs:documentation>Сравнение "больше или равно"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EQ">
+				<xs:annotation>
+					<xs:documentation>Сравнение "в точности равно"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LT">
+				<xs:annotation>
+					<xs:documentation>Сравнение "меньше чем"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LE">
+				<xs:annotation>
+					<xs:documentation>Сравнение "меньше или равно"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LIKE">
+				<xs:annotation>
+					<xs:documentation>Сравнение по подстроке</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NE">
+				<xs:annotation>
+					<xs:documentation>Сравнение "не равно"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

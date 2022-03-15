@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+	<Folder FolderName="wsdl">
+		<File FilePath="wsdl\quarantine.quarantineCommandService.wsdl" HomeFolder="Yes"/>
+		<File FilePath="wsdl\quarantine.quarantineQueryService.wsdl" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="service.types">
+		<File FilePath="service.types\quarantine.quarantineCommandService.v1.types.xsd" HomeFolder="Yes"/>
+		<File FilePath="service.types\quarantine.quarantineQueryService.v1.types.xsd" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="service.core">
+		<File FilePath="service.core\quarantine.core.v1.xsd" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="emias.core">
+		<File FilePath="emias.core\emias.core.address.v1.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.core\emias.core.queryExpression.v1.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.core\emias.core.v1.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.core\emias.system.v1.faults.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.core\emias.system.v1.userContext.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.core\emias.system.v1.xsd" HomeFolder="Yes"/>
+	</Folder>
+</Project>

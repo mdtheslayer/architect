@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "required": [
+        "regTypes"
+    ],
+    "properties": {
+        "regTypes": {
+            "type": "array",
+            "title": "Массив типов продуктов",
+            "items": {
+                "type": "object",
+                "title": "Тип продукта",
+                "required": [
+                    "guid",
+                    "name"
+                ],
+                "properties": {
+                    "guid": {
+                        "type": "string",
+                        "title": "Гуид продукта"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Наименование продукта"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": "Создание заявки на сертификат",
+  "required": [
+    "Guid",
+    "orderInfo"
+  ],
+  "properties": {
+    "Guid": {
+      "type": "string",
+      "title": "ИД заявки на сертификат"
+    },
+    "orderInfo": {
+      "type": "object",
+      "title": "Информация о заказе",
+      "required": [
+        "inn",
+        "firstName",
+        "lastName",
+        "middleName"
+      ],
+      "properties": {
+        "inn": {
+          "type": "string",
+          "title": "ИНН"
+        },
+        "firstName": {
+          "type": "string",
+          "title": "Имя"
+        },
+        "lastName": {
+          "type": "string",
+          "title": "Фамилия"
+        },
+        "middleName": {
+          "type": "string",
+          "title": "Отчетство"
+        }
+      }
+    }
+  }
+}

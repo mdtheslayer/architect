@@ -1,0 +1,233 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "title": "Создание заказа",
+    "description": "post /api/AddOrder",
+    "required": [
+      "organization",
+      "OrderType",
+      "employee"
+    ],
+    "properties": {
+      "organization": {
+        "type": "object",
+        "title": "Сведения по организации",
+        "required": [
+          "inn",
+          "companyName",
+          "companyNameFull",
+          "address",
+          "contact",
+          "boss",
+          "isFl"
+        ],
+        "properties": {
+          "inn": {
+            "type": "string",
+            "title": "ИНН"
+          },
+          "kpp": {
+            "type": "string",
+            "title": "КПП"
+          },
+          "ogrn": {
+            "type": "string",
+            "title": "ОГРН или ОГРНИП"
+          },
+          "companyName": {
+            "type": "string",
+            "title": "Краткое наименование организации"
+          },
+          "companyNameFull": {
+            "type": "string",
+            "title": "Полное наименование организации"
+          },
+          "address": {
+            "type": "object",
+            "title": "Адрес",
+            "required": [
+              "index",
+              "region",
+              "city"
+            ],
+            "properties": {
+              "index": {
+                "type": "string",
+                "title": "Индекс"
+              },
+              "region": {
+                "type": "string",
+                "title": "Регион"
+              },
+              "area": {
+                "type": "string",
+                "title": "Район"
+              },
+              "city": {
+                "type": "string",
+                "title": "Город"
+              },
+              "place": {
+                "type": "string",
+                "title": "Населеный пункт"
+              },
+              "street": {
+                "type": "string",
+                "title": "Улица"
+              },
+              "houseNum": {
+                "type": "string",
+                "title": "Дом"
+              },
+              "buildNum": {
+                "type": "string",
+                "title": "Строение"
+              },
+              "room": {
+                "type": "string",
+                "title": "Команата или офис"
+              }
+            }
+          },
+          "contact": {
+            "type": "object",
+            "title": "Контактное лицо",
+            "required": [
+              "phone",
+              "email",
+              "firstName",
+              "middleName",
+              "lastName"
+            ],
+            "properties": {
+              "phone": {
+                "type": "string",
+                "title": "Телефон"
+              },
+              "phoneExt": {
+                "type": "string",
+                "title": "Добавочный телефон"
+              },
+              "email": {
+                "type": "string",
+                "title": "Почта"
+              },
+              "firstName": {
+                "type": "string",
+                "title": "Имя"
+              },
+              "middleName": {
+                "type": "string",
+                "title": "Отчетство"
+              },
+              "lastName": {
+                "type": "string",
+                "title": "Фамилия"
+              }
+            }
+          },
+          "boss": {
+            "type": "object",
+            "title": "Руководитель",
+            "required": [
+              "reason",
+              "firstName",
+              "middleName",
+              "lastName",
+              "position"
+            ],
+            "properties": {
+              "reason": {
+                "type": "string",
+                "title": "Основание полномочий"
+              },
+              "documentNumber": {
+                "type": "string",
+                "title": "Номер документа оснований полномочий"
+              },
+              "firstName": {
+                "type": "string",
+                "title": "Имя"
+              },
+              "middleName": {
+                "type": "string",
+                "title": "Отчество"
+              },
+              "lastName": {
+                "type": "string",
+                "title": "Фамилия"
+              },
+              "position": {
+                "type": "string",
+                "title": "Должность"
+              }
+            }
+          },
+          "isFl": {
+            "type": "boolean",
+            "title": "Заявка на физ. лицо"
+          }
+        }
+      },
+      "OrderType": {
+        "type": "string",
+        "title": "Тип сертификата"
+      },
+      "employee": {
+        "type": "array",
+        "title": "Владелец сертификата",
+        "items": {
+          "type": "object",
+          "title": "Владелец сертификата",
+          "required": [
+            "firstName",
+            "middleName",
+            "lastName",
+            "position",
+            "email",
+            "snils",
+            "phone"
+
+          ],
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "title": "Имя"
+            },
+            "middleName": {
+              "type": "string",
+              "title": "Отчество"
+            },
+            "lastName": {
+              "type": "string",
+              "title": "Фамилия"
+            },
+            "position": {
+              "type": "string",
+              "title": "Должность"
+            },
+            "email": {
+              "type": "string",
+              "title": "Почта"
+            },
+            "snils": {
+              "type": "string",
+              "title": "СНИЛС"
+            },
+            "phone": {
+              "type": "string",
+              "title": "Телефон"
+            },
+            "mobilePhone": {
+              "type": "string",
+              "title": "Моб. телефон"
+            },
+            "loginDss": {
+              "type": "string",
+              "title": "Логин DSS"
+            }
+          }
+        }
+      }
+    }
+  }

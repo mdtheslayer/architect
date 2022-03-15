@@ -1,0 +1,298 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "type": "object",
+  "title": "Создание заказа сертификата",
+  "description": "post /api/uc/CreateOrderCert",
+  "required": [
+    "organization",
+    "certType",
+    "certOwner"
+  ],
+  "properties": {
+    "organization": {
+      "type": "object",
+      "title": "Сведения по организации",
+      "required": [
+        "inn",
+        "companyName",
+        "companyNameFull",
+        "address",
+        "contact",
+        "boss",
+        "isFl",
+        "isDss",
+        "askPin",
+        "secondFactorType",
+        "keystorage"
+      ],
+      "properties": {
+        "inn": {
+          "type": "string",
+          "title": "ИНН"
+        },
+        "kpp": {
+          "type": "string",
+          "title": "КПП"
+        },
+        "ogrn": {
+          "type": "string",
+          "title": "ОГРН или ОГРНИП"
+        },
+        "companyName": {
+          "type": "string",
+          "title": "Краткое наименование организации"
+        },
+        "companyNameFull": {
+          "type": "string",
+          "title": "Полное наименование организации"
+        },
+        "address": {
+          "type": "object",
+          "title": "Адрес",
+          "required": [
+            "index",
+            "region",
+            "city",
+            "place"
+          ],
+          "properties": {
+            "index": {
+              "type": "string",
+              "title": "Индекс"
+            },
+            "region": {
+              "type": "string",
+              "title": "Регион"
+            },
+            "area": {
+              "type": "string",
+              "title": "Район"
+            },
+            "city": {
+              "type": "string",
+              "title": "Город"
+            },
+            "place": {
+              "type": "string",
+              "title": "Населеный пункт"
+            },
+            "street": {
+              "type": "string",
+              "title": "Улица"
+            },
+            "houseNum": {
+              "type": "string",
+              "title": "Дом"
+            },
+            "buildNum": {
+              "type": "string",
+              "title": "Строение"
+            },
+            "room": {
+              "type": "string",
+              "title": "Команата или офис"
+            }
+          }
+        },
+        "contact": {
+          "type": "object",
+          "title": "Контактное лицо",
+          "required": [
+            "phone",
+            "email",
+            "firstName",
+            "middleName",
+            "lastName"
+          ],
+          "properties": {
+            "phone": {
+              "type": "string",
+              "title": "Телефон"
+            },
+            "phoneExt": {
+              "type": "string",
+              "title": "Добавочный телефон"
+            },
+            "email": {
+              "type": "string",
+              "title": "Почта"
+            },
+            "firstName": {
+              "type": "string",
+              "title": "Имя"
+            },
+            "middleName": {
+              "type": "string",
+              "title": "Отчетство"
+            },
+            "lastName": {
+              "type": "string",
+              "title": "Фамилия"
+            }
+          }
+        },
+        "boss": {
+          "type": "object",
+          "title": "Руководитель",
+          "required": [
+            "reason",
+            "firstName",
+            "middleName",
+            "lastName",
+            "position"
+          ],
+          "properties": {
+            "reason": {
+              "type": "string",
+              "title": "Основание полномочий"
+            },
+            "documentNumber": {
+              "type": "string",
+              "title": "Номер документа оснований полномочий"
+            },
+            "firstName": {
+              "type": "string",
+              "title": "Имя"
+            },
+            "middleName": {
+              "type": "string",
+              "title": "Отчество"
+            },
+            "lastName": {
+              "type": "string",
+              "title": "Фамилия"
+            },
+            "position": {
+              "type": "string",
+              "title": "Должность"
+            }
+          }
+        },
+        "isFl": {
+          "type": "boolean",
+          "title": "Заявка на физ. лицо"
+        },
+        "isDSS": {
+          "type": "boolean",
+          "title": "Заявка на сертификат Dss"
+        },
+        "askPin": {
+          "type": "boolean",
+          "title": "Необходимость Pin кода на сертификат Dss"
+        },
+        "secondFactorType": {
+          "type": "string",
+          "title": "Режим работы клиента с сертификатом Dss"
+        },
+        "keystorage": {
+          "type": "string",
+          "title": "Место хранения сертификата Dss"
+        }
+      }
+    },
+    "certType": {
+      "type": "string",
+      "title": "Тип сертификата"
+    },
+    "certOwner": {
+      "type": "array",
+      "title": "Владелец сертификата",
+      "items": {
+        "type": "object",
+        "title": "Владелец сертификата",
+        "required": [
+          "firstName",
+          "middleName",
+          "lastName",
+          "position",
+          "email",
+          "snils",
+          "gender",
+          "birthDate",
+          "birthPlace",
+          "series",
+          "number",
+          "issueid",
+          "IssueDate",
+          "phone",
+          "expiryDate",
+          "citizenchip"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "title": "Имя"
+          },
+          "middleName": {
+            "type": "string",
+            "title": "Отчество"
+          },
+          "lastName": {
+            "type": "string",
+            "title": "Фамилия"
+          },
+          "position": {
+            "type": "string",
+            "title": "Должность"
+          },
+          "email": {
+            "type": "string",
+            "title": "Почта"
+          },
+          "snils": {
+            "type": "string",
+            "title": "СНИЛС"
+          },
+          "gender": {
+            "type": "string",
+            "title": "Пол"
+          },
+          "birthDate": {
+            "type": "string",
+            "title": "Дата рождения"
+          },
+          "birthPlace": {
+            "type": "string",
+            "title": "Место рождения"
+          },
+          "series": {
+            "type": "string",
+            "title": "Серия паспорта"
+          },
+          "number": {
+            "type": "string",
+            "title": "Номер паспорта"
+          },
+          "issueid": {
+            "type": "string",
+            "title": "Код подразделения, выдавшего паспорт"
+          },
+          "IssueDate": {
+            "type": "string",
+            "title": "Дата выдачи паспорта"
+          },
+          "expiryDate": {
+            "type": "string",
+            "title": "рок действия документа (для иностранцев)"
+          },
+          "phone": {
+            "type": "string",
+            "title": "Телефон"
+          },
+          "mobilePhone": {
+            "type": "string",
+            "title": "Моб. телефон"
+          },
+          "citizenchip": {
+            "type": "string",
+            "title": "Гражданство (в формате Альфа-3 по ОКСМ)"
+          },
+          "loginDss": {
+            "type": "string",
+            "title": "Логин DSS"
+          }
+        }
+      }
+    }
+  }
+}

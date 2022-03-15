@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "title": "Статусы завок",
+    "required": [
+        "registrationGuids"
+    ],
+    "properties": {
+        "registrationGuids": {
+            "type": "array",
+            "title": "Массив гуидов заявок на сертификат",
+            "items": {
+                "type": "string",
+                "title": "Гуид заявки"
+            }
+        }
+    }
+}

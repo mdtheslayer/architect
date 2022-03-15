@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="http://emias.mos.ru/quarantine/core/v1/" targetNamespace="http://emias.mos.ru/quarantine/core/v1/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="../emias.core/emias.core.v1.xsd"/>
+	<xs:include schemaLocation="../emias.core/emias.core.queryExpression.v1.xsd"/>
+	<xs:complexType name="NotificationShort">
+		<xs:annotation>
+			<xs:documentation>Агрегат "Уведомление"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:DomainEntity">
+				<xs:sequence>
+					<xs:element name="personId" type="core:ID" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор персоны</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="quarantineId" type="core:ID">
+						<xs:annotation>
+							<xs:documentation>Идентификатор карантина</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="state" type="core:ENotificationState">
+						<xs:annotation>
+							<xs:documentation>Статус уведомления</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" type="core:ENotificationType">
+						<xs:annotation>
+							<xs:documentation>Тип уведомления</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="source" type="core:ENotificationSource">
+						<xs:annotation>
+							<xs:documentation>Источник</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="user" type="core:TargetUser" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Пользователь</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NotificationExtension">
+		<xs:annotation>
+			<xs:documentation>Расширенный агрегат "Уведомление"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:NotificationShort"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Aggregate-->
+	<xs:complexType name="QuarantineShort">
+		<xs:annotation>
+			<xs:documentation>Аггрегат "Карантин"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:DomainEntity">
+				<xs:sequence>
+					<xs:element name="moId" type="xs:long" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор медицинской организации</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="muId" type="xs:long" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор медицинского учреждения</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="attachmentId" type="xs:long" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор прикрепления</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="educationOrganizationId" type="xs:ID" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор ОО (Мастер ЕМИАС.СВМР2)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="diagnosis" type="core:Diagnosis">
+						<xs:annotation>
+							<xs:documentation>Карантинный диагноз</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="state" type="core:State">
+						<xs:annotation>
+							<xs:documentation>Состояние карантина</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="address" type="core:Address">
+						<xs:annotation>
+							<xs:documentation>Адрес в рамках которого заведен карантин</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="zoneType" type="core:ZoneType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Зона вводимого карантина в рамках ОО</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isNotificated" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Признак нотификации</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="organization" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="core:Organization">
+									<xs:sequence>
+										<xs:element name="type" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Тип организации</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QuarantineExtension">
+		<xs:annotation>
+			<xs:documentation>Расширенный агрегат "Карантин"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:QuarantineShort">
+				<xs:sequence>
+					<xs:element name="participations" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Коллекция Участий</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="participation" type="core:ParticipationExtension" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Участие</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="areas" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Колекция участков</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="area" type="core:Area" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Участок</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="durations">
+						<xs:annotation>
+							<xs:documentation>Коллекция периодов</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="duration" type="core:DurationShort" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Период</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ParticipationShort">
+		<xs:annotation>
+			<xs:documentation>Сущность "Участие"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:DomainEntity">
+				<xs:sequence>
+					<xs:element name="type" type="core:EParticipationType">
+						<xs:annotation>
+							<xs:documentation>Тип участия</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="class" type="core:ClassShort" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Класс участия</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="buildingId" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Здание участия (Идентификатор МЭШ)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="educationFacilityId" type="core:ID" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор ОУ (Мастер ЕМИАС.СВМР2)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isNotificated" type="xs:boolean" default="false">
+						<xs:annotation>
+							<xs:documentation>Признак нотификации случая</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ParticipationExtension">
+		<xs:annotation>
+			<xs:documentation>Расширенная cущность "Участие"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:ParticipationShort">
+				<xs:sequence>
+					<xs:element name="sources" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Коллекция источников</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="source" type="core:SourceExtenstion" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Источник</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:choice>
+						<xs:element name="person" type="core:PersonShort" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Персона</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="quarantine" type="core:QuarantineShort" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Карантин</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="treatments" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Коллекция мероприятий</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="treatment" type="core:TreatmentShort" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>мероприятие</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PersonShort">
+		<xs:annotation>
+			<xs:documentation>Cущность "Персона"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:DomainEntity">
+				<xs:sequence>
+					<xs:element name="emiasId" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Идентификатор персоны в ЕМИАС</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="meshId" type="xs:long" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор персоны в МЭШ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="patient" type="core:PatientView">
+						<xs:annotation>
+							<xs:documentation>Данные по пациенту</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PersonExtension">
+		<xs:annotation>
+			<xs:documentation>Расширенная сущность "Персона"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PersonShort">
+				<xs:sequence>
+					<xs:element name="participations" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Коллекция Участий</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="participation" type="core:ParticipationExtension" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Участие</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Entities-->
+	<!--Источник-->
+	<xs:complexType name="SourceShort">
+		<xs:annotation>
+			<xs:documentation>Cущность "Источник"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:DomainEntity">
+				<xs:sequence>
+					<xs:element name="documentId" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Идентификатор документа СИМИ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="templateId" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Идентификатор шаблона документа СИМИ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="documentCreated" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Дата создания документа СИМИ </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" type="core:ESourceType">
+						<xs:annotation>
+							<xs:documentation>Тип источника (Документа СИМИ)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="employee" type="core:Employee" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Медработник</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SourceExtenstion">
+		<xs:annotation>
+			<xs:documentation>Расширенная сущность "Источник"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:SourceShort">
+				<xs:sequence>
+					<xs:element name="parentSource" type="core:SourceShort" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Источник - родитель</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Класс-->
+	<xs:complexType name="ClassShort">
+		<xs:annotation>
+			<xs:documentation>Сущность "Класс"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:DomainEntity">
+				<xs:sequence>
+					<xs:element name="name" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Наименование класса</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="meshUuid" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>идентификатор класса в мэш</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="areaId" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Идентификатор класса (мастер сторонняя система)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Мероприятие-->
+	<xs:complexType name="TreatmentShort">
+		<xs:annotation>
+			<xs:documentation>Сущность "Мероприятие по лечению"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:DomainEntity">
+				<xs:sequence>
+					<xs:element name="eventId" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Идентификатор мероприятия (мастер система стороний продукт) </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="eventDate" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Дата планируемого мероприятия</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Период-->
+	<xs:complexType name="DurationShort">
+		<xs:annotation>
+			<xs:documentation>Период</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:DomainEntity">
+				<xs:sequence>
+					<xs:element name="startDate" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Дата начала карантина</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Дата окончания карантина</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--State Machine-->
+	<xs:complexType name="State">
+		<xs:annotation>
+			<xs:documentation>Статус</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reason" type="xs:string" minOccurs="0"/>
+			<xs:element name="status" type="xs:string"/>
+			<xs:element name="user" type="core:Employee"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--ValueObject-->
+	<xs:complexType name="Diagnosis">
+		<xs:annotation>
+			<xs:documentation>Диагноз</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Код диагноза</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Статус диагноза</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата постановки диагноза</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование диагноза</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Employee">
+		<xs:annotation>
+			<xs:documentation>Медработник</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Имя медработника</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="positionNom" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Специальность медработника</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jobExecutionId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор исполнения должности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Address">
+		<xs:annotation>
+			<xs:documentation>Адрес</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nsiId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор НСИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TargetUser">
+		<xs:annotation>
+			<xs:documentation>Пользватель уведомления</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="jobExecutionId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Исполнение должности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="login" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Логин</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="snils" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>СНИЛС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Area">
+		<xs:annotation>
+			<xs:documentation>Участок</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="areaId" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>Идентификатор участка(Владелец внешняя система) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="title" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование участка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код участка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Enum-->
+	<xs:simpleType name="EParticipationType">
+		<xs:annotation>
+			<xs:documentation>Тип Пациента</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ESourceType">
+		<xs:annotation>
+			<xs:documentation>Тип Источника</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="EDiagnosisStatus">
+		<xs:annotation>
+			<xs:documentation>Статус Диагноза</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="EQuarantineType">
+		<xs:annotation>
+			<xs:documentation>Тип Карантина</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ENotificationSource">
+		<xs:annotation>
+			<xs:documentation>Источник уведомления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ENotificationType">
+		<xs:annotation>
+			<xs:documentation>Тип уведомления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ENotificationState">
+		<xs:annotation>
+			<xs:documentation>Статус уведомления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ZoneType">
+		<xs:annotation>
+			<xs:documentation>Тип вводимой зоны в ОО</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<!--View-->
+	<xs:complexType name="PatientView">
+		<xs:annotation>
+			<xs:documentation>Представление пациент</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lastName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="middleName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gender" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Гендер</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Abstract type-->
+	<xs:complexType name="DomainEntity" abstract="true">
+		<xs:annotation>
+			<xs:documentation>сущность ЕМИАС.Карантины</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:EntityBase">
+				<xs:attribute name="createDate" type="xs:dateTime" use="required">
+					<xs:annotation>
+						<xs:documentation>Дата создания записи</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="modificationDate" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>Дата модификации</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Organization" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Организация</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="eoId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор образовательной организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор медицинской организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="muId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор медицинского учреждения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="area" type="core:Area" minOccurs="0"/>
+			<xs:element name="shortName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Корткое наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

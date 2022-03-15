@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Аутентификация и авторизация по сертификату",
+  "description": "post /api/certificateLogin",
+  "properties": {
+    "certificate": {
+      "type": "string",
+      "title": "Сертификат ключа ЭП",
+      "description": "Сериализованный (Base64) X.509 сертификат ключа ЭП",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "certificate"
+  ]
+}

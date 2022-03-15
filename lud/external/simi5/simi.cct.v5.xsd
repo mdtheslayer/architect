@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:tns="http://emias.mos.ru/simi/cct/v5/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:simicore="http://emias.mos.ru/simi/core/v5/" targetNamespace="http://emias.mos.ru/simi/cct/v5/" version="1.0">
+	<xs:import namespace="http://emias.mos.ru/simi/core/v5/" schemaLocation="simi.core.v5.xsd"/>
+	<!--reusable elements-->
+	<xs:element name="cctCode" type="xs:unsignedInt" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Код элемента терминологии CCT</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cctItem" type="tns:CctItem">
+		<xs:annotation>
+			<xs:documentation>Представление элемента терминологии CCT</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cctFolder" type="tns:CctFolder">
+		<xs:annotation>
+			<xs:documentation>Представление группирующего элемента терминологии CCT</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cctItemCollection" type="tns:CctItemCollection">
+		<xs:annotation>
+			<xs:documentation>Набор элементов и группирующих элементов терминологии CCT</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cctParameters" type="simicore:TagCollection">
+		<xs:annotation>
+			<xs:documentation>Представляет параметры, специфичные для Класса документов СИМИ, определенного элементом терминологии CCT</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:attribute name="lifecycleState" type="tns:LifecycleState">
+		<xs:annotation>
+			<xs:documentation>Состояние жизненного цикла элемента CCT</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<!--description of cct type-->
+	<xs:complexType name="CctItemCollection">
+		<xs:annotation>
+			<xs:documentation>Представляет коллекцию элементов и группирующих элементов терминологии CCT</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cctFolder" type="tns:CctFolder" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Набор группирующих элементов терминологии CCT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cctItem" type="tns:CctItem" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Набор элементов терминологии CCT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CctItem">
+		<xs:annotation>
+			<xs:documentation>Представление элемента терминологии CCT</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CctBase">
+				<xs:sequence>
+					<xs:element ref="tns:contentTypeInfo">
+						<xs:annotation>
+							<xs:documentation>Представляет тип контента, разрешенного для Документа СИМИ, являющегося представителем Класса документов СИМИ, определенного элементом терминологии CCT</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="tns:cctParameters">
+						<xs:annotation>
+							<xs:documentation>Представляет параметры, специфичные для Класса документов СИМИ, определенного элементом терминологии CCT</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="canDeprecateAfterSign" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation>Признак возможности анулирования Документа СИМИ после его подписания ЭП (если не задан - true)</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute ref="tns:lifecycleState">
+					<xs:annotation>
+						<xs:documentation>Состояние жизненного цикла элемента CCT</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CctFolder">
+		<xs:annotation>
+			<xs:documentation>Представление группирующего элемента терминологии CCT</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CctBase"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CctBase" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Базовое представление элемента терминологии CCT</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:cctCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код элемента терминологии CCT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cctDescription" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Описание элемента терминологии CCT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tags" type="simicore:TagCollection">
+				<xs:annotation>
+					<xs:documentation>Коллекция Тэгов, наследуемых Документом СИМИ, вследствие его принадлежности к Классу документов СИМИ, определенного элементом терминологии CCT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="confidentialityTags" type="simicore:TagCollection">
+				<xs:annotation>
+					<xs:documentation>Коллекция Тэгов, определяющих уровень конфиденциальности Документа СИМИ, наследуемых Документом СИМИ, вследствие его принадлежности к Классу документов СИМИ, определенного элементом терминологии CCT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="parentCode" type="xs:unsignedInt" use="required">
+			<xs:annotation>
+				<xs:documentation>Код родительского элемента терминологиии CCT</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--content type description-->
+	<xs:element name="contentTypeInfo" type="tns:ContentTypeInfo">
+		<xs:annotation>
+			<xs:documentation>Представляет тип контента, разрешенного для Документа СИМИ, являющегося представителем Класса документов СИМИ, определенного элементом терминологии CCT</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ContentTypeInfo">
+		<xs:annotation>
+			<xs:documentation>Описывает сведения о типе контента, разрешенного для Документа СИМИ, являющегося представителем Класса документов СИМИ, определенного элементом терминологии CCT</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="mimeType" type="xs:string" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Коллекция MIME-типов, разрешенных для Класса документов СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="mimeClass" type="tns:MimeClass" use="required">
+			<xs:annotation>
+				<xs:documentation>MIME-класс, определенный для Класса документов СИМИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="MimeClass">
+		<xs:annotation>
+			<xs:documentation>Представляет перечисление типов контента Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="APPLICATION">
+				<xs:annotation>
+					<xs:documentation>Любые двоичные данные</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUDIO">
+				<xs:annotation>
+					<xs:documentation>Аудио</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IMAGE">
+				<xs:annotation>
+					<xs:documentation>Изображение</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEXT">
+				<xs:annotation>
+					<xs:documentation>Текст</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VIDEO">
+				<xs:annotation>
+					<xs:documentation>Видео</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VND">
+				<xs:annotation>
+					<xs:documentation>Вендор-зависимый класс контента</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="X">
+				<xs:annotation>
+					<xs:documentation>Нестандартный подтип, не зарегистрирован в «Центре присвоенных номеров Интернета» (IANA)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--visualization description-->
+	<xs:element name="visualizationId" type="xs:string" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Представляет идентификатор XSLT представления контента Документа СИМИ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="visualizations" type="tns:VisualizationCollection">
+		<xs:annotation>
+			<xs:documentation>Представляет коллекцию сведений о XSLT преобразованиях</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="VisualizationCollection">
+		<xs:annotation>
+			<xs:documentation>Представляет коллекцию сведений о XSLT преобразованиях</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="visualization" type="tns:Visualization" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Представляет сведения о XSLT преобразовании, которое может быть использовано для визуализации контента Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Visualization">
+		<xs:annotation>
+			<xs:documentation>Описывает сведения о XSLT преобразовании, которое может быть использовано для визуализации контента Документа СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:visualizationId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Представляет идентификатор XSLT представления контента Документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="tns:cctCode">
+				<xs:annotation>
+					<xs:documentation>Код элемента терминологии CCT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visualizationInfo" type="tns:VisualizationInfo">
+				<xs:annotation>
+					<xs:documentation>Базовые сведения о XSLT преобразовании</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visualizationData" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Данные XSLT преобразования в формате base64</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VisualizationInfo">
+		<xs:annotation>
+			<xs:documentation>Описывает базовые сведения о XSLT преобразовании</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="tags" type="simicore:TagCollection" form="qualified">
+				<xs:annotation>
+					<xs:documentation>Тэги XSLT преобразования</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Наименование XSLT преобразования</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="description" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Описание XSLT преобразования</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="xsltVersion" type="tns:XsltVersion" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия спецификации XSLT преобразования</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="signature" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Признак (true/false) возможности использования данного XSLT преобразования для визуализации контента Документа СИМИ при его подписании (истинное значение должен иметь только один элемент списка)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="XsltVersion">
+		<xs:annotation>
+			<xs:documentation>Представляет перечисление версий спецификаций XSLT преобразований</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="XSLT_1_0">
+				<xs:annotation>
+					<xs:documentation>Версия 1.0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XSLT_1_1">
+				<xs:annotation>
+					<xs:documentation>Версия 1.1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XSLT_2_0">
+				<xs:annotation>
+					<xs:documentation>Версия 2.0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XSLT_3_0">
+				<xs:annotation>
+					<xs:documentation>Версия 3.0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LifecycleState">
+		<xs:annotation>
+			<xs:documentation>Состояние жизненного цикла элемента CCT</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ALPHA">
+				<xs:annotation>
+					<xs:documentation>Доступ на АРМ врача возможен только у модельеров</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BETA">
+				<xs:annotation>
+					<xs:documentation>Предоставляется тестовый доступ врачам</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACTIVE">
+				<xs:annotation>
+					<xs:documentation>Свободное (промышленное) использование</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEPRECATED">
+				<xs:annotation>
+					<xs:documentation>Элемент терминологии является "архивным" (более не используется)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

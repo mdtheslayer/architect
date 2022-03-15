@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "title": "Сотправка сертификата на регистрацию в ЕСИА",
+    "required": [
+        "registrationGuid",
+        "certificate"
+    ],
+    "properties": {
+        "registrationGuid": {
+            "type": "string",
+            "title": "ИД заявки на сертификат"
+        },
+        "certificate": {
+            "type": "string",
+            "title": "Тело сертификата в формате base64"
+        }
+    }
+}

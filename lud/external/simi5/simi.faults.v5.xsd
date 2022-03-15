@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://emias.mos.ru/simi/faults/v5/"
+           xmlns:tns="http://emias.mos.ru/simi/faults/v5/" xmlns:nsf="http://emias.mos.ru/system/v1/faults/" version="1.0">	
+	<xs:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="emias.system.v1.faults.xsd"/>	
+	
+	<!--base types-->
+	<xs:complexType name="SimiFault">
+        <xs:annotation>
+            <xs:documentation>Ошибка обработки запроса</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="nsf:BaseFault">
+                <xs:sequence>
+			<xs:element name="contextEntries">
+				<xs:annotation>
+					<xs:documentation>Параметры контекста возникновения ошибки</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Параметры контекста возникновения ошибки</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Параметр контекста возникновения ошибки</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:annotation>
+									<xs:documentation>Параметр контекста возникновения ошибки</xs:documentation>
+								</xs:annotation>
+								<xs:sequence>
+									<xs:element name="key" type="xs:anyType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Название параметра контекста возникновения ошибки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="value" type="xs:anyType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Значение параметра контекста возникновения ошибк</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="stackTrace" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Стек-трейс</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сообщение об ошибке</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="errorCode" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>Код ошибки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>
