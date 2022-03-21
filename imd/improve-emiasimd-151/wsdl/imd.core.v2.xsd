@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<xs:schema xmlns="http://emias.mos.ru/imd/core/v2/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://emias.mos.ru/imd/core/v2/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="emias.core.v1.xsd"/>
+	<!--abstract Types-->
+	<xs:complexType name="DocumentBase" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Абстрактный тип для описания документов СИМИ</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="EntityId">
+				<xs:sequence>
+					<xs:element name="documentId" type="GUID">
+						<xs:annotation>
+							<xs:documentation>Идентификатор Документа СИМИ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cctCode" type="xs:int" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Класс-код документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isIdentified" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Признак идентифицированного документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" type="DocumentTypeShort">
+						<xs:annotation>
+							<xs:documentation>Тип документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="structuredType" type="StructuredType">
+						<xs:annotation>
+							<xs:documentation>Тип структуры</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="patientId" type="xs:long" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор пациента</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="incompletedPatient" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Признак пациента с неполными данными</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="descendants" type="GUID" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Документ потомок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="documentCreatedOn" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Дата создания документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="createdOn" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Дата создания записи</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="careEventId" type="xs:long" minOccurs="0"/>
+					<xs:element name="careEventStarted" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="authorSpeciality" type="xs:string" minOccurs="0"/>
+					<xs:element name="authorSpecialityId" type="xs:string" minOccurs="0"/>
+					<xs:element name="muName" type="xs:string" minOccurs="0"/>
+					<xs:element name="authorName" type="xs:string" minOccurs="0"/>
+					<xs:element name="authorLogin" type="xs:string" minOccurs="0"/>
+					<xs:element name="muId" type="xs:long" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Inquiry Entites-->
+	<xs:complexType name="DocumentTypeExtension">
+		<xs:annotation>
+			<xs:documentation>Справочная сущность расширенная "Тип документа"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="EntityBase">
+				<xs:sequence>
+					<xs:element name="businessName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Наименование документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="value" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Код типа документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="types" type="DocumentTypeExtension" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DocumentTypeShort">
+		<xs:annotation>
+			<xs:documentation>Справочная сущность "Тип документа"</xs:documentation>
+			<xs:documentation>Справочная сущность расширенная "Тип документа"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="EntityBase">
+				<xs:sequence>
+					<xs:element name="businessName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Наименование документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="value" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Код типа документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--System Entites-->
+	<xs:complexType name="DocumentShort">
+		<xs:annotation>
+			<xs:documentation>Сущность "Document"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="simiDocumentId"/>
+			<xs:element name="count" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Количество несовпавших полей</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="createdOn" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата создания записи</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FieldShort">
+		<xs:annotation>
+			<xs:documentation>Сущность "Field"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="key" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование поля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Значение поля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="info" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Entites Extension-->
+	<xs:complexType name="DocumentExtension">
+		<xs:annotation>
+			<xs:documentation>Расширенная сущность "Document"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentShort">
+				<xs:sequence>
+					<xs:element name="field" type="FieldShort" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Несовпавшее поле</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" type="DocumentTypeShort">
+						<xs:annotation>
+							<xs:documentation>Тип документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Enumeration-->
+	<xs:simpleType name="StructuredType">
+		<xs:annotation>
+			<xs:documentation>Перечисляемый тип (Структура документа)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STRUCTURED"/>
+			<xs:enumeration value="UNSTRUCTURED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Gender">
+		<xs:annotation>
+			<xs:documentation>Перечисляемый тип (Пол человека)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FEMALE"/>
+			<xs:enumeration value="MALE"/>
+			<xs:enumeration value="UNDEFINED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Business Entites-->
+	<xs:complexType name="DischargeEpicrisisMom">
+		<xs:annotation>
+			<xs:documentation>Сущность "Выписной эпикриз по полису мамы"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBase">
+				<xs:sequence>
+					<xs:element name="children" type="Children">
+						<xs:annotation>
+							<xs:documentation>Ребенок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="patronage" type="Patronage">
+						<xs:annotation>
+							<xs:documentation>Представитель</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="hospital" type="Hospital">
+						<xs:annotation>
+							<xs:documentation>Стационар</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EpicrisisUnidentifiedPatient">
+		<xs:annotation>
+			<xs:documentation>Cущность "Эпикризы на неидентифицированного пациента"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBase">
+				<xs:sequence>
+					<xs:element name="children" type="Children">
+						<xs:annotation>
+							<xs:documentation>Ребенок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="patronage" type="Patronage">
+						<xs:annotation>
+							<xs:documentation>Представитель</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="hospital" type="Hospital">
+						<xs:annotation>
+							<xs:documentation>Стационар</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Sped">
+		<xs:annotation>
+			<xs:documentation>Cущность "Документы СПЕД"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBase">
+				<xs:sequence>
+					<xs:element name="children" type="Children">
+						<xs:annotation>
+							<xs:documentation>Ребенок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="hospital" type="Hospital">
+						<xs:annotation>
+							<xs:documentation>Стационар</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GeneralDischargeEpicrisis">
+		<xs:annotation>
+			<xs:documentation>Cущность "Общий выписной эпикриз"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBase">
+				<xs:sequence>
+					<xs:element name="children" type="Children">
+						<xs:annotation>
+							<xs:documentation>Ребенок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="hospital" type="Hospital">
+						<xs:annotation>
+							<xs:documentation>Стационар</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EpicrisisNr">
+		<xs:annotation>
+			<xs:documentation>Cущность "Эпикриз НР"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBase">
+				<xs:sequence>
+					<xs:element name="children" type="Children">
+						<xs:annotation>
+							<xs:documentation>Ребенок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="patronage" type="Patronage">
+						<xs:annotation>
+							<xs:documentation>Представитель</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="hospital" type="Hospital">
+						<xs:annotation>
+							<xs:documentation>Стационар</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Pmpc">
+		<xs:annotation>
+			<xs:documentation>Сущность "Документ ПМПК"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBase">
+				<xs:sequence>
+					<xs:element name="children" type="Children"/>
+					<xs:element name="patronage" type="Patronage" minOccurs="0"/>
+					<xs:element name="pdnAgreementReceived" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Supd">
+		<xs:annotation>
+			<xs:documentation>Cущность "Документы СУПД"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBase">
+				<xs:sequence>
+					<xs:element name="children" type="Children">
+						<xs:annotation>
+							<xs:documentation>Ребенок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="patronage" type="Patronage">
+						<xs:annotation>
+							<xs:documentation>Представитель</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="activeId" type="ID" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор актива</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="visitId" type="ID" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатора визита</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="callId" type="ID" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Идентификатор звонка</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Business Types-->
+	<xs:complexType name="Patronage">
+		<xs:annotation>
+			<xs:documentation>Тип "Представитель"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fio" type="FIO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ФИО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="omsPolicy" type="OmsPolicy" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полис ОМС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="omsMedicalFacility" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование организации, выдавшая ОМС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="PhoneNumber" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Номер телефона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="snils" type="Snils" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>СНИЛС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Children">
+		<xs:annotation>
+			<xs:documentation>Тип "Ребенок"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fio" type="FIO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ФИО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gender" type="Gender" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Пол</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthSerialNumber" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер при родах</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="address" type="Address" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oms" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>омс</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="snils" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>снилс</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Hospital">
+		<xs:annotation>
+			<xs:documentation>Тип "Стационар"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dischargeDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выписки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="caseHistoryNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер истории болезни (родах)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FIO">
+		<xs:annotation>
+			<xs:documentation>ФИО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="firstName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Имя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="middleName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Address">
+		<xs:annotation>
+			<xs:documentation>Тип "Адрес"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="address" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование адреса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="fiasId" type="xs:string" minOccurs="0"/>
+				<xs:element name="nsiId" type="ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор адреса</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PhoneNumber">
+		<xs:annotation>
+			<xs:documentation>Тип "Номер телефона"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long">
+			<xs:pattern value="\d{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Snils">
+		<xs:annotation>
+			<xs:documentation>Тип "СНИЛС"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="OmsPolicy">
+		<xs:annotation>
+			<xs:documentation>Тип "ОМС"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="AddressType">
+		<xs:annotation>
+			<xs:documentation>Тип "Адрес"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NSI"/>
+			<xs:enumeration value="FIAS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="IdentifiedDocument">
+		<xs:annotation>
+			<xs:documentation>Сущность "Идентифицированный документ"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBase">
+				<xs:sequence>
+					<xs:element name="patronage" type="Patronage" minOccurs="0"/>
+					<xs:element name="children" type="Children" minOccurs="0"/>
+					<xs:element name="hospital" type="Hospital" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

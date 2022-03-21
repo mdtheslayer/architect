@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<xs:schema xmlns:tns="http://emias.mos.ru/imd/aggregationMedicalDocumentService/v2/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="http://emias.mos.ru/imd/core/v2/" targetNamespace="http://emias.mos.ru/imd/aggregationMedicalDocumentService/v2/types/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://emias.mos.ru/imd/core/v2/" schemaLocation="imd.core.v2.xsd"/>
+	<!--View-->
+	<xs:complexType name="RepresentativeView">
+		<xs:annotation>
+			<xs:documentation>Предсавление ЗП для поиска</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="surname" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="patronymic" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChildrenView">
+		<xs:annotation>
+			<xs:documentation>Представление Ребенка для поиска</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Имя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="surname" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фамиилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="patronymic" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oms" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ОМС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="snils" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>СНИЛС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--List-->
+	<xs:complexType name="PmpcDocumentResultPage">
+		<xs:annotation>
+			<xs:documentation>Результирующая выборка сущности "ПМПК"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PagingResults">
+				<xs:sequence>
+					<xs:element name="document" type="core:Pmpc" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SupdDocumentResultPage">
+		<xs:annotation>
+			<xs:documentation>Результирующая выборка сущности "СУПД"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PagingResults">
+				<xs:sequence>
+					<xs:element name="document" type="core:Supd" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Документ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IdentifiedDocumentResultPage">
+		<xs:annotation>
+			<xs:documentation>Результирующая выборка сущности "Идентифицированный документ"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PagingResults">
+				<xs:sequence>
+					<xs:element name="document" type="core:IdentifiedDocument" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Идентифицированный документ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EpicrisisNewBornDocumentResultPage">
+		<xs:annotation>
+			<xs:documentation>Результирующая выборка сущности "СПЕД"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PagingResults">
+				<xs:sequence>
+					<xs:element name="document" type="core:EpicrisisNr" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Эпикриз на новорожденного</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Request & responses-->
+	<!--метод getSupdDocument-->
+	<xs:element name="getSupdDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getSupdDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="patientId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор пациента ЕМИАС</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="visitId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор посещения СУПД</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="callId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор вызова СУПД</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="activeId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор актива СУПД</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="cctCode" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Класс-код документа</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="core:pagingOptions" minOccurs="0"/>
+				<xs:element ref="core:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getSupdDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getSupdDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="tns:SupdDocumentResultPage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--метод getEpicrsisNewBornDocument-->
+	<xs:element name="getEpicrisisNewBornDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getEpicrsisNewBornDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="patientId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор пациента ЕМИАС</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="cctCode" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Класс код документа</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="address" type="core:Address" minOccurs="0"/>
+				<xs:element name="person" minOccurs="0">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="core:FIO">
+								<xs:sequence>
+									<xs:element name="birthDate" type="xs:date" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>День рождения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="type" use="required">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="CHILDREN"/>
+											<xs:enumeration value="PATRONAGE"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="patronagePhoneNumber" type="core:PhoneNumber" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Номер телефона представителя</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="core:pagingOptions" minOccurs="0"/>
+				<xs:element ref="core:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getEpicrisisNewBornDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getEpicrsisNewBornDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="tns:EpicrisisNewBornDocumentResultPage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getIdentifiedDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getIdentificationDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="callId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор вызова СУПД</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="patientId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор пациента ЕМИАС</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="visitId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор посещения СУПД</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="activeId" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор актива СУПД</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="cctCode" type="xs:int" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Класс-код документа</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="queryType" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="core:pagingOptions" minOccurs="0"/>
+				<xs:element ref="core:options" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getIndetifiedDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getIdentificationDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="tns:IdentifiedDocumentResultPage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getPmpcDocumentRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода getPmpcDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="children" type="tns:ChildrenView" minOccurs="0"/>
+				<xs:element name="representative" type="tns:RepresentativeView" minOccurs="0"/>
+				<xs:element ref="core:options" minOccurs="0"/>
+				<xs:element ref="core:pagingOptions" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getPmpcDocumentResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода getPmpcDocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="tns:PmpcDocumentResultPage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
