@@ -62,247 +62,232 @@
 		</xs:sequence>
 	</xs:complexType>
 	<!--метод updateQuarantineState (Обновление карантина)-->
-	<xs:element name="updateQuarantineStateRequest">
+	<xs:complexType name="UpdateQuarantineStateRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода updateQuarantine</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="quarantineId" type="core:ID">
-					<xs:annotation>
-						<xs:documentation>Идентификатор карантина</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="participationId" type="core:ID" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>Идентификатор участия</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="state" type="xs:string">
-					<xs:annotation>
-						<xs:documentation>Статус</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="reason" type="xs:string" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>Повод смены статуса</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="updateQuarantineStateResponse">
+		<xs:sequence>
+			<xs:element name="quarantineId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор карантина</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="participationId" type="core:ID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор участия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="state" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reason" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Повод смены статуса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateQuarantineStateResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода updateQuarantine</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="core:result"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element ref="core:result"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--метод archiveQuarantineParticipations (Архиваций участий в рамках карантина)-->
-	<xs:element name="archiveQuarantineParticipationsRequest">
+	<xs:complexType name="ArchiveQuarantineParticipationsRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода archiveQuarantineParticipation</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="participations">
-					<xs:annotation>
-						<xs:documentation>Коллекция участий</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="participationId" type="core:ID" maxOccurs="unbounded">
-								<xs:annotation>
-									<xs:documentation>Идентификатор участия</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-						</xs:sequence>
-						<xs:attribute name="quarantineId" type="core:ID" use="required">
+		<xs:sequence>
+			<xs:element name="participations">
+				<xs:annotation>
+					<xs:documentation>Коллекция участий</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="participationId" type="core:ID" maxOccurs="unbounded">
 							<xs:annotation>
-								<xs:documentation>Идентификатор карантина</xs:documentation>
+								<xs:documentation>Идентификатор участия</xs:documentation>
 							</xs:annotation>
-						</xs:attribute>
-					</xs:complexType>
-				</xs:element>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="archiveQuarantineParticipationsResponse">
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="quarantineId" type="core:ID" use="required">
+						<xs:annotation>
+							<xs:documentation>Идентификатор карантина</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ArchiveQuarantineParticipationsResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода archiveQuarantineParticipation</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result" type="tns:ParticipationsCollectionView"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result" type="tns:ParticipationsCollectionView"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--метод updateArchiveQuarantineParticipations (Обновление архивности участий в рамках карантина)-->
-	<xs:element name="updateArchiveQuarantineParticipationsRequest">
+	<xs:complexType name="UpdateArchiveQuarantineParticipationsRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода updateArchiveQuarantineParticipations</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="participations">
-					<xs:annotation>
-						<xs:documentation>Коллекция Участий</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="participationId" type="core:ID" maxOccurs="unbounded">
-								<xs:annotation>
-									<xs:documentation>Идентификатор участия</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-						</xs:sequence>
-						<xs:attribute name="quarantineId" type="core:ID" use="required">
+		<xs:sequence>
+			<xs:element name="participations">
+				<xs:annotation>
+					<xs:documentation>Коллекция Участий</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="participationId" type="core:ID" maxOccurs="unbounded">
 							<xs:annotation>
-								<xs:documentation>Идентификатор карантина</xs:documentation>
+								<xs:documentation>Идентификатор участия</xs:documentation>
 							</xs:annotation>
-						</xs:attribute>
-					</xs:complexType>
-				</xs:element>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="updateArchiveQuarantineParticipationsResponse">
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="quarantineId" type="core:ID" use="required">
+						<xs:annotation>
+							<xs:documentation>Идентификатор карантина</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateArchiveQuarantineParticipationsResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода updateArchiveQuarantineParticipations</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result" type="tns:ParticipationsCollectionView"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result" type="tns:ParticipationsCollectionView"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--метод depreceateQuarantine (Прекращение карантина)-->
-	<xs:element name="depreceateQuarantineRequest">
+	<xs:complexType name="DepreceateQuarantineRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода depreceateQuarantine</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="quarantineId" type="core:ID">
-					<xs:annotation>
-						<xs:documentation>Идентификатор карантина</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="depreceateQuarantineResponse">
+		<xs:sequence>
+			<xs:element name="quarantineId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор карантина</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DepreceateQuarantineResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода depreceateQuarantine</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="core:result"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element ref="core:result"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--метод pushParticipationNotification(Отправка уведомлений по персоне в рамках карантина)-->
-	<xs:element name="pushParticipationNotificationRequest">
+	<xs:complexType name="PushParticipationNotificationRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода pushParticipationNotification</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="type" type="core:ENotificationType">
-					<xs:annotation>
-						<xs:documentation>Тип уведомлений</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="quarantineId" type="core:ID">
-					<xs:annotation>
-						<xs:documentation>Идентификатор карантина</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="persons" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>Коллекция персон</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="personId" type="xs:long" maxOccurs="unbounded">
-								<xs:annotation>
-									<xs:documentation>Идентификатор персоны (Мастер система ЕМИАС.Карантины)</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="pushParticipationNotificationResponse">
+		<xs:sequence>
+			<xs:element name="type" type="core:ENotificationType">
+				<xs:annotation>
+					<xs:documentation>Тип уведомлений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quarantineId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор карантина</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="persons" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Коллекция персон</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="personId" type="xs:long" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Идентификатор персоны (Мастер система ЕМИАС.Карантины)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PushParticipationNotificationResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода pushParticipationNotification</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result" type="tns:ParticipationsCollectionView"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result" type="tns:ParticipationsCollectionView"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Обновление мероприятия в рамках участия-->
-	<xs:element name="createParticipationTreatmentRequest">
+	<xs:complexType name="CreateParticipationTreatmentRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода ParticipationTreatment</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="treatment" type="tns:TreatmentView"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="createParticiaptionTreatmentResponse">
+		<xs:sequence>
+			<xs:element name="treatment" type="tns:TreatmentView"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateParticiaptionTreatmentResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода ParticipationTreatment</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result" type="core:TreatmentShort"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result" type="core:TreatmentShort"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--метод pushQuarantineNotification (Отправка уведомление по карантину))-->
-	<xs:element name="pushQuarantineNotificationRequest">
+	<xs:complexType name="PushQuarantineNotificationRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода pushQuarantineNotification</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="type" type="core:ENotificationType">
-					<xs:annotation>
-						<xs:documentation>Тип уведомлений</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="quarantineId" type="core:ID">
-					<xs:annotation>
-						<xs:documentation>Идентификатор карантина</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="pushQuarantineNotificationResponse">
+		<xs:sequence>
+			<xs:element name="type" type="core:ENotificationType">
+				<xs:annotation>
+					<xs:documentation>Тип уведомлений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quarantineId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор карантина</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PushQuarantineNotificationResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода pushQuarantineNotification</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="core:result"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element ref="core:result"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Элементы-->
+	<xs:element name="updateQuarantineStateRequest" type="tns:UpdateQuarantineStateRequest"/>
+	<xs:element name="updateQuarantineStateResponse" type="tns:UpdateQuarantineStateResponse"/>
+	<xs:element name="archiveQuarantineParticipationsRequest" type="tns:ArchiveQuarantineParticipationsRequest"/>
+	<xs:element name="archiveQuarantineParticipationsResponse" type="tns:ArchiveQuarantineParticipationsResponse"/>
+	<xs:element name="updateArchiveQuarantineParticipationsRequest" type="tns:UpdateArchiveQuarantineParticipationsRequest"/>
+	<xs:element name="updateArchiveQuarantineParticipationsResponse" type="tns:UpdateArchiveQuarantineParticipationsResponse"/>
+	<xs:element name="depreceateQuarantineRequest" type="tns:DepreceateQuarantineRequest"/>
+	<xs:element name="depreceateQuarantineResponse" type="tns:DepreceateQuarantineResponse"/>
+	<xs:element name="pushParticipationNotificationRequest" type="tns:PushParticipationNotificationRequest"/>
+	<xs:element name="pushParticipationNotificationResponse" type="tns:PushParticipationNotificationResponse"/>
+	<xs:element name="createParticipationTreatmentRequest" type="tns:CreateParticipationTreatmentRequest"/>
+	<xs:element name="createParticiaptionTreatmentResponse" type="tns:CreateParticiaptionTreatmentResponse"/>
 </xs:schema>

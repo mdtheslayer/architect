@@ -64,6 +64,12 @@
 	<wsdl:message name="getContainsPersonOutput">
 		<wsdl:part name="body" element="ns1:getContainsPersonResponse"/>
 	</wsdl:message>
+	<wsdl:message name="getQuarantineClassesInput">
+		<wsdl:part name="body" element="ns1:getQuarantineClassesRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getQuarantineClassesOutput">
+		<wsdl:part name="body" element="ns1:getQuarantineClassesResponse"/>
+	</wsdl:message>
 	<wsdl:portType name="queryServicePortType">
 		<wsdl:operation name="getQuarantineById">
 			<wsdl:documentation>Получение карантина по идентификатору</wsdl:documentation>
@@ -111,6 +117,12 @@
 			<wsdl:documentation>  Получение признака наличия у пациента актуальных карантинов</wsdl:documentation>
 			<wsdl:input message="tns:getContainsPersonInput"/>
 			<wsdl:output message="tns:getContainsPersonOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getQuarantineClasses">
+			<wsdl:documentation>Получение списка классов</wsdl:documentation>
+			<wsdl:input message="tns:getQuarantineClassesInput"/>
+			<wsdl:output message="tns:getQuarantineClassesOutput"/>
 			<wsdl:fault name="fault" message="tns:fault"/>
 		</wsdl:operation>
 	</wsdl:portType>
@@ -219,6 +231,17 @@
 			<wsdl:fault name="fault">
 				<soap:fault name="fault" use="literal"/>
 			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getQuarantineClasses">
+			<soap:operation soapAction="getQuarantineClasses"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault"/>
 		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="queryService">

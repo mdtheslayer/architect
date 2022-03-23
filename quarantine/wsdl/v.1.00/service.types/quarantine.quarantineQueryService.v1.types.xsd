@@ -1,7 +1,65 @@
 <!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="http://emias.mos.ru/quarantine/core/v1/" xmlns:tns="http://emias.mos.ru/quarantine/quarantineQueryService/v1/types/" targetNamespace="http://emias.mos.ru/quarantine/quarantineQueryService/v1/types/" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://emias.mos.ru/quarantine/core/v1/" schemaLocation="../service.core/quarantine.core.v1.xsd"/>
+	<!--Представления-->
+	<xs:complexType name="СlassView">
+		<xs:annotation>
+			<xs:documentation>Предславение сущности "Класс"</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:ClassShort">
+				<xs:sequence>
+					<xs:element name="counts" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Количество разных типов участников</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="count" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>счетчик</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:simpleContent>
+											<xs:extension base="xs:int">
+												<xs:attribute name="entity" type="xs:string" use="required">
+													<xs:annotation>
+														<xs:documentation>Наиенование сущности</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="type" type="xs:string">
+													<xs:annotation>
+														<xs:documentation>Тип сущности</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:extension>
+										</xs:simpleContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<!--Листинговые типы-->
+	<xs:complexType name="ClassViewResultListPage">
+		<xs:annotation>
+			<xs:documentation>Результирующая выборка Представлений классов в рамках карантина</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:PagingResults">
+				<xs:sequence>
+					<xs:element name="class" type="tns:СlassView" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Класс</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:complexType name="QuarantineParticipationResultListPage">
 		<xs:annotation>
 			<xs:documentation>Результирующая выборка Участий в рамках карантина</xs:documentation>
@@ -55,249 +113,258 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<!--Метод getQuarantineById (Получение карантина по идентификатору)-->
-	<xs:element name="getQuarantineByIdRequest">
+	<xs:complexType name="GetQuarantineByIdRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода getQuarantineById</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="quarantineId" type="core:ID">
-					<xs:annotation>
-						<xs:documentation>Идентификатор сущности "Карантин"</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="getQuarantineByIdResponse">
+		<xs:sequence>
+			<xs:element name="quarantineId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор сущности "Карантин"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetQuarantineByIdResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода getQuarantineById</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="quarantine" type="core:QuarantineExtension"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="quarantine" type="core:QuarantineExtension"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Метод getQuarantineList (Получения списка карантинов)-->
-	<xs:element name="getQuarantineListRequest" type="core:FindCriteria">
+	<xs:complexType name="GetQuarantineListRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода getQuarantineList</xs:documentation>
 		</xs:annotation>
-	</xs:element>
-	<xs:element name="getQuarantineListResponse">
+		<xs:complexContent>
+			<xs:extension base="core:FindCriteria"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetQuarantineListResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода getQuarantineList</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result" type="tns:QuarantineResultListPage"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result" type="tns:QuarantineResultListPage"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Метод getQuarantineParticipationList (Получение участия в рамках карантина)-->
-	<xs:element name="getQuarantineParticipationByIdRequest">
+	<xs:complexType name="GetQuarantineParticipationByIdRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода getQuarantineParticipationById</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="participationId" type="core:ID">
-					<xs:annotation>
-						<xs:documentation>Идентификатор Участия</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="quarantineId" type="core:ID">
-					<xs:annotation>
-						<xs:documentation>Идентификатор карантина </xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="getQuarantineParticipationByIdResponse">
+		<xs:sequence>
+			<xs:element name="participationId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор Участия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quarantineId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор карантина </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetQuarantineParticipationByIdResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода getQuarantineParticipationById</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="participation" type="core:ParticipationExtension"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="participation" type="core:ParticipationExtension"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Метод getQuarantineParticipationList (Получение списка участий в рамках карантина)-->
-	<xs:element name="getQuarantineParticipationListRequest">
+	<xs:complexType name="GetQuarantineParticipationListRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода getQuarantineParticipationList</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="core:FindCriteria"/>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="getQuarantineParticipationListResponse">
+		<xs:complexContent>
+			<xs:extension base="core:FindCriteria"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetQuarantineParticipationListResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода getQuarantineParticipationList</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result" type="tns:QuarantineParticipationResultListPage"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result" type="tns:QuarantineParticipationResultListPage"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Метод getPersonById (Получение персоны по идентификатору)-->
-	<xs:element name="getPersonByIdRequest">
+	<xs:complexType name="GetPersonByIdRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода getPersonById</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="personId" type="xs:long" minOccurs="0">
+		<xs:sequence>
+			<xs:element name="personId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор персоны</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="meshId" type="core:ID">
 					<xs:annotation>
-						<xs:documentation>Идентификатор персоны</xs:documentation>
+						<xs:documentation>Идентификатор персоны в МЭШ</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:choice>
-					<xs:element name="meshId" type="core:ID">
-						<xs:annotation>
-							<xs:documentation>Идентификатор персоны в МЭШ</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="emiasId" type="core:ID">
-						<xs:annotation>
-							<xs:documentation>Идентификатор персоны в ЕМИАС</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:choice>
-				<xs:element ref="core:options" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="getPersonByIdResponse">
+				<xs:element name="emiasId" type="core:ID">
+					<xs:annotation>
+						<xs:documentation>Идентификатор персоны в ЕМИАС</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element ref="core:options" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetPersonByIdResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода getPersonById</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="person" type="core:PersonExtension"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="person" type="core:PersonExtension"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Метод getPersonById (Получение списка персон)-->
-	<xs:element name="getPersonListRequest">
+	<xs:complexType name="GetPersonListRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода getPersonList</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="core:FindCriteria"/>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="getPersonListResponse">
+		<xs:complexContent>
+			<xs:extension base="core:FindCriteria"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetPersonListResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода getPersonList</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result" type="tns:PersonResultListPage"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result" type="tns:PersonResultListPage"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Методы подсчета количества сущностей-->
 	<!--метод getEntityCount(Получение количества элементов в рамках одной сущности)-->
-	<xs:element name="getEntityCountRequest">
+	<xs:complexType name="GetEntityCountRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода getEntityCount</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="core:FindCriteria"/>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="getEntityCountResponse">
+		<xs:complexContent>
+			<xs:extension base="core:FindCriteria"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetEntityCountResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода getEntityCount</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="result">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="count" maxOccurs="unbounded">
-								<xs:annotation>
-									<xs:documentation>Параметр, отвечающий за количество объектов</xs:documentation>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:simpleContent>
-										<xs:extension base="xs:integer">
-											<xs:attribute name="entityName" type="xs:string" use="required">
-												<xs:annotation>
-													<xs:documentation>Наименование сущности</xs:documentation>
-												</xs:annotation>
-											</xs:attribute>
-										</xs:extension>
-									</xs:simpleContent>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element name="result">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="count" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Параметр, отвечающий за количество объектов</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:integer">
+										<xs:attribute name="entityName" type="xs:string" use="required">
+											<xs:annotation>
+												<xs:documentation>Наименование сущности</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Метод получения пациента у которого есть актуальный диагноз-->
-	<xs:element name="getContainsPersonRequest">
+	<xs:complexType name="GetContainsPersonRequest">
 		<xs:annotation>
 			<xs:documentation>Входные параметры для метода getContainsPerson</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:choice>
-					<xs:element name="meshId" type="core:ID">
-						<xs:annotation>
-							<xs:documentation>Идентификатор персоны в МЭШ</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="emiasId" type="core:ID">
-						<xs:annotation>
-							<xs:documentation>Идентификатор персоны в ЕМИАС</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:choice>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="getContainsPersonResponse">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="meshId" type="core:ID">
+					<xs:annotation>
+						<xs:documentation>Идентификатор персоны в МЭШ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="emiasId" type="core:ID">
+					<xs:annotation>
+						<xs:documentation>Идентификатор персоны в ЕМИАС</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetContainsPersonResponse">
 		<xs:annotation>
 			<xs:documentation>Выходные параметры для метода getContainsPerson</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="core:result"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+		<xs:sequence>
+			<xs:element ref="core:result"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Метод для получения списка классов в рамках карантина-->
+	<xs:complexType name="GetQuarantineClassesRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры для метода getQuarantineClasses</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:FindCriteria"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetQuarantineClassesResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры для метода getQuarantineClasses</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="result" type="tns:ClassViewResultListPage"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Элементы-->
+	<xs:element name="getQuarantineByIdRequest" type="tns:GetQuarantineByIdRequest"/>
+	<xs:element name="getQuarantineByIdResponse" type="tns:GetQuarantineByIdResponse"/>
+	<xs:element name="getQuarantineListRequest" type="tns:GetQuarantineListRequest"/>
+	<xs:element name="getQuarantineListResponse" type="tns:GetQuarantineListResponse"/>
+	<xs:element name="getQuarantineParticipationByIdRequest" type="tns:GetQuarantineParticipationByIdRequest"/>
+	<xs:element name="getQuarantineParticipationByIdResponse" type="tns:GetQuarantineParticipationByIdResponse"/>
+	<xs:element name="getQuarantineParticipationListRequest" type="tns:GetQuarantineParticipationListRequest"/>
+	<xs:element name="getQuarantineParticipationListResponse" type="tns:GetQuarantineParticipationListResponse"/>
+	<xs:element name="getPersonByIdRequest" type="tns:GetPersonByIdRequest"/>
+	<xs:element name="getPersonByIdResponse" type="tns:GetPersonByIdResponse"/>
+	<xs:element name="getPersonListRequest" type="tns:GetPersonListRequest"/>
+	<xs:element name="getPersonListResponse" type="tns:GetPersonListResponse"/>
+	<xs:element name="getEntityCountRequest" type="tns:GetEntityCountRequest"/>
+	<xs:element name="getEntityCountResponse" type="tns:GetEntityCountResponse"/>
+	<xs:element name="getContainsPersonRequest" type="tns:GetContainsPersonRequest"/>
+	<xs:element name="getContainsPersonResponse" type="tns:GetContainsPersonResponse"/>
+	<xs:element name="getQuarantineClassesRequest" type="tns:GetQuarantineClassesRequest"/>
+	<xs:element name="getQuarantineClassesResponse" type="tns:GetQuarantineClassesResponse"/>
 </xs:schema>
