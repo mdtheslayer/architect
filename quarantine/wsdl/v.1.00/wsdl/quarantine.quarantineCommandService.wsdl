@@ -52,6 +52,12 @@
 	<wsdl:message name="createParticipationTreatmentOutput">
 		<wsdl:part name="body" element="ns1:createParticiaptionTreatmentResponse"/>
 	</wsdl:message>
+	<wsdl:message name="createPolyclinicParticipationInput">
+		<wsdl:part name="parameter" element="ns1:сreatePolyclinicParticipationRequest"/>
+	</wsdl:message>
+	<wsdl:message name="createPolyclinicParticipationOutput">
+		<wsdl:part name="parameter" element="ns1:сreatePolyclinicParticipationResponse"/>
+	</wsdl:message>
 	<wsdl:portType name="commandServicePortType">
 		<wsdl:operation name="updateQuarantineState">
 			<wsdl:documentation>Обновление статуса карантина</wsdl:documentation>
@@ -87,6 +93,12 @@
 			<wsdl:documentation>Создание мероприятия в рамках участия</wsdl:documentation>
 			<wsdl:input message="tns:createParticipationTreatmentInput"/>
 			<wsdl:output message="tns:createParticipationTreatmentOutput"/>
+			<wsdl:fault name="fault" message="tns:fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="createPolyclinicParticipation">
+			<wsdl:documentation>Создания участия в рамках карантина</wsdl:documentation>
+			<wsdl:input message="tns:createPolyclinicParticipationInput"/>
+			<wsdl:output message="tns:createPolyclinicParticipationOutput"/>
 			<wsdl:fault name="fault" message="tns:fault"/>
 		</wsdl:operation>
 	</wsdl:portType>
@@ -162,6 +174,18 @@
 			<wsdl:input>
 				<soap:body use="literal"/>
 				<soap:header message="tns:userContext" part="userContext" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createPolyclinicParticipation">
+			<soap:operation soapAction="createPolyclinicParticipation"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output>
 				<soap:body use="literal"/>

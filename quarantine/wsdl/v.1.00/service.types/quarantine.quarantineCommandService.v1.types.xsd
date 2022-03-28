@@ -27,7 +27,7 @@
 	</xs:complexType>
 	<xs:complexType name="ParticipationsCollectionView">
 		<xs:annotation>
-			<xs:documentation> Представление коллекции участий</xs:documentation>
+			<xs:documentation>Представление коллекции участий</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="participations">
@@ -60,6 +60,29 @@
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolyclinicParticipationView">
+		<xs:annotation>
+			<xs:documentation>Представление поликлинического участия</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="core:EParticipationType">
+				<xs:annotation>
+					<xs:documentation>Тип участия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="emiasId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор пациента ЕМИАС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isNotificated" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Признак нотификации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="quarantineId" type="core:ID" use="required"/>
 	</xs:complexType>
 	<!--метод updateQuarantineState (Обновление карантина)-->
 	<xs:complexType name="UpdateQuarantineStateRequest">
@@ -277,6 +300,23 @@
 			<xs:element ref="core:result"/>
 		</xs:sequence>
 	</xs:complexType>
+	<!--метод createParticipation (Создания участия по карантину в рамках МЖ)-->
+	<xs:complexType name="CreatePolyclinicParticipationRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры для метода createParticipation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="participation" type="tns:PolyclinicParticipationView"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreatePolyclinicParticipationResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры для метода createParticipation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="core:result"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Элементы-->
 	<xs:element name="updateQuarantineStateRequest" type="tns:UpdateQuarantineStateRequest"/>
 	<xs:element name="updateQuarantineStateResponse" type="tns:UpdateQuarantineStateResponse"/>
@@ -290,4 +330,6 @@
 	<xs:element name="pushParticipationNotificationResponse" type="tns:PushParticipationNotificationResponse"/>
 	<xs:element name="createParticipationTreatmentRequest" type="tns:CreateParticipationTreatmentRequest"/>
 	<xs:element name="createParticiaptionTreatmentResponse" type="tns:CreateParticiaptionTreatmentResponse"/>
+	<xs:element name="сreatePolyclinicParticipationRequest" type="tns:CreatePolyclinicParticipationRequest"/>
+	<xs:element name="сreatePolyclinicParticipationResponse" type="tns:CreatePolyclinicParticipationResponse"/>
 </xs:schema>
