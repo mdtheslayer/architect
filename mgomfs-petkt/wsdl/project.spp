@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+	<Folder FolderName="wsdl">
+		<File FilePath="services.PetService.v1.wsdl" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="service-types">
+		<File FilePath="services.PetService.v1.types.xsd" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="service-core">
+		<File FilePath="PetService.core.v1.xsd" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="system">
+		<File FilePath="emias.core.address.v1.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.core.v1.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.system.v1.faults.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.system.v1.userContext.xsd" HomeFolder="Yes"/>
+		<File FilePath="emias.system.v1.xsd" HomeFolder="Yes"/>
+	</Folder>
+</Project>

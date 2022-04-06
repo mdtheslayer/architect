@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<xs:schema xmlns:tns="http://192.168.192.27:8485/services/PetService/v1/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="http://192.168.192.27:8485/services/PetService/core/v1" targetNamespace="http://192.168.192.27:8485/services/PetService/v1/types/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://192.168.192.27:8485/services/PetService/core/v1" schemaLocation="PetService.core.v1.xsd"/>
+	<xs:complexType name="PushView">
+		<xs:annotation>
+			<xs:documentation>Представление "Пуш-уведомление"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="event" type="core:EPushEventType">
+				<xs:annotation>
+					<xs:documentation>событие; 0 - COMPELETE 1 - DEPRECEATE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="entity" type="core:EPushEntityType">
+				<xs:annotation>
+					<xs:documentation>сущность: PetCtExamReferal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pushId" type="core:ID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор мастер-системы пуш-уведомления</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>полезная нагрузка пуш-уведомления</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="attribute" type="core:Attribute" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>атрибут пуш-уведомления</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Комплексные типы request&response-->
+	<xs:complexType name="GetPushRequest">
+		<xs:annotation>
+			<xs:documentation>Тип request метода getPush</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="push" type="tns:PushView"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetPushResponse">
+		<xs:annotation>
+			<xs:documentation>Тип response метода getPush</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="core:result"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Конечные элементы request&response-->
+	<xs:element name="getPushRequest" type="tns:GetPushRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры для метода getPush</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPushResponse" type="tns:GetPushResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры для метода getPush</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

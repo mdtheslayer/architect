@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="http://192.168.192.27:8485/services/PetService/core/v1" targetNamespace="http://192.168.192.27:8485/services/PetService/core/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="emias.core.v1.xsd"/>
+	<xs:complexType name="Attribute">
+		<xs:sequence>
+			<xs:element name="value" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>значение атрибута</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attribute" type="core:Attribute" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="key" type="core:EKeyType" use="required">
+			<xs:annotation>
+				<xs:documentation>ключ атрибута</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="EPushEntityType">
+		<xs:annotation>
+			<xs:documentation>Простой перечисляемый тип Cущность пуш-уведомления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="EPushEventType">
+		<xs:annotation>
+			<xs:documentation>Простой перечисляемый тип События пуш-уведомления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="EKeyType">
+		<xs:annotation>
+			<xs:documentation>Простой перечисляемый тип Ключей атрибута пуш уведомления</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+</xs:schema>
