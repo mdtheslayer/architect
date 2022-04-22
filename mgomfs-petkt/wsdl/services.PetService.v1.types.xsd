@@ -17,6 +17,11 @@
 					<xs:documentation>сущность: PetCtExamReferal</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="documentId" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Идентификатор документа СИМИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="pushId" type="core:ID">
 				<xs:annotation>
 					<xs:documentation>Идентификатор мастер-системы пуш-уведомления</xs:documentation>
