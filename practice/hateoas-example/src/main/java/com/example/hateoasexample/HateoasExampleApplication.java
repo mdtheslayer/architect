@@ -1,13 +1,13 @@
-package ru.tproger.axondemo;
+package com.example.hateoasexample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AxonDemoApplication {
+public class HateoasExampleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AxonDemoApplication.class, args);
+        SpringApplication.run(HateoasExampleApplication.class, args);
     }
 
 }

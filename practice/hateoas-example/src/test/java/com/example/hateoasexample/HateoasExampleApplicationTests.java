@@ -1,10 +1,10 @@
-package ru.tproger.axondemo;
+package com.example.hateoasexample;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AxonDemoApplicationTests {
+class HateoasExampleApplicationTests {
 
     @Test
     void contextLoads() {

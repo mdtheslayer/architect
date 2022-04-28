@@ -32,7 +32,9 @@ public class Book {
         if (command.getAmount() <= 0)
             throw new IllegalArgumentException("Amount must be positive");
         apply(new BookRegisteredEvent(command.getBookId(), command.getTitle(), command.getDescription(), command.getAmount()));
-    };
+    }
+
+    ;
 
     @CommandHandler
     public void handle(BorrowBookCommand command) {
@@ -43,7 +45,9 @@ public class Book {
         if (tenants.contains(command.getFullName()))
             throw new IllegalArgumentException("Book already borrowed by this person");
         apply(new BookBorrowedEvent(command.getBookId(), command.getFullName()));
-    };
+    }
+
+    ;
 
     @CommandHandler
     public void handle(ReturnBookCommand command) {
@@ -52,7 +56,9 @@ public class Book {
         if (!tenants.contains(command.getFullName()))
             throw new IllegalArgumentException("Book must be returned by person who has borrowed it");
         apply(new BookReturnedEvent(command.getBookId(), command.getFullName()));
-    };
+    }
+
+    ;
 
     @EventSourcingHandler
     public void on(BookRegisteredEvent event) {
@@ -61,7 +67,9 @@ public class Book {
         bookId = event.getBookId();
         amount = event.getAmount();
         tenants = new HashSet<>();
-    };
+    }
+
+    ;
 
     @EventSourcingHandler
     public void on(BookBorrowedEvent event) {
@@ -69,7 +77,9 @@ public class Book {
 
         amount--;
         tenants.add(event.getFullName());
-    };
+    }
+
+    ;
 
     @EventSourcingHandler
     public void on(BookReturnedEvent event) {
@@ -77,6 +87,8 @@ public class Book {
 
         amount++;
         tenants.remove(event.getFullName());
-    };
+    }
+
+    ;
 
 }
