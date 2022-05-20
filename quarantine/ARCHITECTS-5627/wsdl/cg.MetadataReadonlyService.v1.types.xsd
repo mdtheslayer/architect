@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://emias.mos.ru/cg/v1/metadataReadonlyService/types/"
+           xmlns:cg1="http://emias.mos.ru/cg/v1/" xmlns:core="http://emias.mos.ru/cg/core/"
+           targetNamespace="http://emias.mos.ru/cg/v1/metadataReadonlyService/types/" version="1.0">
+    <xs:annotation>
+        <xs:documentation>
+            Входные/выходные типы данных (request/response) для методов сервиса MetadataReadonlyService
+        </xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://emias.mos.ru/cg/v1/" schemaLocation="emias.cg.v1.xsd"/>
+    <xs:import namespace="http://emias.mos.ru/cg/core/" schemaLocation="emias.cg.core.xsd"/>
+    <xs:element name="getControlledGroupRequest" type="getControlledGroupRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getControlledGroup</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getControlledGroupParameterRequest" type="getControlledGroupParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getControlledGroupParameterResponse" type="getControlledGroupParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getControlledGroupResponse" type="getControlledGroupResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getControlledGroup</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getControlledGroupViewRequest" type="getControlledGroupViewRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getControlledGroupView</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getControlledGroupViewResponse" type="getControlledGroupViewResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getControlledGroupView</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getObjectsByTagRequest" type="getObjectsByTagRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getObjectsByTag</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getObjectsByTagResponse" type="getObjectsByTagResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getObjectsByTag</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getPatientParameterRequest" type="getPatientParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getPatientParameter</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getPatientParameterResponse" type="getPatientParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getPatientParameter</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getMembersRequest" type="getMembersRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getMembers</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getMembersResponse" type="getMembersResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getMembers</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getPatientGroupsRequest" type="getPatientGroupsRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getPatientGroups</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getPatientGroupsResponse" type="getPatientGroupsResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getPatientGroups</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchControlledGroupsRequest" type="searchControlledGroupsRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода searchControlledGroups</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchControlledGroupsResponse" type="searchControlledGroupsResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода searchControlledGroups</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="includeArchived" type="xs:boolean">
+        <xs:annotation>
+            <xs:documentation>
+                Признак возврата данных по архивным данным (значение по умолчанию false)
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="getControlledGroupParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="includeHistory" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных истории значений параметров КГ (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры вызова метода</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getControlledGroupParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:ControlledGroupParameter">
+                <xs:annotation>
+                    <xs:documentation>Параметр контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getControlledGroupViewRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним представления контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры вызова метода</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getControlledGroupViewResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:ControlledGroupView">
+                <xs:annotation>
+                    <xs:documentation>Представление контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getControlledGroupRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры вызова метода</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getControlledGroupResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:ControlledGroup">
+                <xs:annotation>
+                    <xs:documentation>Контролируемая группа</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getObjectsByTagRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getObjectsByTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код тега</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры вызова метода</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getObjectsByTagResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getObjectsByTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:TaggedObject" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Тегируемый объект</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getPatientGroupsRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getPatientGroups</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="patient" type="cg1:Patient">
+                <xs:annotation>
+                    <xs:documentation>Информация о пациенте</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Опции пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="membershipType" type="cg1:MembershipType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Тип членства пациента в группе</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры вызова метода</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getPatientGroupsResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getPatientGroups</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:PatientControlledGroupResultPage">
+                <xs:annotation>
+                    <xs:documentation>Страница контролируемых групп, в которых состоит пациент</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getMembersRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getMembers</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="membersFilterOptions" type="cg1:MembersFilterOptions" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры фильтрации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Опции пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры вызова метода</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getMembersResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getMembers</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:MembersResultPage">
+                <xs:annotation>
+                    <xs:documentation>Страница с результатом поиска</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getPatientParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getMembers</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="includeOperations" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак получения операций rangeOperation, medicalOperation параметра пациента КГ
+                        (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры вызова метода</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getPatientParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getMembers</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:PatientParameter">
+                <xs:annotation>
+                    <xs:documentation>Параметр пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchControlledGroupsRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchControlledGroups</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="tagCode" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код тега</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="controlledGroups" type="CG" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="includeHistory" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата исторических значений параметров КГ (значение по умолчанию: false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Опции пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CG">
+        <xs:annotation>
+            <xs:documentation>Ключевые поля контролируемой группы</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="key" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Псевдоним контролируемой группы</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="idERP" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Идентификатор универсальной группы</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="idCG" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Идентификатор контролируемой группы</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="searchControlledGroupsResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchControlledGroups</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="ControlledGroupsResultPage">
+                <xs:annotation>
+                    <xs:documentation>Страница результатов отбора контролируемых групп</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ControlledGroupsResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов отбора контролируемых групп</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Контролируемые группы</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="cg1:ControlledGroup" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Контролируемая группа</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

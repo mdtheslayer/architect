@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://emias.mos.ru/cg/v1/adminWriteService/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cg1="http://emias.mos.ru/cg/v1/" xmlns:core="http://emias.mos.ru/cg/core/"
+           targetNamespace="http://emias.mos.ru/cg/v1/adminWriteService/types/" elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:documentation>
+            Входные/выходные типы данных (request/response) для методов сервиса AdminWriteService
+        </xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://emias.mos.ru/cg/v1/" schemaLocation="emias.cg.v1.xsd"/>
+    <xs:import namespace="http://emias.mos.ru/cg/core/" schemaLocation="emias.cg.core.xsd"/>
+    <xs:element name="archiveControlledGroupRequest" type="archiveControlledGroupRequest"/>
+    <xs:element name="archiveControlledGroupParameterRequest" type="archiveControlledGroupParameterRequest"/>
+    <xs:element name="archiveControlledGroupParameterResponse" type="archiveControlledGroupParameterResponse"/>
+    <xs:element name="searchOperationsRequest" type="searchOperationsRequest"/>
+    <xs:element name="searchOperationsResponse" type="searchOperationsResponse"/>
+    <xs:element name="archiveControlledGroupResponse" type="archiveControlledGroupResponse"/>
+    <xs:element name="archiveControlledGroupViewRequest" type="archiveControlledGroupViewRequest"/>
+    <xs:element name="archiveControlledGroupViewResponse" type="archiveControlledGroupViewResponse"/>
+    <xs:element name="archiveOperationRequest" type="archiveOperationRequest"/>
+    <xs:element name="archiveOperationResponse" type="archiveOperationResponse"/>
+    <xs:element name="archivePatientParameterRequest" type="archivePatientParameterRequest"/>
+    <xs:element name="archivePatientParameterResponse" type="archivePatientParameterResponse"/>
+    <xs:element name="archiveTagRequest" type="archiveTagRequest"/>
+    <xs:element name="archiveTagResponse" type="archiveTagResponse"/>
+    <xs:element name="createControlledGroupRequest" type="createControlledGroupRequest"/>
+    <xs:element name="createControlledGroupParameterRequest" type="createControlledGroupParameterRequest"/>
+    <xs:element name="createControlledGroupParameterResponse" type="createControlledGroupParameterResponse"/>
+    <xs:element name="createControlledGroupResponse" type="createControlledGroupResponse"/>
+    <xs:element name="createControlledGroupViewRequest" type="createControlledGroupViewRequest"/>
+    <xs:element name="createControlledGroupViewResponse" type="createControlledGroupViewResponse"/>
+    <xs:element name="createOperationRequest" type="createOperationRequest"/>
+    <xs:element name="createOperationResponse" type="createOperationResponse"/>
+    <xs:element name="createPatientParameterRequest" type="createPatientParameterRequest"/>
+    <xs:element name="createPatientParameterResponse" type="createPatientParameterResponse"/>
+    <xs:element name="createTagRequest" type="createTagRequest"/>
+    <xs:element name="createTagResponse" type="createTagResponse"/>
+    <xs:element name="getOperationRequest" type="getOperationRequest"/>
+    <xs:element name="getOperationResponse" type="getOperationResponse"/>
+    <xs:element name="removeTagFromObjectRequest" type="removeTagFromObjectRequest"/>
+    <xs:element name="removeTagFromObjectResponse" type="removeTagFromObjectResponse"/>
+    <xs:element name="restoreControlledGroupRequest" type="restoreControlledGroupRequest"/>
+    <xs:element name="restoreControlledGroupParameterRequest" type="restoreControlledGroupParameterRequest"/>
+    <xs:element name="restoreControlledGroupParameterResponse" type="restoreControlledGroupParameterResponse"/>
+    <xs:element name="restoreControlledGroupResponse" type="restoreControlledGroupResponse"/>
+    <xs:element name="restoreControlledGroupViewRequest" type="restoreControlledGroupViewRequest"/>
+    <xs:element name="restoreControlledGroupViewResponse" type="restoreControlledGroupViewResponse"/>
+    <xs:element name="restoreOperationRequest" type="restoreOperationRequest"/>
+    <xs:element name="restoreOperationResponse" type="restoreOperationResponse"/>
+    <xs:element name="restorePatientParameterRequest" type="restorePatientParameterRequest"/>
+    <xs:element name="restorePatientParameterResponse" type="restorePatientParameterResponse"/>
+    <xs:element name="restoreTagRequest" type="restoreTagRequest"/>
+    <xs:element name="restoreTagResponse" type="restoreTagResponse"/>
+    <xs:element name="setControlledGroupParameterValueRequest" type="setControlledGroupParameterValueRequest"/>
+    <xs:element name="setControlledGroupParameterValueResponse" type="setControlledGroupParameterValueResponse"/>
+    <xs:element name="setTagToObjectRequest" type="setTagToObjectRequest"/>
+    <xs:element name="setTagToObjectResponse" type="setTagToObjectResponse"/>
+    <xs:element name="setPatientParameterToViewRequest" type="setPatientParameterToViewRequest"/>
+    <xs:element name="setPatientParameterToViewResponse" type="setPatientParameterToViewResponse"/>
+    <xs:element name="removePatientParameterFromViewRequest" type="removePatientParameterFromViewRequest"/>
+    <xs:element name="removePatientParameterFromViewResponse" type="removePatientParameterFromViewResponse"/>
+    <xs:element name="updateControlledGroupRequest" type="updateControlledGroupRequest"/>
+    <xs:element name="updateControlledGroupParameterRequest" type="updateControlledGroupParameterRequest"/>
+    <xs:element name="updateControlledGroupParameterResponse" type="updateControlledGroupParameterResponse"/>
+    <xs:element name="updateControlledGroupResponse" type="updateControlledGroupResponse"/>
+    <xs:element name="updateControlledGroupViewRequest" type="updateControlledGroupViewRequest"/>
+    <xs:element name="updateControlledGroupViewResponse" type="updateControlledGroupViewResponse"/>
+    <xs:element name="updateOperationRequest" type="updateOperationRequest"/>
+    <xs:element name="updateOperationResponse" type="updateOperationResponse"/>
+    <xs:element name="updatePatientParameterRequest" type="updatePatientParameterRequest"/>
+    <xs:element name="updatePatientParameterResponse" type="updatePatientParameterResponse"/>
+    <xs:element name="updateTagRequest" type="updateTagRequest"/>
+    <xs:element name="updateTagResponse" type="updateTagResponse"/>
+    <xs:element name="searchPatientParameterRequest" type="searchPatientParameterRequest"/>
+    <xs:element name="searchPatientParameterResponse" type="searchPatientParameterResponse"/>
+    <xs:element name="searchTagsRequest" type="searchTagsRequest"/>
+    <xs:element name="searchTagsResponse" type="searchTagsResponse"/>
+    <xs:element name="includeArchived" type="xs:boolean">
+        <xs:annotation>
+            <xs:documentation>
+                Признак возврата данных по архивным данным (значение по умолчанию false)
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="filterOptions">
+        <xs:annotation>
+            <xs:documentation>Параметры фильтрации списка</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:annotation>
+                <xs:documentation>Параметры фильтрации списка</xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+                <xs:element name="filterOption" type="core:KeyValuePair" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>Параметр фильтрации списка</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="restoreControlledGroupParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода restoreControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="restoreControlledGroupParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода restoreControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="updatePatientParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода updatePatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="type" type="cg1:DataType">
+                <xs:annotation>
+                    <xs:documentation>Тип параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="medicalOperationId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор операции получения значения параметра</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="rangeOperationId" type="xs:long" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор операциии получения диапазона нормы значений параметра</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updatePatientParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода updatePatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="setControlledGroupParameterValueRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода setControlledGroupParameterValue</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="controlledGroupParameterKey" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="values" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Значения параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:annotation>
+                        <xs:documentation>Значения параметра контролируемой группы</xs:documentation>
+                    </xs:annotation>
+                    <xs:sequence>
+                        <xs:element name="value" type="xs:string" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Значение параметра контролируемой группы</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="setControlledGroupParameterValueResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода setControlledGroupParameterValue</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="createControlledGroupRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода createControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="erpGroupId" type="xs:long" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор группы ЕРП</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createControlledGroupResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода createControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="createControlledGroupViewRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода createControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название представления контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание представления контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним представления контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="controlledGroupId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификаторы параметров пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createControlledGroupViewResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода createControlledGroupViewResponse</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="archiveTagRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода archiveTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="id" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор тега</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archiveTagResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода archiveTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="archiveControlledGroupViewRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода archiveControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ представления контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archiveControlledGroupViewResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода archiveControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="updateControlledGroupViewRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода updateControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним (ключ)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updateControlledGroupViewResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода updateControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="getOperationRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="key" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Ключ операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="includePatientParameters" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата псевдонимов параметров пациента, обновляемых в рамках операции (значение по
+                        умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getOperationResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:Operation">
+                <xs:annotation>
+                    <xs:documentation>Операция</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createPatientParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода createPatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="type" type="cg1:DataType">
+                <xs:annotation>
+                    <xs:documentation>Тип параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="medicalOperationId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор операции получения значения параметра</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="rangeOperationId" type="xs:long" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор операциии получения диапазона нормы значений параметра</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createPatientParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода createPatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="archiveControlledGroupRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода archiveControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archiveControlledGroupResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода archiveControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="restoreTagRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода restoreTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="id" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор тега</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="restoreTagResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода restoreTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="archivePatientParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода archivePatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archivePatientParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода archivePatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="updateOperationRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода updateOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="query" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Хранимый запрос</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="operationType" type="cg1:OperationType">
+                <xs:annotation>
+                    <xs:documentation>Тип операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updateOperationResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода updateOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="restoreControlledGroupRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода restoreControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="restoreControlledGroupResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода restoreControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="updateControlledGroupParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода updateControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dataType" type="cg1:DataType">
+                <xs:annotation>
+                    <xs:documentation>Тип данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updateControlledGroupParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода updateControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="createTagRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода createTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schema" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Схема</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="code" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createTagResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода createTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="restoreOperationRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода restoreOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="restoreOperationResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода restoreOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="createControlledGroupParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода createControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dataType" type="cg1:DataType">
+                <xs:annotation>
+                    <xs:documentation>Тип параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="controlledGroupId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createControlledGroupParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода createControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="updateControlledGroupRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода updateControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updateControlledGroupResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода updateControlledGroup</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="restoreControlledGroupViewResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода restoreControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="restoreControlledGroupViewRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода restoreControlledGroupView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ представления контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="restorePatientParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода restorePatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="setTagToObjectRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода setTagToObject</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="tagId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор тега</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="taggedObjectId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор тегируемого объекта</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="setTagToObjectResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода setTagToObject</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="restorePatientParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода restorePatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archiveOperationRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода archiveOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archiveOperationResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода archiveOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="updateTagRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода updateTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="tag" type="cg1:Tag">
+                <xs:annotation>
+                    <xs:documentation>Тег</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updateTagResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода updateTag</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="setPatientParameterToViewRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода setPatientParameterToView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="controlledGroupViewKey" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним представления</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientParameterKey" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="setPatientParameterToViewResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода setPatientParameterToView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="removePatientParameterFromViewRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода removePatientParameterFromView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="controlledGroupViewKey" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним представления</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientParameterKey" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним параметра пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="removePatientParameterFromViewResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода removePatientParameterFromView</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="archiveControlledGroupParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода archiveControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Ключ параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archiveControlledGroupParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода archiveControlledGroupParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="removeTagFromObjectRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода removeTagFromObject</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="tagId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор тега</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="taggedObjectId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор тегируемого объекта</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="removeTagFromObjectResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода removeTagFromObject</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="createOperationRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода createOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="key" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Псевдоним операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="type" type="cg1:OperationType">
+                <xs:annotation>
+                    <xs:documentation>Тип операции</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="query" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Хранимый запрос</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createOperationResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода createOperation</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="OperationsResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов отбора операций</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Операции</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="cg1:Operation" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Операция</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="searchOperationsRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchOperations</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="filterOptions" minOccurs="0"/>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Опции пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchOperationsResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchOperations</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="OperationsResultPage">
+                <xs:annotation>
+                    <xs:documentation>Страница результатов отбора операций</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PatientParameterResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов отбора параметров пациента</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Параметры пациента</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="cg1:PatientParameter" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Параметр пациента</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="searchPatientParameterRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchPatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="filterOptions" minOccurs="0"/>
+            <xs:element ref="includeArchived" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак возврата данных по архивным данным (значение по умолчанию false)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Опции пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchPatientParameterResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchPatientParameter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="PatientParameterResultPage">
+                <xs:annotation>
+                    <xs:documentation>Страница результатов параметров пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TagsResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов отбора тегов</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Теги</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="cg1:Tag" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Тег</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="searchTagsRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchTags</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="filterOptions" minOccurs="0"/>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Опции пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchTagsResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchTags</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="TagsResultPage">
+                <xs:annotation>
+                    <xs:documentation>Страница результатов отбора тегов</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

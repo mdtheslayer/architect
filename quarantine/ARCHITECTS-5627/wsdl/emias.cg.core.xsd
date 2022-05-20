@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://emias.mos.ru/cg/core/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://emias.mos.ru/cg/core/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:documentation>Типы данных для сервисов проекта "Контролируемые группы", не зависящие от версии контракта</xs:documentation>
+    </xs:annotation>
+    <xs:include schemaLocation="emias.core.v1.xsd"/>
+</xs:schema>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions targetNamespace="http://emias.mos.ru/cg/v1/metadataReadonlyService/"
+			 name="MetadataReadonlyService"
+			 xmlns="http://schemas.xmlsoap.org/wsdl/"
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			 xmlns:uctx="http://emias.mos.ru/system/v1/userContext/"
+			 xmlns:nsf="http://emias.mos.ru/system/v1/faults/"
+			 xmlns:ns1="http://emias.mos.ru/cg/v1/metadataReadonlyService/types/"
+			 xmlns:tns="http://emias.mos.ru/cg/v1/metadataReadonlyService/"
+			 xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+	<documentation>Сервис MetadataReadonlyService версия 1.0.0.0_</documentation>
+
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="http://emias.mos.ru/system/v1/userContext/" schemaLocation="emias.system.v1.userContext.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="emias.system.v1.faults.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/cg/core/" schemaLocation="emias.cg.core.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/cg/v1/metadataReadonlyService/types/" schemaLocation="cg.MetadataReadonlyService.v1.types.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/cg/v1/" schemaLocation="emias.cg.v1.xsd"/>
+		</xsd:schema>
+	</types>
+	
+	<message name="UserContext">
+		<documentation>Контекст пользователя</documentation>
+		<part name="userContext" element="uctx:userContext"/>
+	</message>
+	<message name="Fault">
+		<documentation>Ошибка</documentation>
+		<part name="fault" element="nsf:fault"/>
+	</message>
+	<message name="getControlledGroupViewInput">
+		<part name="body" element="ns1:getControlledGroupViewRequest"/>
+	</message>
+	<message name="getControlledGroupViewOutput">
+		<part name="body" element="ns1:getControlledGroupViewResponse"/>
+	</message>
+	<message name="getControlledGroupInput">
+		<part name="body" element="ns1:getControlledGroupRequest"/>
+	</message>
+	<message name="getControlledGroupOutput">
+		<part name="body" element="ns1:getControlledGroupResponse"/>
+	</message>
+	<message name="getPatientGroupsInput">
+		<part name="body" element="ns1:getPatientGroupsRequest"/>
+	</message>
+	<message name="getPatientGroupsOutput">
+		<part name="body" element="ns1:getPatientGroupsResponse"/>
+	</message>
+	<message name="getPatientParameterInput">
+		<part name="body" element="ns1:getPatientParameterRequest"/>
+	</message>
+	<message name="getPatientParameterOutput">
+		<part name="body" element="ns1:getPatientParameterResponse"/>
+	</message>
+	<message name="getControlledGroupParameterInput">
+		<part name="body" element="ns1:getControlledGroupParameterRequest"/>
+	</message>
+	<message name="getControlledGroupParameterOutput">
+		<part name="body" element="ns1:getControlledGroupParameterResponse"/>
+	</message>
+	<message name="getObjectsByTagInput">
+		<part name="body" element="ns1:getObjectsByTagRequest"/>
+	</message>
+	<message name="getObjectsByTagOutput">
+		<part name="body" element="ns1:getObjectsByTagResponse"/>
+	</message>
+	<message name="getMembersInput">
+		<part name="body" element="ns1:getMembersRequest"/>
+	</message>
+	<message name="getMembersOutput">
+		<part name="body" element="ns1:getMembersResponse"/>
+	</message>
+	<message name="searchControlledGroupsInput">
+		<part name="body" element="ns1:searchControlledGroupsRequest"/>
+	</message>
+	<message name="searchControlledGroupsOutput">
+		<part name="body" element="ns1:searchControlledGroupsResponse"/>
+	</message>
+
+	<portType name="MetadataReadonlyServicePortType">
+		<operation name="getControlledGroupView">
+			<documentation>
+				Получение сведений о представлении данных
+			</documentation>
+			<input name="getControlledGroupViewInput" message="tns:getControlledGroupViewInput"/>
+			<output name="getControlledGroupViewOutput" message="tns:getControlledGroupViewOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getControlledGroup">
+			<documentation>
+				Получение сведений о контролируемой группе
+			</documentation>
+			<input name="getControlledGroupInput" message="tns:getControlledGroupInput"/>
+			<output name="getControlledGroupOutput" message="tns:getControlledGroupOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchControlledGroups">
+			<documentation>
+				Осуществляет поиск контролируемых групп
+			</documentation>
+			<input name="searchControlledGroupsInput" message="tns:searchControlledGroupsInput"/>
+			<output name="searchControlledGroupsOutput" message="tns:searchControlledGroupsOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getPatientGroups">
+			<documentation>
+				Получение списка контролируемых групп пациента
+			</documentation>
+			<input name="getPatientGroupsInput" message="tns:getPatientGroupsInput"/>
+			<output name="getPatientGroupsOutput" message="tns:getPatientGroupsOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getPatientParameter">
+			<documentation>
+				Получение сведений о параметре пациента
+			</documentation>
+			<input name="getPatientParameterInput" message="tns:getPatientParameterInput"/>
+			<output name="getPatientParameterOutput" message="tns:getPatientParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getControlledGroupParameter">
+			<documentation>
+				Получение сведений о параметре контролируемой группы
+			</documentation>
+			<input name="getControlledGroupParameterInput" message="tns:getControlledGroupParameterInput"/>
+			<output name="getControlledGroupParameterOutput" message="tns:getControlledGroupParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getObjectsByTag">
+			<documentation>
+				Получение сведений об объектах, на которых назначен тег
+			</documentation>
+			<input name="getObjectsByTagInput" message="tns:getObjectsByTagInput"/>
+			<output name="getObjectsByTagOutput" message="tns:getObjectsByTagOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getMembers">
+			<documentation>
+				Получение списка пациентов контролируемой группы
+			</documentation>
+			<input name="getMembersInput" message="tns:getMembersInput"/>
+			<output name="getMembersOutput" message="tns:getMembersOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+	</portType>
+	
+	<binding name="MetadataReadonlyServiceBinding" type="tns:MetadataReadonlyServicePortType">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="getControlledGroupView">
+			<soap12:operation soapAction="getControlledGroupView"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getControlledGroup">
+			<soap12:operation soapAction="getControlledGroup"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getPatientGroups">
+			<soap12:operation soapAction="getPatientGroups"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getPatientParameter">
+			<soap12:operation soapAction="getPatientParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getControlledGroupParameter">
+			<soap12:operation soapAction="getControlledGroupParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getObjectsByTag">
+			<soap12:operation soapAction="getObjectsByTag"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getMembers">
+			<soap12:operation soapAction="getMembers"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchControlledGroups">
+			<soap12:operation soapAction="searchControlledGroups"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+	
+	<service name="MetadataReadonlyService">
+		<port name="MetadataReadonlyServicePort" binding="tns:MetadataReadonlyServiceBinding">
+			<soap12:address location="REPLACE_WITH_ACTUAL_URL"/>
+		</port>
+	</service>
+
+	<wsp:Policy wsu:Id="authPolicy" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+		<sp:SupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+			<wsp:Policy>
+				<sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+					<wsp:Policy>
+						<sp:NoPassword/>
+					</wsp:Policy>
+				</sp:UsernameToken>
+			</wsp:Policy>
+		</sp:SupportingTokens>
+	</wsp:Policy>
+</definitions>

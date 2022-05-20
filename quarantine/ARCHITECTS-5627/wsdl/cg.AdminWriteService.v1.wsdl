@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://emias.mos.ru/cg/v1/adminWriteService/"
+			 name="AdminWriteService"
+			 xmlns="http://schemas.xmlsoap.org/wsdl/"
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			 xmlns:uctx="http://emias.mos.ru/system/v1/userContext/"
+			 xmlns:nsf="http://emias.mos.ru/system/v1/faults/"
+			 xmlns:ns1="http://emias.mos.ru/cg/v1/adminWriteService/types/"
+			 xmlns:tns="http://emias.mos.ru/cg/v1/adminWriteService/"
+			 xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+			 xmlns:wsp="http://www.w3.org/ns/ws-policy">
+	<documentation>Сервис AdminWriteService версия 1.0.0.0_</documentation>
+
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="http://emias.mos.ru/system/v1/userContext/" schemaLocation="emias.system.v1.userContext.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="emias.system.v1.faults.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/cg/core/" schemaLocation="emias.cg.core.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/cg/v1/adminWriteService/types/" schemaLocation="cg.AdminWriteService.v1.types.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/cg/v1/" schemaLocation="emias.cg.v1.xsd"/>
+		</xsd:schema>
+	</types>
+
+	<message name="UserContext">
+		<documentation>Контекст пользователя</documentation>
+		<part name="userContext" element="uctx:userContext"/>
+	</message>
+	<message name="Fault">
+		<documentation>Ошибка</documentation>
+		<part name="fault" element="nsf:fault"/>
+	</message>
+	<message name="createOperationInput">
+		<part name="body" element="ns1:createOperationRequest"/>
+	</message>
+	<message name="createOperationOutput">
+		<part name="body" element="ns1:createOperationResponse"/>
+	</message>
+	<message name="archiveOperationInput">
+		<part name="body" element="ns1:archiveOperationRequest"/>
+	</message>
+	<message name="archiveOperationOutput">
+		<part name="body" element="ns1:archiveOperationResponse"/>
+	</message>
+	<message name="archiveTagInput">
+		<part name="body" element="ns1:archiveTagRequest"/>
+	</message>
+	<message name="archiveTagOutput">
+		<part name="body" element="ns1:archiveTagResponse"/>
+	</message>
+	<message name="updateOperationInput">
+		<part name="body" element="ns1:updateOperationRequest"/>
+	</message>
+	<message name="updateOperationOutput">
+		<part name="body" element="ns1:updateOperationResponse"/>
+	</message>
+	<message name="restoreOperationInput">
+		<part name="body" element="ns1:restoreOperationRequest"/>
+	</message>
+	<message name="restoreOperationOutput">
+		<part name="body" element="ns1:restoreOperationResponse"/>
+	</message>
+	<message name="createTagInput">
+		<part name="body" element="ns1:createTagRequest"/>
+	</message>
+	<message name="createTagOutput">
+		<part name="body" element="ns1:createTagResponse"/>
+	</message>
+	<message name="restoreTagInput">
+		<part name="body" element="ns1:restoreTagRequest"/>
+	</message>
+	<message name="restoreTagOutput">
+		<part name="body" element="ns1:restoreTagResponse"/>
+	</message>
+	<message name="getOperationInput">
+		<part name="body" element="ns1:getOperationRequest"/>
+	</message>
+	<message name="getOperationOutput">
+		<part name="body" element="ns1:getOperationResponse"/>
+	</message>
+	<message name="updateTagInput">
+		<part name="body" element="ns1:updateTagRequest"/>
+	</message>
+	<message name="updateTagOutput">
+		<part name="body" element="ns1:updateTagResponse"/>
+	</message>
+	<message name="setTagToObjectInput">
+		<part name="body" element="ns1:setTagToObjectRequest"/>
+	</message>
+	<message name="setTagToObjectOutput">
+		<part name="body" element="ns1:setTagToObjectResponse"/>
+	</message>
+	<message name="restoreControlledGroupParameterInput">
+		<part name="body" element="ns1:restoreControlledGroupParameterRequest"/>
+	</message>
+	<message name="restoreControlledGroupParameterOutput">
+		<part name="body" element="ns1:restoreControlledGroupParameterResponse"/>
+	</message>
+	<message name="setControlledGroupParameterValueInput">
+		<part name="body" element="ns1:setControlledGroupParameterValueRequest"/>
+	</message>
+	<message name="setControlledGroupParameterValueOutput">
+		<part name="body" element="ns1:setControlledGroupParameterValueResponse"/>
+	</message>
+	<message name="archivePatientParameterInput">
+		<part name="body" element="ns1:archivePatientParameterRequest"/>
+	</message>
+	<message name="archivePatientParameterOutput">
+		<part name="body" element="ns1:archivePatientParameterResponse"/>
+	</message>
+	<message name="updateControlledGroupParameterInput">
+		<part name="body" element="ns1:updateControlledGroupParameterRequest"/>
+	</message>
+	<message name="updateControlledGroupParameterOutput">
+		<part name="body" element="ns1:updateControlledGroupParameterResponse"/>
+	</message>
+	<message name="restorePatientParameterInput">
+		<part name="body" element="ns1:restorePatientParameterRequest"/>
+	</message>
+	<message name="restorePatientParameterOutput">
+		<part name="body" element="ns1:restorePatientParameterResponse"/>
+	</message>
+	<message name="archiveControlledGroupViewInput">
+		<part name="body" element="ns1:archiveControlledGroupViewRequest"/>
+	</message>
+	<message name="archiveControlledGroupViewOutput">
+		<part name="body" element="ns1:archiveControlledGroupViewResponse"/>
+	</message>
+	<message name="updateControlledGroupInput">
+		<part name="body" element="ns1:updateControlledGroupRequest"/>
+	</message>
+	<message name="updateControlledGroupOutput">
+		<part name="body" element="ns1:updateControlledGroupResponse"/>
+	</message>
+	<message name="restoreControlledGroupInput">
+		<part name="body" element="ns1:restoreControlledGroupRequest"/>
+	</message>
+	<message name="restoreControlledGroupOutput">
+		<part name="body" element="ns1:restoreControlledGroupResponse"/>
+	</message>
+	<message name="createControlledGroupParameterInput">
+		<part name="body" element="ns1:createControlledGroupParameterRequest"/>
+	</message>
+	<message name="createControlledGroupParameterOutput">
+		<part name="body" element="ns1:createControlledGroupParameterResponse"/>
+	</message>
+	<message name="updatePatientParameterInput">
+		<part name="body" element="ns1:updatePatientParameterRequest"/>
+	</message>
+	<message name="updatePatientParameterOutput">
+		<part name="body" element="ns1:updatePatientParameterResponse"/>
+	</message>
+	<message name="createControlledGroupInput">
+		<part name="body" element="ns1:createControlledGroupRequest"/>
+	</message>
+	<message name="createControlledGroupOutput">
+		<part name="body" element="ns1:createControlledGroupResponse"/>
+	</message>
+	<message name="createControlledGroupViewInput">
+		<part name="body" element="ns1:createControlledGroupViewRequest"/>
+	</message>
+	<message name="createControlledGroupViewOutput">
+		<part name="body" element="ns1:createControlledGroupViewResponse"/>
+	</message>
+	<message name="updateControlledGroupViewInput">
+		<part name="body" element="ns1:updateControlledGroupViewRequest"/>
+	</message>
+	<message name="updateControlledGroupViewOutput">
+		<part name="body" element="ns1:updateControlledGroupViewResponse"/>
+	</message>
+	<message name="removeTagFromObjectInput">
+		<part name="body" element="ns1:removeTagFromObjectRequest"/>
+	</message>
+	<message name="removeTagFromObjectOutput">
+		<part name="body" element="ns1:removeTagFromObjectResponse"/>
+	</message>
+	<message name="archiveControlledGroupInput">
+		<part name="body" element="ns1:archiveControlledGroupRequest"/>
+	</message>
+	<message name="archiveControlledGroupOutput">
+		<part name="body" element="ns1:archiveControlledGroupResponse"/>
+	</message>
+	<message name="archiveControlledGroupParameterInput">
+		<part name="body" element="ns1:archiveControlledGroupParameterRequest"/>
+	</message>
+	<message name="archiveControlledGroupParameterOutput">
+		<part name="body" element="ns1:archiveControlledGroupParameterResponse"/>
+	</message>
+	<message name="restoreControlledGroupViewInput">
+		<part name="body" element="ns1:restoreControlledGroupViewRequest"/>
+	</message>
+	<message name="restoreControlledGroupViewOutput">
+		<part name="body" element="ns1:restoreControlledGroupViewResponse"/>
+	</message>
+	<message name="createPatientParameterInput">
+		<part name="body" element="ns1:createPatientParameterRequest"/>
+	</message>
+	<message name="createPatientParameterOutput">
+		<part name="body" element="ns1:createPatientParameterResponse"/>
+	</message>
+	<message name="searchOperationsInput">
+		<part name="body" element="ns1:searchOperationsRequest"/>
+	</message>
+	<message name="searchOperationsOutput">
+		<part name="body" element="ns1:searchOperationsResponse"/>
+	</message>
+	<message name="searchPatientParameterInput">
+		<part name="body" element="ns1:searchPatientParameterRequest"/>
+	</message>
+	<message name="searchPatientParameterOutput">
+		<part name="body" element="ns1:searchPatientParameterResponse"/>
+	</message>
+	<message name="setPatientParameterToViewInput">
+		<part name="body" element="ns1:setPatientParameterToViewRequest"/>
+	</message>
+	<message name="setPatientParameterToViewOutput">
+		<part name="body" element="ns1:setPatientParameterToViewResponse"/>
+	</message>
+	<message name="searchTagsInput">
+		<part name="body" element="ns1:searchTagsRequest"/>
+	</message>
+	<message name="searchTagsOutput">
+		<part name="body" element="ns1:searchTagsResponse"/>
+	</message>
+	<message name="removePatientParameterFromViewInput">
+		<part name="body" element="ns1:removePatientParameterFromViewRequest"/>
+	</message>
+	<message name="removePatientParameterFromViewOutput">
+		<part name="body" element="ns1:removePatientParameterFromViewResponse"/>
+	</message>
+
+	<portType name="AdminWriteServicePortType">
+		<operation name="archiveOperation">
+			<documentation>
+				Архивирует операцию
+			</documentation>
+			<input name="archiveOperationInput" message="tns:archiveOperationInput"/>
+			<output name="archiveOperationOutput" message="tns:archiveOperationOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchTags">
+			<documentation>
+				Получает список тегов
+			</documentation>
+			<input name="searchTagsInput" message="tns:searchTagsInput"/>
+			<output name="searchTagsOutput" message="tns:searchTagsOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchPatientParameter">
+			<documentation>
+				Осуществляет поиск параметров пациента
+			</documentation>
+			<input name="searchPatientParameterInput" message="tns:searchPatientParameterInput"/>
+			<output name="searchPatientParameterOutput" message="tns:searchPatientParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchOperations">
+			<documentation>
+				Осуществляет поиск операций
+			</documentation>
+			<input name="searchOperationsInput" message="tns:searchOperationsInput"/>
+			<output name="searchOperationsOutput" message="tns:searchOperationsOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="createOperation">
+			<documentation>
+				Создает операцию
+			</documentation>
+			<input name="createOperationInput" message="tns:createOperationInput"/>
+			<output name="createOperationOutput" message="tns:createOperationOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="updateTag">
+			<documentation>
+				Обновляет тег
+			</documentation>
+			<input name="updateTagInput" message="tns:updateTagInput"/>
+			<output name="updateTagOutput" message="tns:updateTagOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="setTagToObject">
+			<documentation>
+				Устанавливает тег на объект
+			</documentation>
+			<input name="setTagToObjectInput" message="tns:setTagToObjectInput"/>
+			<output name="setTagToObjectOutput" message="tns:setTagToObjectOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="restoreOperation">
+			<documentation>
+				Восстанавливает операцию
+			</documentation>
+			<input name="restoreOperationInput" message="tns:restoreOperationInput"/>
+			<output name="restoreOperationOutput" message="tns:restoreOperationOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="createTag">
+			<documentation>
+				Создает тег
+			</documentation>
+			<input name="createTagInput" message="tns:createTagInput"/>
+			<output name="createTagOutput" message="tns:createTagOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getOperation">
+			<documentation>
+				Получает операцию
+			</documentation>
+			<input name="getOperationInput" message="tns:getOperationInput"/>
+			<output name="getOperationOutput" message="tns:getOperationOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="archiveTag">
+			<documentation>
+				Архивирует тег
+			</documentation>
+			<input name="archiveTagInput" message="tns:archiveTagInput"/>
+			<output name="archiveTagOutput" message="tns:archiveTagOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="restoreTag">
+			<documentation>
+				Восстанавливает тег
+			</documentation>
+			<input name="restoreTagInput" message="tns:restoreTagInput"/>
+			<output name="restoreTagOutput" message="tns:restoreTagOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="updateOperation">
+			<documentation>
+				Обновляет операцию
+			</documentation>
+			<input name="updateOperationInput" message="tns:updateOperationInput"/>
+			<output name="updateOperationOutput" message="tns:updateOperationOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="createControlledGroupParameter">
+			<documentation>
+				Создает параметр контролируемой группы
+			</documentation>
+			<input name="createControlledGroupParameterInput" message="tns:createControlledGroupParameterInput"/>
+			<output name="createControlledGroupParameterOutput" message="tns:createControlledGroupParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="restorePatientParameter">
+			<documentation>
+				Восстанавливает параметр пациента
+			</documentation>
+			<input name="restorePatientParameterInput" message="tns:restorePatientParameterInput"/>
+			<output name="restorePatientParameterOutput" message="tns:restorePatientParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="archiveControlledGroup">
+			<documentation>
+				Архивирует контролируемую группу
+			</documentation>
+			<input name="archiveControlledGroupInput" message="tns:archiveControlledGroupInput"/>
+			<output name="archiveControlledGroupOutput" message="tns:archiveControlledGroupOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="archivePatientParameter">
+			<documentation>
+				Архивирует параметр пациента
+			</documentation>
+			<input name="archivePatientParameterInput" message="tns:archivePatientParameterInput"/>
+			<output name="archivePatientParameterOutput" message="tns:archivePatientParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="removeTagFromObject">
+			<documentation>
+				Удаляет тег из объекта
+			</documentation>
+			<input name="removeTagFromObjectInput" message="tns:removeTagFromObjectInput"/>
+			<output name="removeTagFromObjectOutput" message="tns:removeTagFromObjectOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="updateControlledGroup">
+			<documentation>
+				Обновляет контролируемую группу
+			</documentation>
+			<input name="updateControlledGroupInput" message="tns:updateControlledGroupInput"/>
+			<output name="updateControlledGroupOutput" message="tns:updateControlledGroupOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="setControlledGroupParameterValue">
+			<documentation>
+				Устанавливает значение параметра контролируемой группы
+			</documentation>
+			<input name="setControlledGroupParameterValueInput" message="tns:setControlledGroupParameterValueInput"/>
+			<output name="setControlledGroupParameterValueOutput" message="tns:setControlledGroupParameterValueOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="restoreControlledGroupView">
+			<documentation>
+				Восстанавливает представление контролируемой группы
+			</documentation>
+			<input name="restoreControlledGroupViewInput" message="tns:restoreControlledGroupViewInput"/>
+			<output name="restoreControlledGroupViewOutput" message="tns:restoreControlledGroupViewOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="createControlledGroup">
+			<documentation>
+				Создает контролируемую группу
+			</documentation>
+			<input name="createControlledGroupInput" message="tns:createControlledGroupInput"/>
+			<output name="createControlledGroupOutput" message="tns:createControlledGroupOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="restoreControlledGroupParameter">
+			<documentation>
+				Восстанавливает параметр контролируемой группы
+			</documentation>
+			<input name="restoreControlledGroupParameterInput" message="tns:restoreControlledGroupParameterInput"/>
+			<output name="restoreControlledGroupParameterOutput" message="tns:restoreControlledGroupParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="updatePatientParameter">
+			<documentation>
+				Обновляет параметр пациента
+			</documentation>
+			<input name="updatePatientParameterInput" message="tns:updatePatientParameterInput"/>
+			<output name="updatePatientParameterOutput" message="tns:updatePatientParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="createControlledGroupView">
+			<documentation>
+				Создает представление контролируемой группы
+			</documentation>
+			<input name="createControlledGroupViewInput" message="tns:createControlledGroupViewInput"/>
+			<output name="createControlledGroupViewOutput" message="tns:createControlledGroupViewOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="archiveControlledGroupView">
+			<documentation>
+				Архивирует представление контролируемой группы
+			</documentation>
+			<input name="archiveControlledGroupViewInput" message="tns:archiveControlledGroupViewInput"/>
+			<output name="archiveControlledGroupViewOutput" message="tns:archiveControlledGroupViewOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="archiveControlledGroupParameter">
+			<documentation>
+				Архивирует параметр контролируемой группы
+			</documentation>
+			<input name="archiveControlledGroupParameterInput" message="tns:archiveControlledGroupParameterInput"/>
+			<output name="archiveControlledGroupParameterOutput" message="tns:archiveControlledGroupParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="createPatientParameter">
+			<documentation>
+				Создает параметр пациента
+			</documentation>
+			<input name="createPatientParameterInput" message="tns:createPatientParameterInput"/>
+			<output name="createPatientParameterOutput" message="tns:createPatientParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="updateControlledGroupParameter">
+			<documentation>
+				Обновляет параметр контролируемой группы
+			</documentation>
+			<input name="updateControlledGroupParameterInput" message="tns:updateControlledGroupParameterInput"/>
+			<output name="updateControlledGroupParameterOutput" message="tns:updateControlledGroupParameterOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="updateControlledGroupView">
+			<documentation>
+				Обновляет представление контролируемой группы
+			</documentation>
+			<input name="updateControlledGroupViewInput" message="tns:updateControlledGroupViewInput"/>
+			<output name="updateControlledGroupViewOutput" message="tns:updateControlledGroupViewOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="restoreControlledGroup">
+			<documentation>
+				Восстанавливает контрольную группу
+			</documentation>
+			<input name="restoreControlledGroupInput" message="tns:restoreControlledGroupInput"/>
+			<output name="restoreControlledGroupOutput" message="tns:restoreControlledGroupOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="setPatientParameterToView">
+			<documentation>
+				Добавляет параметр пациента в представление контролируемой группы
+			</documentation>
+			<input name="setPatientParameterToViewInput" message="tns:setPatientParameterToViewInput"/>
+			<output name="setPatientParameterToViewOutput" message="tns:setPatientParameterToViewOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="removePatientParameterFromView">
+			<documentation>
+				Удаляет параметр пациента из представления контролируемой группы
+			</documentation>
+			<input name="removePatientParameterFromViewInput" message="tns:removePatientParameterFromViewInput"/>
+			<output name="removePatientParameterFromViewOutput" message="tns:removePatientParameterFromViewOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+	</portType>
+
+	<binding name="AdminWriteServiceBinding" type="tns:AdminWriteServicePortType">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsp:PolicyReference URI="#authPolicy"/>
+		<operation name="createOperation">
+			<soap12:operation soapAction="createOperation"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchPatientParameter">
+			<soap12:operation soapAction="searchPatientParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchTags">
+			<soap12:operation soapAction="searchTags"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchOperations">
+			<soap12:operation soapAction="searchOperations"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="setPatientParameterToView">
+			<soap12:operation soapAction="setPatientParameterToView"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="removePatientParameterFromView">
+			<soap12:operation soapAction="removePatientParameterFromView"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="archiveOperation">
+			<soap12:operation soapAction="archiveOperation"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="archiveTag">
+			<soap12:operation soapAction="archiveTag"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="updateOperation">
+			<soap12:operation soapAction="updateOperation"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="restoreOperation">
+			<soap12:operation soapAction="restoreOperation"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="createTag">
+			<soap12:operation soapAction="createTag"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="restoreTag">
+			<soap12:operation soapAction="restoreTag"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getOperation">
+			<soap12:operation soapAction="getOperation"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="updateTag">
+			<soap12:operation soapAction="updateTag"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="setTagToObject">
+			<soap12:operation soapAction="setTagToObject"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="restoreControlledGroupParameter">
+			<soap12:operation soapAction="restoreControlledGroupParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="setControlledGroupParameterValue">
+			<soap12:operation soapAction="setControlledGroupParameterValue"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="archivePatientParameter">
+			<soap12:operation soapAction="archivePatientParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="updateControlledGroupParameter">
+			<soap12:operation soapAction="updateControlledGroupParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="restorePatientParameter">
+			<soap12:operation soapAction="restorePatientParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="archiveControlledGroupView">
+			<soap12:operation soapAction="archiveControlledGroupView"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="updateControlledGroup">
+			<soap12:operation soapAction="updateControlledGroup"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="restoreControlledGroup">
+			<soap12:operation soapAction="restoreControlledGroup"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="createControlledGroupParameter">
+			<soap12:operation soapAction="createControlledGroupParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="updatePatientParameter">
+			<soap12:operation soapAction="updatePatientParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="createControlledGroup">
+			<soap12:operation soapAction="createControlledGroup"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="createControlledGroupView">
+			<soap12:operation soapAction="createControlledGroupView"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="updateControlledGroupView">
+			<soap12:operation soapAction="updateControlledGroupView"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="removeTagFromObject">
+			<soap12:operation soapAction="removeTagFromObject"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="archiveControlledGroup">
+			<soap12:operation soapAction="archiveControlledGroup"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="archiveControlledGroupParameter">
+			<soap12:operation soapAction="archiveControlledGroupParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="restoreControlledGroupView">
+			<soap12:operation soapAction="restoreControlledGroupView"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="createPatientParameter">
+			<soap12:operation soapAction="createPatientParameter"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+
+	<service name="AdminWriteService" >
+		<wsp:PolicyReference URI="#authPolicy"/>
+		<port name="AdminWriteServicePort" binding="tns:AdminWriteServiceBinding">
+			<soap12:address location="REPLACE_WITH_ACTUAL_URL"/>
+		</port>
+	</service>
+
+	<wsp:Policy wsu:Id="authPolicy" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+		<sp:SupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+			<wsp:Policy>
+				<sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+					<wsp:Policy>
+						<sp:WssUsernameToken11/>
+					</wsp:Policy>
+				</sp:UsernameToken>
+			</wsp:Policy>
+		</sp:SupportingTokens>
+		<wsss:ValidatorConfiguration
+				wspp:visibility="private" xmlns:wsss="http://schemas.sun.com/2006/03/wss/server"
+				xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy">
+			<wsss:Validator name="usernameValidator"
+							classname="ru.mos.emias.cg.soap.v1.AuthValidation" />
+		</wsss:ValidatorConfiguration>
+	</wsp:Policy>
+</definitions>

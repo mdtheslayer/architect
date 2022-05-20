@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions targetNamespace="http://emias.mos.ru/cg/v1/dataLoaderService/"
+			 name="DataLoaderService"
+			 xmlns="http://schemas.xmlsoap.org/wsdl/"
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:uctx="http://emias.mos.ru/system/v1/userContext/"
+			 xmlns:nsf="http://emias.mos.ru/system/v1/faults/"
+			 xmlns:ns1="http://emias.mos.ru/cg/v1/dataLoaderService/types/"
+			 xmlns:tns="http://emias.mos.ru/cg/v1/dataLoaderService/"
+			 xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+	<documentation>Сервис DataLoaderService версия 1.0.0.0_</documentation>
+
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="http://emias.mos.ru/system/v1/userContext/"
+						schemaLocation="emias.system.v1.userContext.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="emias.system.v1.faults.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/cg/core/" schemaLocation="emias.cg.core.xsd"/>
+			<xsd:import namespace="http://emias.mos.ru/cg/v1/dataLoaderService/types/"
+						schemaLocation="cg.DataLoaderService.v1.types.xsd"/>
+		</xsd:schema>
+	</types>
+
+	<message name="UserContext">
+		<documentation>Контекст пользователя</documentation>
+		<part name="userContext" element="uctx:userContext"/>
+	</message>
+	<message name="Fault">
+		<documentation>Ошибка</documentation>
+		<part name="fault" element="nsf:fault"/>
+	</message>
+	<message name="createDataLoadQueryInput">
+		<part name="body" element="ns1:createDataLoadQueryRequest"/>
+	</message>
+	<message name="createDataLoadQueryOutput">
+		<part name="body" element="ns1:createDataLoadQueryResponse"/>
+	</message>
+	<message name="getDataLoadQueryInput">
+		<part name="body" element="ns1:getDataLoadQueryRequest"/>
+	</message>
+	<message name="getDataLoadQueryOutput">
+		<part name="body" element="ns1:getDataLoadQueryResponse"/>
+	</message>
+	<message name="createDataLoadTaskInput">
+		<part name="body" element="ns1:createDataLoadTaskRequest"/>
+	</message>
+	<message name="createDataLoadTaskOutput">
+		<part name="body" element="ns1:createDataLoadTaskResponse"/>
+	</message>
+	<message name="updateDataLoadTaskInput">
+		<part name="body" element="ns1:updateDataLoadTaskRequest"/>
+	</message>
+	<message name="updateDataLoadTaskOutput">
+		<part name="body" element="ns1:updateDataLoadTaskResponse"/>
+	</message>
+	<message name="updateDataLoadQueryInput">
+		<part name="body" element="ns1:updateDataLoadQueryRequest"/>
+	</message>
+	<message name="updateDataLoadQueryOutput">
+		<part name="body" element="ns1:updateDataLoadQueryResponse"/>
+	</message>
+	<message name="getDataLoadTasksInput">
+		<part name="body" element="ns1:getDataLoadTasksRequest"/>
+	</message>
+	<message name="getDataLoadTasksOutput">
+		<part name="body" element="ns1:getDataLoadTasksResponse"/>
+	</message>
+	<message name="searchDataLoadTasksInput">
+		<part name="body" element="ns1:searchDataLoadTasksRequest"/>
+	</message>
+	<message name="searchDataLoadTasksOutput">
+		<part name="body" element="ns1:searchDataLoadTasksResponse"/>
+	</message>
+	<message name="searchDataLoadQueriesInput">
+		<part name="body" element="ns1:searchDataLoadQueriesRequest"/>
+	</message>
+	<message name="searchDataLoadQueriesOutput">
+		<part name="body" element="ns1:searchDataLoadQueriesResponse"/>
+	</message>
+	<message name="searchDataLoadTaskExecutionEventsInput">
+		<part name="body" element="ns1:searchDataLoadTaskExecutionEventsRequest"/>
+	</message>
+	<message name="searchDataLoadTaskExecutionEventsOutput">
+		<part name="body" element="ns1:searchDataLoadTaskExecutionEventsResponse"/>
+	</message>
+	<message name="archiveDataLoadQueryInput">
+		<part name="body" element="ns1:archiveDataLoadQueryRequest"/>
+	</message>
+	<message name="archiveDataLoadQueryOutput">
+		<part name="body" element="ns1:archiveDataLoadQueryResponse"/>
+	</message>
+	<message name="initDataLoadTaskExecutionInput">
+		<part name="body" element="ns1:initDataLoadTaskExecutionRequest"/>
+	</message>
+	<message name="initDataLoadTaskExecutionOutput">
+		<part name="body" element="ns1:initDataLoadTaskExecutionResponse"/>
+	</message>
+	<message name="searchPatientProcessingErrorsInput">
+		<part name="body" element="ns1:searchPatientProcessingErrorsRequest"/>
+	</message>
+	<message name="searchPatientProcessingErrorsOutput">
+		<part name="body" element="ns1:searchPatientProcessingErrorsResponse"/>
+	</message>
+	<message name="searchPatientsByErrorInput">
+		<part name="body" element="ns1:searchPatientsByErrorRequest"/>
+	</message>
+	<message name="searchPatientsByErrorOutput">
+		<part name="body" element="ns1:searchPatientsByErrorResponse"/>
+	</message>
+	<message name="getDataLoadPatientAqlTemplateInput">
+		<part name="body" element="ns1:getDataLoadPatientAqlTemplateRequest"/>
+	</message>
+	<message name="getDataLoadPatientAqlTemplateOutput">
+		<part name="body" element="ns1:getDataLoadPatientAqlTemplateResponse"/>
+	</message>
+	<message name="getDataLoadQueryTemplateInput">
+		<part name="body" element="ns1:getDataLoadQueryTemplateRequest"/>
+	</message>
+	<message name="getDataLoadQueryTemplateOutput">
+		<part name="body" element="ns1:getDataLoadQueryTemplateResponse"/>
+	</message>
+
+	<portType name="DataLoaderServicePortType">
+		<operation name="createDataLoadQuery">
+			<documentation>
+				Создание запроса загрузки данных
+			</documentation>
+			<input name="createDataLoadQueryInput" message="tns:createDataLoadQueryInput"/>
+			<output name="createDataLoadQueryOutput" message="tns:createDataLoadQueryOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getDataLoadQuery">
+			<documentation>
+				Получение запросов загрузки данных
+			</documentation>
+			<input name="getDataLoadQueryInput" message="tns:getDataLoadQueryInput"/>
+			<output name="getDataLoadQueryOutput" message="tns:getDataLoadQueryOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="createDataLoadTask">
+			<documentation>
+				Создание задачи загрузки данных
+			</documentation>
+			<input name="createDataLoadTaskInput" message="tns:createDataLoadTaskInput"/>
+			<output name="createDataLoadTaskOutput" message="tns:createDataLoadTaskOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="updateDataLoadTask">
+			<documentation>
+				Обновление задачи загрузки данных
+			</documentation>
+			<input name="updateDataLoadTaskInput" message="tns:updateDataLoadTaskInput"/>
+			<output name="updateDataLoadTaskOutput" message="tns:updateDataLoadTaskOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="archiveDataLoadQuery">
+			<documentation>
+				Архивирование запроса загрузки данных
+			</documentation>
+			<input name="archiveDataLoadQueryInput" message="tns:archiveDataLoadQueryInput"/>
+			<output name="archiveDataLoadQueryOutput" message="tns:archiveDataLoadQueryOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="updateDataLoadQuery">
+			<documentation>
+				Обновление запроса загрузки данных
+			</documentation>
+			<input name="updateDataLoadQueryInput" message="tns:updateDataLoadQueryInput"/>
+			<output name="updateDataLoadQueryOutput" message="tns:updateDataLoadQueryOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getDataLoadTasks">
+			<documentation>
+				Получение задач загрузки данных
+			</documentation>
+			<input name="getDataLoadTasksInput" message="tns:getDataLoadTasksInput"/>
+			<output name="getDataLoadTasksOutput" message="tns:getDataLoadTasksOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchDataLoadTasks">
+			<documentation>
+				Получение задач загрузки данных
+			</documentation>
+			<input name="searchDataLoadTasksInput" message="tns:searchDataLoadTasksInput"/>
+			<output name="searchDataLoadTasksOutput" message="tns:searchDataLoadTasksOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchDataLoadQueries">
+			<documentation>
+				Получение запросов загрузки данных
+			</documentation>
+			<input name="searchDataLoadQueriesInput" message="tns:searchDataLoadQueriesInput"/>
+			<output name="searchDataLoadQueriesOutput" message="tns:searchDataLoadQueriesOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchDataLoadTaskExecutionEvents">
+			<documentation>
+				Получение событий выполнения задачи загрузки данных
+			</documentation>
+			<input name="searchDataLoadTaskExecutionEventsInput" message="tns:searchDataLoadTaskExecutionEventsInput"/>
+			<output name="searchDataLoadTaskExecutionEventsOutput" message="tns:searchDataLoadTaskExecutionEventsOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="initDataLoadTaskExecution">
+			<documentation>
+				Инициация выполнения задачи загрузки данных
+			</documentation>
+			<input name="initDataLoadTaskExecutionInput" message="tns:initDataLoadTaskExecutionInput"/>
+			<output name="initDataLoadTaskExecutionOutput" message="tns:initDataLoadTaskExecutionOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchPatientProcessingErrors">
+			<documentation>
+				Получение ошибок обработки пациентов
+			</documentation>
+			<input name="searchPatientProcessingErrorsInput" message="tns:searchPatientProcessingErrorsInput"/>
+			<output name="searchPatientProcessingErrorsOutput" message="tns:searchPatientProcessingErrorsOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="searchPatientsByError">
+			<documentation>
+				Получение пациентов с указанной ошибкой обработки
+			</documentation>
+			<input name="searchPatientsByErrorInput" message="tns:searchPatientsByErrorInput"/>
+			<output name="searchPatientsByErrorOutput" message="tns:searchPatientsByErrorOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getDataLoadPatientAqlTemplate">
+			<documentation>
+				Получение шаблона запроса пациентов для наполнения КГ
+			</documentation>
+			<input name="getDataLoadPatientAqlTemplateInput" message="tns:getDataLoadPatientAqlTemplateInput"/>
+			<output name="getDataLoadPatientAqlTemplateOutput" message="tns:getDataLoadPatientAqlTemplateOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+		<operation name="getDataLoadQueryTemplate">
+			<documentation>
+				Получение шаблона запроса данных по пациенту для наполнения КГ
+			</documentation>
+			<input name="getDataLoadQueryTemplateInput" message="tns:getDataLoadQueryTemplateInput"/>
+			<output name="getDataLoadQueryTemplateOutput" message="tns:getDataLoadQueryTemplateOutput"/>
+			<fault name="Fault" message="tns:Fault"/>
+		</operation>
+	</portType>
+
+	<binding name="DataLoaderServiceBinding" type="tns:DataLoaderServicePortType">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="createDataLoadQuery">
+			<soap12:operation soapAction="createDataLoadQuery"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getDataLoadQuery">
+			<soap12:operation soapAction="getDataLoadQuery"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="createDataLoadTask">
+			<soap12:operation soapAction="createDataLoadTask"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="updateDataLoadTask">
+			<soap12:operation soapAction="updateDataLoadTask"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="updateDataLoadQuery">
+			<soap12:operation soapAction="updateDataLoadQuery"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="archiveDataLoadQuery">
+			<soap12:operation soapAction="archiveDataLoadQuery"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getDataLoadTasks">
+			<soap12:operation soapAction="getDataLoadTasks"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchDataLoadTasks">
+			<soap12:operation soapAction="searchDataLoadTasks"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchDataLoadQueries">
+			<soap12:operation soapAction="searchDataLoadQueries"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchDataLoadTaskExecutionEvents">
+			<soap12:operation soapAction="searchDataLoadTaskExecutionEvents"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="initDataLoadTaskExecution">
+			<soap12:operation soapAction="initDataLoadTaskExecution"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchPatientProcessingErrors">
+			<soap12:operation soapAction="searchPatientProcessingErrors"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="searchPatientsByError">
+			<soap12:operation soapAction="searchPatientsByError"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getDataLoadPatientAqlTemplate">
+			<soap12:operation soapAction="getDataLoadPatientAqlTemplate"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="getDataLoadQueryTemplate">
+			<soap12:operation soapAction="getDataLoadQueryTemplate"/>
+			<input>
+				<soap12:header message="tns:UserContext" part="userContext" use="literal"/>
+				<soap12:body use="literal"/>
+			</input>
+			<output>
+				<soap12:body use="literal"/>
+			</output>
+			<fault name="Fault">
+				<soap12:fault name="Fault" use="literal"/>
+			</fault>
+		</operation>
+
+	</binding>
+
+	<service name="DataLoaderService">
+		<port name="DataLoaderServicePort" binding="tns:DataLoaderServiceBinding">
+			<soap12:address location="REPLACE_WITH_ACTUAL_URL"/>
+		</port>
+	</service>
+
+	<wsp:Policy wsu:Id="authPolicy" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+		<sp:SupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+			<wsp:Policy>
+				<sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+					<wsp:Policy>
+						<sp:NoPassword/>
+					</wsp:Policy>
+				</sp:UsernameToken>
+			</wsp:Policy>
+		</sp:SupportingTokens>
+	</wsp:Policy>
+</definitions>

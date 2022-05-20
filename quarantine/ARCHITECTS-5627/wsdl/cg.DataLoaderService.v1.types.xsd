@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://emias.mos.ru/cg/v1/dataLoaderService/types/"
+           xmlns:cg1="http://emias.mos.ru/cg/load/v1/"
+           xmlns:core="http://emias.mos.ru/cg/core/"
+           xmlns:tns="http://emias.mos.ru/cg/v1/dataLoaderService/types/"
+           targetNamespace="http://emias.mos.ru/cg/v1/dataLoaderService/types/" version="1.0">
+    <xs:annotation>
+        <xs:documentation>
+            Входные/выходные типы данных (request/response) для методов сервиса DataLoaderService
+        </xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://emias.mos.ru/cg/load/v1/" schemaLocation="emias.cg.load.v1.xsd"/>
+    <xs:import namespace="http://emias.mos.ru/cg/core/" schemaLocation="emias.cg.core.xsd"/>
+    <xs:element name="filterOptions">
+        <xs:annotation>
+            <xs:documentation>Параметры фильтрации списка</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:annotation>
+                <xs:documentation>Параметры фильтрации списка</xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+                <xs:element name="filterOption" type="core:KeyValuePair" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>Параметр фильтрации списка</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getDataLoadQueryRequest" type="getDataLoadQueryRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getDataLoadQuery</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="updateDataLoadQueryRequest" type="updateDataLoadQueryRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода updateDataLoadQuery</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="updateDataLoadQueryResponse" type="updateDataLoadQueryResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода updateDataLoadQuery</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="archiveDataLoadQueryRequest" type="archiveDataLoadQueryRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода updateDataLoadQuery</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="archiveDataLoadQueryResponse" type="archiveDataLoadQueryResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода updateDataLoadQuery</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getDataLoadQueryResponse" type="getDataLoadQueryResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getDataLoadQuery</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="createDataLoadQueryRequest" type="createDataLoadQueryRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода createDataLoadQuery</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="createDataLoadQueryResponse" type="createDataLoadQueryResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода createDataLoadQuery</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getDataLoadTasksRequest" type="getDataLoadTasksRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getDataLoadTasks</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getDataLoadTasksResponse" type="getDataLoadTasksResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getDataLoadTasks</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="updateDataLoadTaskRequest" type="updateDataLoadTaskRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода updateDataLoadTask</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="updateDataLoadTaskResponse" type="updateDataLoadTaskResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода updateDataLoadTask</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="setDataLoadQueryToDataLoadTaskRequest" type="setDataLoadQueryToDataLoadTaskRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода setDataLoadQueryToDataLoadTask</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="setDataLoadQueryToDataLoadTaskResponse" type="setDataLoadQueryToDataLoadTaskResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода setDataLoadQueryToDataLoadTask</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchPatientProcessingErrorsRequest" type="searchPatientProcessingErrorsRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода searchPatientProcessingErrors</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchPatientProcessingErrorsResponse" type="searchPatientProcessingErrorsResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода searchPatientProcessingErrors</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchPatientsByErrorRequest" type="searchPatientsByErrorRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода searchPatientProcessingErrors</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchPatientsByErrorResponse" type="searchPatientsByErrorResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода searchPatientProcessingErrors</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="createDataLoadTaskRequest" type="createDataLoadTaskRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода createDataLoadTask</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="createDataLoadTaskResponse" type="createDataLoadTaskResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода createDataLoadTask</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="removeDataLoadQueryFromDataLoadTaskRequest" type="removeDataLoadQueryFromDataLoadTaskRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода removeDataLoadQueryFromDataLoadTask</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="removeDataLoadQueryFromDataLoadTaskResponse" type="removeDataLoadQueryFromDataLoadTaskResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода removeDataLoadQueryFromDataLoadTask</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchDataLoadTaskExecutionEventsRequest" type="searchDataLoadTaskExecutionEventsRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода searchDataLoadTaskExecutionEvents</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchDataLoadTaskExecutionEventsResponse" type="searchDataLoadTaskExecutionEventsResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода searchDataLoadTaskExecutionEvents</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="initDataLoadTaskExecutionRequest" type="initDataLoadTaskExecutionRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода initDataLoadTaskExecution</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="initDataLoadTaskExecutionResponse" type="initDataLoadTaskExecutionResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода initDataLoadTaskExecution</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getDataLoadPatientAqlTemplateRequest" type="getDataLoadPatientAqlTemplateRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getDataLoadPatientAqlTemplate</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getDataLoadPatientAqlTemplateResponse" type="getDataLoadPatientAqlTemplateResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getDataLoadPatientAqlTemplate</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getDataLoadQueryTemplateRequest" type="getDataLoadQueryTemplateRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода getDataLoadQueryTemplate</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="getDataLoadQueryTemplateResponse" type="getDataLoadQueryTemplateResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода getDataLoadQueryTemplate</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchDataLoadTasksRequest" type="searchDataLoadTasksRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода searchDataLoadTasks</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchDataLoadTasksResponse" type="searchDataLoadTasksResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода searchDataLoadTasks</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchDataLoadQueriesRequest" type="searchDataLoadQueriesRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос метода searchDataLoadQueries</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="searchDataLoadQueriesResponse" type="searchDataLoadQueriesResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ метода searchDataLoadQueries</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="includeArchived" type="xs:boolean">
+        <xs:annotation>
+            <xs:documentation>
+                Признак возврата данных по архивным данным (значение по умолчанию false)
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="updateDataLoadQueryRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода updateDataLoadQuery</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="id" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор обновляемого запроса загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Наименование запроса загрузки</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="query" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Запрос</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updateDataLoadQueryResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода updateDataLoadQuery</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadQuery">
+                <xs:annotation>
+                    <xs:documentation>Обновлённый запрос загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archiveDataLoadQueryRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода archiveDataLoadQuery</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataLoadQueryId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор запроса загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="archiveDataLoadQueryResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода archiveDataLoadQuery</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="createDataLoadQueryRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода createDataLoadQuery</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Наименование запроса загрузки</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="query" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Запрос</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dataLoadTaskId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>>Идентификатор запроса задачи загрузки</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createDataLoadQueryResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода createDataLoadQuery</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadQuery" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Созданный запрос загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getDataLoadQueryRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getDataLoadQuery</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="id" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор запроса загрузки данных,
+                        если не задан - метод возвращает список всех запросов загрузки
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getDataLoadQueryResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getDataLoadQuery</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadQueriesResultPage">
+                <xs:annotation>
+                    <xs:documentation>Результат поиска запросов загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchDataLoadQueriesRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchDataLoadQueries</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataLoadTaskId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор задачи загрузки данных
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="includeArchived" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Признак включения в результат архивных запросов загрузки данных.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="tns:filterOptions" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Опции фильтрации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Параметры пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchDataLoadQueriesResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchDataLoadQueries</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadQueriesResultPage">
+                <xs:annotation>
+                    <xs:documentation>Результат поиска запросов загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchDataLoadTasksRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchDataLoadTasks</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="tns:filterOptions" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Опции фильтрации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Параметры пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchDataLoadTasksResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchDataLoadTasks</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadTasksResultPage">
+                <xs:annotation>
+                    <xs:documentation>Результат поиска задач загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getDataLoadTasksRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getDataLoadTasks</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор задачи загрузки данных,
+                        если не задан - метод возвращает список всех задач загрузки
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getDataLoadTasksResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getDataLoadTasks</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadTasksResultPage">
+                <xs:annotation>
+                    <xs:documentation>Результат поиска запросов загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createDataLoadTaskRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода createDataLoadTask</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Наименование задачи загрузки</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="controlledGroupId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор КГ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientAql" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Запрос пациентов для наполнения КГ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientIdList" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Список идентификаторов пациентов для наполнения КГ</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="patientId" type="xs:long" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Идентификатор пациентов для наполнения КГ</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры вызова метода</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createDataLoadTaskResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода createDataLoadTask</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadTask">
+                <xs:annotation>
+                    <xs:documentation>Созданная задача загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="removeDataLoadQueryFromDataLoadTaskRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода removeDataLoadQueryFromDataLoadTask</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataLoadQueryId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор запроса загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dataLoadTaskId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор задачи загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="removeDataLoadQueryFromDataLoadTaskResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода removeDataLoadQueryFromDataLoadTask</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="searchDataLoadTaskExecutionEventsRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchDataLoadTaskExecutionEvents</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataLoadTaskId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор задачи загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Параметры пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchDataLoadTaskExecutionEventsResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchDataLoadTaskExecutionEvents</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadTaskExecutionEventsResultPage">
+                <xs:annotation>
+                    <xs:documentation>Результат поиска событий выполнения задачи загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="initDataLoadTaskExecutionRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода initDataLoadTaskExecution</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataLoadTaskId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор задачи загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchPatientProcessingErrorsRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchPatientProcessingErrors</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataLoadTaskExecutionEventId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор события выполнения задачи загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Параметры пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="initDataLoadTaskExecutionResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода initDataLoadTaskExecution</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="searchPatientProcessingErrorsResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchPatientProcessingErrors</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:PatientsProcessingErrorResultPage">
+                <xs:annotation>
+                    <xs:documentation>Результат поиска ошибок обработки пациентов</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchPatientsByErrorRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода searchPatientsByError</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataLoadTaskExecutionEventId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор события выполнения задачи загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="errorCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код сообщения об ошибке</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:pagingOptions">
+                <xs:annotation>
+                    <xs:documentation>Параметры пагинации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="searchPatientsByErrorResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода searchPatientsByError</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:PatientErrorInfoResultPage">
+                <xs:annotation>
+                    <xs:documentation>Результат поиска ошибок обработки пациентов</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getDataLoadPatientAqlTemplateRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getDataLoadPatientAqlTemplate</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="getDataLoadPatientAqlTemplateResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getDataLoadPatientAqlTemplate</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="patientAqlQuery" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Шаблон запроса загрузки пациентов для наполнения КГ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getDataLoadQueryTemplateRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода getDataLoadQueryTemplate</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="getDataLoadQueryTemplateResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода getDataLoadQueryTemplate</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="query" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Шаблон запроса загрузки данных по пациенту для наполнения КГ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="setDataLoadQueryToDataLoadTaskRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода setDataLoadQueryToDataLoadTask</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataLoadQueryId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор запроса загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dataLoadTaskId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор задачи загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="core:options" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="setDataLoadQueryToDataLoadTaskResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода setDataLoadQueryToDataLoadTask</xs:documentation>
+        </xs:annotation>
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="updateDataLoadTaskRequest">
+        <xs:annotation>
+            <xs:documentation>Входные параметры метода updateDataLoadTask</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор обновляемой задачи загрузки данных</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="name" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Наименование задачи загрузки</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="description" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Описание</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="controlledGroupId" type="xs:long">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор КГ</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="patientAql" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Запрос пациентов для наполнения КГ</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="patientIdList" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Список идентификаторов пациентов для наполнения КГ</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="patientId" type="xs:long" minOccurs="0"
+                                        maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>Идентификатор пациентов для наполнения КГ</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="core:options" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Параметры вызова метода</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updateDataLoadTaskResponse">
+        <xs:annotation>
+            <xs:documentation>Выходные параметры метода updateDataLoadTask</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="return" type="cg1:DataLoadTask">
+                <xs:annotation>
+                    <xs:documentation>Обновлённая задача загрузки данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://emias.mos.ru/cg/load/v1/"
+           xmlns:tns="http://emias.mos.ru/cg/load/v1/"
+           xmlns:core="http://emias.mos.ru/cg/core/" version="1.0">
+    <xs:annotation>
+        <xs:documentation>Типы данных для сервисов проекта "Контролируемые группы", зависящие от версии контракта и относящиеся к первоначальной загрузке данных</xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://emias.mos.ru/cg/core/" schemaLocation="emias.cg.core.xsd"/>
+    <xs:complexType name="DataLoadQuery">
+        <xs:annotation>
+            <xs:documentation>Запрос загрузки данных</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Наименование запроса загрузки</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="query" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Запрос</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор запроса загрузки</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="createDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата создания</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="archived" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>Архивировано?</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="DataLoadTaskExecutionEvent">
+        <xs:annotation>
+            <xs:documentation>Событие выполнения задачи загрузки данных</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор события выполнения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="startDateTime" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата запуска задачи загрузки</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="endDateTime" type="xs:dateTime">
+            <xs:annotation>
+                <xs:documentation>Дата завершения загрузки данных</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="status" type="tns:DataLoadTaskExecutionEventStatus" use="required">
+            <xs:annotation>
+                <xs:documentation>Статус</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="ErrorMessage">
+        <xs:annotation>
+            <xs:documentation>Ошибка обработки</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="errorCode" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Код ошибки</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="errorMessage" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Сообщение об ошибке</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="PatientErrorInfo">
+        <xs:annotation>
+            <xs:documentation>Ошибка обработки пациента</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="patientId" type="xs:long">
+            <xs:annotation>
+                <xs:documentation>Идентификатор пациента</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="exception" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Сообщение об ошибке</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="DataLoadTask">
+        <xs:annotation>
+            <xs:documentation>Задача загрузки данных</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Наименование запроса загрузки</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="status" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Статус выполнения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientAql" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Запрос пациентов</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="controlledGroupName" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Наименование контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientIdList" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Список идентификаторов пациентов для наполнения КГ</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="patientId" type="xs:long" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Идентификатор пациентов для наполнения КГ</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dataLoadQueries" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Список запросов загрузки данных</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="dataLoadQuery" type="tns:DataLoadQuery" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Запрос загрузки данных</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор задачи загрузки</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="controlledGroupId" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор контролируемой группы</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="createDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата создания</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="DataLoadQueriesResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов поиска запросов загрузки данных</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Запросы загрузки данных</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="tns:DataLoadQuery" minOccurs="0"
+                                            maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Запрос загрузки данных</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="DataLoadTasksResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов поиска задач загрузки данных</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Задачи загрузки данных</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="tns:DataLoadTask" minOccurs="0"
+                                            maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Задача загрузки данных</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="DataLoadTaskExecutionEventsResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов поиска событий выполнения задачи загрузки данных</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>События выполнения задачи загрузки данных</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="tns:DataLoadTaskExecutionEvent" minOccurs="0"
+                                            maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Событие выполнения задачи загрузки данных</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PatientsProcessingErrorResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов ошибок обработки пациента</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Ошибки обработки пациента</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="tns:ErrorMessage" minOccurs="0"
+                                            maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Ошибка обработки пациента</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PatientErrorInfoResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов запроса пациентов с указанной ошибкой</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Информация о пациенте с указанной ошибкой обработки</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="tns:PatientErrorInfo" minOccurs="0"
+                                            maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Информация о пациенте с указанной ошибкой обработки</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="DataLoadTaskExecutionEventStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EXECUTING">
+                <xs:annotation>
+                    <xs:documentation>Выполняется</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DATA_PROCESS_ERROR">
+                <xs:annotation>
+                    <xs:documentation>Ошибка обработки данных</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="THINKEHR_PATIENTS_ERROR">
+                <xs:annotation>
+                    <xs:documentation>Ошибка получения списка пациентов</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="THINKEHR_LOAD_ERROR">
+                <xs:annotation>
+                    <xs:documentation>Ошибка получения структурированных данных</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SUCCESS">
+                <xs:annotation>
+                    <xs:documentation>Успех</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

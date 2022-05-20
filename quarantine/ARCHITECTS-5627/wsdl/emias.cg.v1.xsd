@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://emias.mos.ru/cg/v1/"
+           xmlns:tns="http://emias.mos.ru/cg/v1/"
+           xmlns:core="http://emias.mos.ru/cg/core/" version="1.0">
+    <xs:annotation>
+        <xs:documentation>Типы данных для сервисов проекта "Контролируемые группы", зависящие от версии контракта</xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://emias.mos.ru/cg/core/" schemaLocation="emias.cg.core.xsd"/>
+    <xs:complexType name="PatientParameter">
+        <xs:annotation>
+            <xs:documentation>Параметр пациента контролируемой группы</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание пациента контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="medicalOperation" type="tns:Operation" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Операция MEDICAL</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="rangeOperation" type="tns:Operation" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Операция RANGE</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="taggedObject" type="tns:TaggedObject" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Тегируемый объект</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="archived" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Архивировано?</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="createDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата создания</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор параметра пациента</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Псевдоним (ключ)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="dataType" type="tns:DataType" use="required">
+            <xs:annotation>
+                <xs:documentation>Тип данных</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="Operation">
+        <xs:annotation>
+            <xs:documentation>Операция</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="query" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Хранимый запрос</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientParameters" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры пациента</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="patientParameter" type="tns:PatientParameter" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Параметр пациента</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="archived" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Архивировано?</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="createDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата создания</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор операции</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Псевдоним (ключ)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="operationType" type="tns:OperationType" use="required">
+            <xs:annotation>
+                <xs:documentation>Тип операции</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="TaggedObject">
+        <xs:annotation>
+            <xs:documentation>Тегируемый объект</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="tags" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Теги</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tag" type="tns:Tag" minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Тег</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="archived" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Архивировано?</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="createDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата создания</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Ключ объекта</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="taggedObjectType" type="tns:TaggedObjectType" use="required">
+            <xs:annotation>
+                <xs:documentation>Тип тегируемого объекта</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="Tag">
+        <xs:annotation>
+            <xs:documentation>Тег</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="schema" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Схема</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор тега</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="archived" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Архивировано?</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="IdList">
+        <xs:annotation>
+            <xs:documentation>Лист идентификаторов</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ids" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификаторы</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long" minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Идентификатор</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ControlledGroup">
+        <xs:annotation>
+            <xs:documentation>Контролируемая группа</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="taggedObject" type="tns:TaggedObject" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Тегируемый объект</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="controlledGroupParameters" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры контролируемой группы</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="controlledGroupParameter" type="tns:ControlledGroupParameter" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Параметр контролируемой группы</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="controlledGroupViews" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Представления контролируемой группы</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="controlledGroupView" type="tns:ControlledGroupView" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Представление контролируемой группы</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="archived" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Архивировано?</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="createDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата создания</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="erpGroupId" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор группы в ЕРП</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Псевдоним (ключ)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="ControlledGroupParameter">
+        <xs:annotation>
+            <xs:documentation>Параметр контролируемой группы</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dataType" type="tns:DataType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Тип данных</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="values" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Значения параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="value" type="tns:ControlledGroupParameterValue" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Значение параметра контролируемой группы</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="taggedObject" type="tns:TaggedObject" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Тегируемый объект</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="controlledGroupParameterValueHistories" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Исторические значения параметра контролируемой группы</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="controlledGroupParameterValueHistory"
+                                    type="tns:ControlledGroupParameterValueHistory" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Историческое значение параметра контролируемой группы
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="archived" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Архивировано?</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="createDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата создания</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор параметра контролируемой группы</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Псевдоним (ключ)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="ControlledGroupParameterValue">
+        <xs:annotation>
+            <xs:documentation>Значение параметра контролируемой группы</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="value" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Значение параметра</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="valueSet" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Группировочный признак</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="ControlledGroupParameterValueHistory">
+        <xs:annotation>
+            <xs:documentation>Историческое значение параметра контролируемой группы</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="value" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Значение параметра</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="valueSet" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Группировочный признак</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="ControlledGroupView">
+        <xs:annotation>
+            <xs:documentation>Представление данных контролируемой группы</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Описание</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="taggedObject" type="tns:TaggedObject" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Тегируемый объект</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientParameters" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Параметры пациента</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="patientParameter" type="tns:PatientParameter" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Параметр пациента</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="archived" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Архивировано?</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="changeDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата изменения</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="createDate" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>Дата создания</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>Идентификатор</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Псевдоним (ключ)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="Patient">
+        <xs:annotation>
+            <xs:documentation>Информация о пациенте</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ukl" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Уникальный код личности в ЕРП</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patientId" type="xs:long" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор пациента в ЕМИАС</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PatientControlledGroup">
+        <xs:sequence>
+            <xs:element name="includeDateTime" type="xs:dateTime" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дата включения в контролируемую группу</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="excludedDateTime" type="xs:dateTime" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дата исключения из контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Псевдоним контролируемой группы</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="PersonalData">
+        <xs:annotation>
+            <xs:documentation>Идентификатор</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="family" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Фамилия</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Имя</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patronymic" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Отчество</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MembersFilterOptions">
+        <xs:annotation>
+            <xs:documentation>Опции фильтрации участников</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="personalData" type="tns:PersonalData" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Личные данные пациента</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dateBirthPeriod" type="core:DatePeriod" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Период даты рождения (при поиске будут отобраны пациенты, для которых: start &lt;=Дата
+                        рождения &lt;= end)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="mainLpuId" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор головной МО</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="lpuId" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор филиала МО</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="areaId" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор участка</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="typeAttach" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Возможные значения:
+                        1 – базовое;
+                        0 – небазовое.
+                        Если не передано, то тип прикрепления при поиске не учитывается
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="requestDate" type="xs:date">
+            <xs:annotation>
+                <xs:documentation>Дата, на которую нужно получить список пациентов. Если не передан, то возвращаются
+                    сведения на текущую дату.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="PatientControlledGroupResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов поиска групп, в которых состоит или состоял пациент</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Контролируемые группы</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="tns:PatientControlledGroup" minOccurs="0"
+                                            maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Контролируемая группа</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="MembersResultPage">
+        <xs:annotation>
+            <xs:documentation>Страница результатов отбора участников группы</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="core:PagingResults">
+                <xs:sequence>
+                    <xs:element name="items" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Участники контролируемой группы</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="tns:Patient" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:annotation>
+                                        <xs:documentation>Участник контролируемой группы</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="ComparisonOperationType">
+        <xs:annotation>
+            <xs:documentation>Оператор сравнения</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GT">
+                <xs:annotation>
+                    <xs:documentation>Условие "больше чем"</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GE">
+                <xs:annotation>
+                    <xs:documentation>Условие "больше или равно"</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="EQ">
+                <xs:annotation>
+                    <xs:documentation>Условие "в точности равно"</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LT">
+                <xs:annotation>
+                    <xs:documentation>Условие "меньше чем"</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LE">
+                <xs:annotation>
+                    <xs:documentation>Условие "меньше или равно"</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RANGE">
+                <xs:annotation>
+                    <xs:documentation>Диапазон</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NE">
+                <xs:annotation>
+                    <xs:documentation>Условие "не равно"</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="OperationType">
+        <xs:annotation>
+            <xs:documentation>Тип операции</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ADD">
+                <xs:annotation>
+                    <xs:documentation>Добавление</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="REMOVE">
+                <xs:annotation>
+                    <xs:documentation>Удаление</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MEDICAL">
+                <xs:annotation>
+                    <xs:documentation>Событие</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RANGE">
+                <xs:annotation>
+                    <xs:documentation>Диапазон</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TaggedObjectType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GROUP">
+                <xs:annotation>
+                    <xs:documentation>Контролируемая группа</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GROUP_PARAMETER">
+                <xs:annotation>
+                    <xs:documentation>Параметр контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="VIEW">
+                <xs:annotation>
+                    <xs:documentation>Представление контролируемой группы</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PATIENT_PARAMETER">
+                <xs:annotation>
+                    <xs:documentation>Параметр пациента</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DataType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BOOLEAN">
+                <xs:annotation>
+                    <xs:documentation>Логический</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="STRING">
+                <xs:annotation>
+                    <xs:documentation>Строковый</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SHORT">
+                <xs:annotation>
+                    <xs:documentation>Маленькое число</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="INTEGER">
+                <xs:annotation>
+                    <xs:documentation>Число</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LONG">
+                <xs:annotation>
+                    <xs:documentation>Большое число</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="REAL">
+                <xs:annotation>
+                    <xs:documentation>Дробный числовой</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TIMESTAMP">
+                <xs:annotation>
+                    <xs:documentation>Дата</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+	<xs:simpleType name="MembershipType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="now">
+				<xs:annotation>
+					<xs:documentation>Возвращать только те группы, членом которых пациент является в настоящий момент</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="was">
+				<xs:annotation>
+					<xs:documentation>Возвращать только те группы, членом которых пациент являлся когда-либо</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
